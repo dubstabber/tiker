@@ -1,14 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { HashRouter, Route, Switch } from 'react-router-dom'
+import Header from './components/Header'
 import Home from './pages/Home'
 import Upload from './pages/Upload'
 
-import './index.css'
+import './App.css'
 
 function App() {
   return (
     <HashRouter>
+      <Header />
       <Switch>
         <Route path='/upload' component={Upload} />
         <Route path='/' component={Home} />
