@@ -70,6 +70,14 @@ hr {
   background-size: 30px;
 }
 
+.personal {
+  width: 40px;
+  height: 40px;
+  background-color: purple;
+  border-radius: 20px;
+  margin: 5px 20px 0 20px;
+}
+
 /* Styling for Home Page */
 .container {
   display: flex;
