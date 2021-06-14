@@ -6,6 +6,8 @@ import axios from 'axios'
 function Home() {
     const [users, setUsers] = useState(null)
     let descendingUsers
+    let topFiveFollowing
+
 
     const fetchData = async () => {
         const results = await axios.get('http://127.0.0.1:5000/posts')
@@ -18,13 +20,19 @@ function Home() {
 
     if(users) {
         descendingUsers = users.sort((a,b) => a.id < b.id ? 1 : -1)
+
+        const following = users.filter(user => user.is_followed)
+        const descendingFollowing = following.sort((a,b) => a.likes < b.likes ? 1 : -1)
+        topFiveFollowing = descendingFollowing.slice(0,5)
     }
+
+    console.log(descendingUsers)
 
     return (
         <>
         {descendingUsers && (
             <div className='container'>
-                <FollowersColumn />
+                <FollowersColumn users={topFiveFollowing} />
                 <div className='feed'>
                     {descendingUsers.map((descendingUser, index) => (
                         <Card
