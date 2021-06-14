@@ -6,14 +6,23 @@ import axios from 'axios'
 
 function Home() {
     const [users, setUsers] = useState(null)
+    const [userToToggle, setUserToToggle] = useState(null)
     let descendingUsers
     let topFiveFollowing
     let topFiveNotFollowing
 
-
     const fetchData = async () => {
-        const results = await axios.get('http://127.0.0.1:5000/posts')
+        const results = await axios.get('http://localhost:5000/posts')
         setUsers(results.data)
+    }
+
+    if(userToToggle) {
+        const newValue = userToToggle.is_followed ? false : true
+        const data = JSON.stringify({is_followed: newValue})
+
+        axios.put(`http://localhost:5000/edit/${userToToggle._id}/?data=${data}`)
+        .then(() => fetchData())
+        setUserToToggle(null)
     }
 
     useEffect(() => {
@@ -43,6 +52,7 @@ function Home() {
                         <Card
                             key={index}
                             user={descendingUser}
+                            toggleFollow={userToToggle => setUserToToggle(userToToggle)}
                         />
                     ))}
 

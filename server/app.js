@@ -42,8 +42,14 @@ app.get('/posts', (req, res) => {
     User.find(null, (err, arr)=>{
         res.json(arr);
     })
-    
 });
+
+app.put('/edit/:id', (req, res) => {
+    const {is_followed} = JSON.parse(req.query.data)
+    User.updateOne({_id: req.params.id}, {is_followed}, (err, arr) => {
+        res.json(arr);
+    })
+})
 
 const PORT = process.env.PORT || 5000;
 
