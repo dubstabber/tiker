@@ -58,14 +58,11 @@ app.put('/edit/:id', (req, res) => {
 })
 
 app.post('/add', (req, res) => {
-    //console.log(req.body)
-    //res.send('OK')
     if(req.body){
         User.create(req.body).then(data => {
             res.send('OK')
         });
     }
-
 })
 
 const PORT = process.env.PORT || 5000;

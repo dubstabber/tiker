@@ -12,7 +12,7 @@ const Header = () => {
           <Link to='/upload'>
             <div className="upload" />
           </Link>
-          <img className="personal" src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_960_720.png" />
+          <img className="personal" src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_960_720.png" alt='personal'/>
         </div>
       </div>
     </div>

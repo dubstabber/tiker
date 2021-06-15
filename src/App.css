@@ -67,7 +67,12 @@ hr {
   justify-content: space-between;
 }
 .logo {
-  /*ADD LOGO*/
+  width: 129px;
+  height: 40px;
+  background-image: url('./images/tiker-logo.png');
+  background-repeat: no-repeat;
+  background-size: 110px;
+  margin: 5px;
 }
 .upload {
   width: 30px;
