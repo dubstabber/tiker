@@ -30,6 +30,10 @@ h3 {
   font-weight: 600;
 }
 
+.red {
+  color:#fe2c55;
+}
+
 p {
   color: grey;
   font-size: 12px;
@@ -61,6 +65,9 @@ hr {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+.logo {
+  /*ADD LOGO*/
 }
 .upload {
   width: 30px;
