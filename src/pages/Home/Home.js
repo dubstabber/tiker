@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import Card from '../components/Card'
-import MiniCard from '../components/MiniCard'
-import FollowersColumn from '../components/FollowersColumn'
+import Card from '../../components/Card/Card'
+import MiniCard from '../../components/MiniCard/MiniCard'
+import FollowersColumn from '../../components/FollowersColumn/FollowersColumn'
 import axios from 'axios'
+import './Home.styles.css'
 
 function Home() {
     const [users, setUsers] = useState(null)

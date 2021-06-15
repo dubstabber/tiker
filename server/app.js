@@ -19,18 +19,24 @@ db.once('open', function() {
 const userSchema = new mongoose.Schema({
     name: String,
     username: String,
+    password: String,
+    email: String,
     avatar: String,
-    is_followed: Boolean,
-    video: String,
+    following: Array,
+    followers: Array
+});
+
+const postSchema = new mongoose.Schema({
+    id: String,
+    content: String,
     caption: String,
     likes: Number,
     comments: Number,
-    timestamp: String,
-    button_visible: Boolean
+    timestamp: String
 });
 
 const User = mongoose.model('User', userSchema);
-
+const Post = mongoose.model('Post', postSchema);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

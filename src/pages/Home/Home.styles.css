@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .suggested-box {
+    min-width: 320px;
+    height: 600px;
+    padding: 10px;
+  }
+  
+  .suggested {
+    width: 280px;
+    height: 350px;
+    border: 1px solid rgb(227,227,228);
+    border-radius: 10px;
+    padding: 20px 15px;
+  }

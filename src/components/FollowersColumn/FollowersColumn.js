@@ -1,7 +1,11 @@
-import React from 'react'
-import MicroCard from '../components/MicroCard'
+import React, {useContext} from 'react'
+import MicroCard from '../MicroCard/MicroCard'
+import {AppContext} from '../../context'
+import './FollowersColumn.styles.css'
+
 
 const FollowersColumn = (topFiveFollowing) => {
+  const {user} = useContext(AppContext)
   const users = topFiveFollowing.users
 
   return (
@@ -14,12 +18,13 @@ const FollowersColumn = (topFiveFollowing) => {
         <div className="following" />
         <h2>Following</h2>
       </div>
+      {(users && user.isAuth) && <p>Your top accounts</p>}
       <hr />
-      <p>Your top accounts</p>
-      {users && users.map((user, index) => (
+      {(users && user.isAuth) ? users.map((user, index) => (
         <MicroCard 
             key={index} user={user}
-        />))}
+        />)) : <><span className="login-caption">Log in to follow creators, like videos, and view comments.</span>
+        <div className="white-btn">Login</div></>}
       <hr />
     </div>
   )

@@ -1,7 +1,11 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { Link } from 'react-router-dom'
+import {AppContext} from '../../context'
+import './Header.styles.css'
 
 const Header = () => {
+  const {user} = useContext(AppContext)
+
   return (
     <div className="header">
       <Link to='/'>
@@ -12,7 +16,9 @@ const Header = () => {
           <Link to='/upload'>
             <div className="upload" />
           </Link>
-          <img className="personal" src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_960_720.png" alt='personal'/>
+          {user.isAuth ? <img className="personal" src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_960_720.png" alt='personal'/>
+        : <button className='login-btn'>Login</button>  
+        }
         </div>
       </div>
     </div>

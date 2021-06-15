@@ -1,4 +1,5 @@
 import React from 'react'
+import './Card.styles.css'
 
 function Card({user, toggleFollow}) {
     const timestamp = user.timestamp
@@ -19,7 +20,7 @@ function Card({user, toggleFollow}) {
               <p>{user.caption}</p>
             </div>
           </div>
-          {user.button_visible && <div className={user.is_followed ? "followed-button" : "follow-button"}
+          {<div className={user.is_followed ? "followed-button" : "follow-button"}
           onClick={() => toggleFollow(user)}
           >
               {user.is_followed ? "Following" : "Follow"}

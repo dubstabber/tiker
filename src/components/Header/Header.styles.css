@@ -1,0 +1,31 @@
+.header {
+    height: 60px;
+    width: 100%;
+    border-bottom: solid 1px rgb(227,227,228);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .logo {
+    width: 129px;
+    height: 40px;
+    background-image: url('../../images/tiker-logo.png');
+    background-repeat: no-repeat;
+    background-size: 110px;
+    margin: 5px;
+  }
+  .upload {
+    width: 30px;
+    height: 25px;
+    margin-top: 15px;
+    background-image: url('../../images/tiker-upload.png');
+    background-size: 30px;
+  }
+  
+  .personal {
+    width: 40px;
+    height: 40px;
+    background-color: purple;
+    border-radius: 20px;
+    margin: 5px 20px 0 20px;
+  }

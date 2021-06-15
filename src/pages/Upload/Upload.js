@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import faker from "faker"
+import './Upload.styles.css'
 
 const Upload = () => {
   const username = 'luke123'
