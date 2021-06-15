@@ -1,8 +1,11 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
 const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
 mongoose.connect('mongodb://localhost/tikerDB', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -45,10 +48,24 @@ app.get('/posts', (req, res) => {
 });
 
 app.put('/edit/:id', (req, res) => {
-    const {is_followed} = JSON.parse(req.query.data)
-    User.updateOne({_id: req.params.id}, {is_followed}, (err, arr) => {
-        res.json(arr);
-    })
+    const data = JSON.parse(req.query.data)
+
+    if(data){
+        User.updateOne({_id: req.params.id}, data, (err, arr) => {
+            res.json(arr);
+        });
+    }
+})
+
+app.post('/add', (req, res) => {
+    //console.log(req.body)
+    //res.send('OK')
+    if(req.body){
+        User.create(req.body).then(data => {
+            res.send('OK')
+        });
+    }
+
 })
 
 const PORT = process.env.PORT || 5000;

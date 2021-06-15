@@ -66,6 +66,7 @@ function Home() {
                                     <MiniCard 
                                         key={index}
                                         user={notFollowingUser}
+                                        toggleFollow={userToToggle => setUserToToggle(userToToggle)}
                                     />
                                 ))}
 

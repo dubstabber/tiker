@@ -1,6 +1,6 @@
 import React from 'react'
 
-function MiniCard({user}) {
+function MiniCard({user, toggleFollow}) {
     return (
         <div className="section minicard">
             <div className="section">
@@ -10,7 +10,9 @@ function MiniCard({user}) {
                     <p>{user.name}</p>
                 </div>
             </div>
-            {user.button_visible && <div className={user.is_followed ? "followed-button" : "follow-button"}>
+            {user.button_visible && <div className={user.is_followed ? "followed-button" : "follow-button"}
+            onClick={() => toggleFollow(user)}
+            >
               {user.is_followed ? "Following" : "Follow"}
             </div>}
         </div>
