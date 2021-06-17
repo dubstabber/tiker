@@ -4,7 +4,11 @@ import {AppContext} from '../../context'
 import './Header.styles.css'
 
 const Header = () => {
-  const {user} = useContext(AppContext)
+  const {user, setShowLogin} = useContext(AppContext)
+
+  const handleLogin = () => {
+    setShowLogin(true);
+  }
 
   return (
     <div className="header">
@@ -17,7 +21,7 @@ const Header = () => {
             <div className="upload" />
           </Link>
           {user.isAuth ? <img className="personal" src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_960_720.png" alt='personal'/>
-        : <button className='login-btn'>Login</button>  
+        : <button onClick={handleLogin} className='login-btn'>Login</button>  
         }
         </div>
       </div>

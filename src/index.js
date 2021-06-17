@@ -5,6 +5,7 @@ import Store from './store'
 import Header from './components/Header/Header'
 import Home from './pages/Home/Home'
 import Upload from './pages/Upload/Upload'
+import Login from './components/Login/Login'
 
 import './App.css'
 
@@ -12,6 +13,7 @@ function App() {
   return (
     <HashRouter>
       <Store>
+        <Login />
         <Header />
         <Switch>
           <Route path='/upload' component={Upload} />

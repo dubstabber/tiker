@@ -5,8 +5,12 @@ import './FollowersColumn.styles.css'
 
 
 const FollowersColumn = (topFiveFollowing) => {
-  const {user} = useContext(AppContext)
+  const {user, setShowLogin} = useContext(AppContext)
   const users = topFiveFollowing.users
+
+  const handleLogin = () => {
+    setShowLogin(true)
+  }
 
   return (
     <div className="followers-column">
@@ -24,7 +28,7 @@ const FollowersColumn = (topFiveFollowing) => {
         <MicroCard 
             key={index} user={user}
         />)) : <><span className="login-caption">Log in to follow creators, like videos, and view comments.</span>
-        <div className="white-btn">Login</div></>}
+        <div onClick={handleLogin} className="white-btn">Login</div></>}
       <hr />
     </div>
   )

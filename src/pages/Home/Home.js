@@ -42,7 +42,6 @@ function Home() {
         topFiveNotFollowing = descendingNotFollowing.slice(0,5)
     }
 
-
     return (
         <>
         {descendingUsers && (
