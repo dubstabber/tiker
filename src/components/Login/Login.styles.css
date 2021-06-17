@@ -15,11 +15,15 @@
     height: 60%;
     top: 20%;
     left: 40%;
+    border-radius: 5px;
+}
+
+.login-container{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    border-radius: 5px;
+    height: 87%;
 }
 
 .login-title {
@@ -37,10 +41,40 @@
     align-content: center;
 }
 
+.email-field{
+    position: relative;
+}
+
 .email-input {
     width: 100%;
+    font-size: 18px;
 }
 
 .password-input {
     width: 100%;
+    font-size: 18px;
+}
+
+.submit-login{
+    align-self: center;
+    width: 100%;
+    background-color: #fe2c55;
+    height: 20%;
+    font-size: 18px;
+    border-radius: 5px;
+    color: white;
+}
+
+.register-proposal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 7%;
+}
+
+.register-link{
+    color:#fe2c55;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 5px;
 }

@@ -29,3 +29,16 @@
     border-radius: 20px;
     margin: 5px 20px 0 20px;
   }
+
+  .login-btn {
+    background:#fe2c55;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 5px;
+    margin: 10px;
+  }
+  
+  .login-btn:hover {
+    background:#ec284f;
+  }

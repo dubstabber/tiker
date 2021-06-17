@@ -64,15 +64,4 @@ hr {
   margin-right: 15px;
   }
 
-.login-btn {
-  background:#fe2c55;
-  color: white;
-  font-weight: 600;
-  font-size: 14px;
-  border-radius: 5px;
-  margin-top: 10px;
-}
 
-.login-btn:hover {
-  background:#ec284f;
-}
