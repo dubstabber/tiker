@@ -6,15 +6,20 @@ import axios from 'axios'
 import './Home.styles.css'
 
 function Home() {
-    const [users, setUsers] = useState(null)
+    const [posts, setPosts] = useState(null)
     const [userToToggle, setUserToToggle] = useState(null)
-    let descendingUsers
+    let descendingPosts
     let topFiveFollowing
     let topFiveNotFollowing
 
     const fetchData = async () => {
-        const results = await axios.get('http://localhost:5000/posts')
-        setUsers(results.data)
+        let results = await axios.get('http://localhost:5000/posts')
+        results = results.data.map((post) => {
+            axios.get('http://localhost:5000/getUser/' + post.userId).then(user => {
+                console.log(Object.assign(post, user.data))
+            })
+        })
+        setPosts(results)
     }
 
     if(userToToggle) {
@@ -30,28 +35,28 @@ function Home() {
         fetchData()
     }, [])
 
-    if(users) {
-        descendingUsers = users.sort((a,b) => a.id < b.id ? 1 : -1)
+    if(posts) {
+        descendingPosts = posts.sort((a,b) => a.id < b.id ? 1 : -1)
 
-        const following = users.filter(user => user.is_followed)
-        const descendingFollowing = following.sort((a,b) => a.likes < b.likes ? 1 : -1)
-        topFiveFollowing = descendingFollowing.slice(0,5)
+        // const following = posts.filter(post => post.is_followed)
+        // const descendingFollowing = following.sort((a,b) => a.likes < b.likes ? 1 : -1)
+        // topFiveFollowing = descendingFollowing.slice(0,5)
 
-        const notFollowing = users.filter(user => user.is_followed === false)
-        const descendingNotFollowing = notFollowing.sort((a,b) => a.likes < b.likes ? 1 : -1)
-        topFiveNotFollowing = descendingNotFollowing.slice(0,5)
+        // const notFollowing = posts.filter(post => post.is_followed === false)
+        // const descendingNotFollowing = notFollowing.sort((a,b) => a.likes < b.likes ? 1 : -1)
+        // topFiveNotFollowing = descendingNotFollowing.slice(0,5)
     }
 
     return (
         <>
-        {descendingUsers && (
+        {descendingPosts && (
             <div className='container'>
                 <FollowersColumn users={topFiveFollowing} />
                 <div className='feed'>
-                    {descendingUsers.map((descendingUser, index) => (
+                    {descendingPosts.map((descendingPost, index) => (
                         <Card
                             key={index}
-                            user={descendingUser}
+                            post={descendingPost}
                             toggleFollow={userToToggle => setUserToToggle(userToToggle)}
                         />
                     ))}
@@ -62,7 +67,7 @@ function Home() {
                         <div className='suggested'>
                             <h2 className='bold'>Suggested accounts</h2>
                             <div className='break' />
-                                {topFiveNotFollowing.map((notFollowingUser, index) => (
+                                {topFiveNotFollowing && topFiveNotFollowing.map((notFollowingUser, index) => (
                                     <MiniCard 
                                         key={index}
                                         user={notFollowingUser}

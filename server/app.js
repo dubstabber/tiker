@@ -26,16 +26,17 @@ const userSchema = new mongoose.Schema({
     following: Array,
     followers: Array,
     createdAt: String
-})
+},{ collection : 'users' })
 
 const postSchema = new mongoose.Schema({
-    id: String,
-    content: String,
+    userId: String,
     caption: String,
+    contentType: String,
+    content: String,
     likes: Number,
     comments: Number,
     timestamp: String
-})
+},{ collection : 'posts' })
 
 const User = mongoose.model('User', userSchema)
 const Post = mongoose.model('Post', postSchema)
@@ -90,9 +91,29 @@ app.post('/register',
 })
 
 app.get('/posts', (req, res) => {
-    User.find(null, (err, arr)=>{
+    Post.find(null, (err, arr)=>{
         res.json(arr);
     })
+})
+
+app.get('/getUser/:id', (req, res) => {
+    User.findOne({_id: req.params.id}, (err, arr) => {
+        if(!err){
+            if(arr.length !== 0){
+                const user = {
+                    username: arr.username,
+                    name: arr.name,
+                    avatar: arr.avatar
+                }
+                res.json(user)
+            }else {
+                res.json([])
+            }
+        } else{
+            res.json([])
+        }
+    })
+    //console.log(req.params.id)
 })
 
 app.put('/edit/:id', (req, res) => {
@@ -100,7 +121,9 @@ app.put('/edit/:id', (req, res) => {
 
     if(data){
         User.updateOne({_id: req.params.id}, data, (err, arr) => {
-            res.json(arr);
+            if(!err){
+                res.json(arr)
+            }
         })
     }
 })
