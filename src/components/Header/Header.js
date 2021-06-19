@@ -4,10 +4,10 @@ import {AppContext} from '../../context'
 import './Header.styles.css'
 
 const Header = () => {
-  const {user, setShowLogin} = useContext(AppContext)
+  const {user, setShowModalDialog} = useContext(AppContext)
 
   const handleLogin = () => {
-    setShowLogin(true);
+    setShowModalDialog(true);
   }
 
   return (

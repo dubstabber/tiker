@@ -1,0 +1,20 @@
+.modal-box{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: black;
+    opacity: 0.7;
+    width: 100vw;
+    height: 100vh;
+}
+
+.box {
+    position: fixed;
+    background-color: white;
+    width: 20%;
+    height: 60%;
+    top: 20%;
+    left: 40%;
+    border-radius: 5px;
+}
+

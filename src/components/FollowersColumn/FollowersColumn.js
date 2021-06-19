@@ -5,11 +5,11 @@ import './FollowersColumn.styles.css'
 
 
 const FollowersColumn = (topFiveFollowing) => {
-  const {user, setShowLogin} = useContext(AppContext)
+  const {user, setShowModalDialog} = useContext(AppContext)
   const users = topFiveFollowing.users
 
   const handleLogin = () => {
-    setShowLogin(true)
+    setShowModalDialog(true)
   }
 
   return (
