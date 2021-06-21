@@ -35,31 +35,23 @@ function Home() {
     
 
     if(posts) {
-        //let date = new Date()
-        //let dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}T${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
-        //descendingPosts = posts.sort((a,b) => a.timestamp < b.timestamp ? 1 : -1)
         descendingPosts = posts.sort((a,b) => {
             const [dateA, timeA] = a.timestamp.split('T')
             let [yearA, monthA, dayA] = dateA.split('-')
-            yearA = parseInt(yearA)
-            monthA = parseInt(monthA)
-            dayA = parseInt(dayA)
+            let [hoursA, minutesA, secondsA] = timeA.split(':')
+            let msA = new Date(yearA, monthA-1, dayA, hoursA, minutesA, secondsA).getTime()
+
             const [dateB, timeB] = b.timestamp.split('T')
             let [yearB, monthB, dayB] = dateB.split('-')
-            yearB = parseInt(yearB)
-            monthB = parseInt(monthB)
-            dayB = parseInt(dayB)
+            let [hoursB, minutesB, secondsB] = timeB.split(':')
+            let msB = new Date(yearB, monthB-1, dayB, hoursB, minutesB, secondsB).getTime()
 
-            if(yearA <= yearB){
-                if(monthA <= monthB){
-                    if(dayA <= dayB){
-                        return 1
-                    }else return -1
-                }else return -1
-            }else return -1
+            if(msA < msB) return 1
+            else if(msA > msB) return -1
+
+            return 0
         })
 
-        //console.log(descendingPosts)
         // const following = posts.filter(post => post.is_followed)
         // const descendingFollowing = following.sort((a,b) => a.likes < b.likes ? 1 : -1)
         // topFiveFollowing = descendingFollowing.slice(0,5)
