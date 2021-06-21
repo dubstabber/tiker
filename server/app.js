@@ -3,6 +3,7 @@ const { body, validationResult } = require('express-validator');
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
+const axios = require('axios')
 
 const app = express()
 app.use(bodyParser.json())
@@ -92,8 +93,22 @@ app.post('/register',
 
 app.get('/posts', (req, res) => {
     Post.find(null, (err, arr)=>{
-        res.json(arr);
+        if(!err) {
+            let posts = []
+            let promises = []
+            arr.forEach(post => {
+                promises.push(axios.get('http://localhost:5000/getUser/' + post.userId ).then(user => {
+                    readyPost = JSON.parse(JSON.stringify(post))
+                    Object.assign(readyPost, user.data)
+                    posts.push(readyPost)
+                }))
+            })
+            Promise.all(promises).then(() => {
+                res.json(posts);
+            }) 
+        }
     })
+
 })
 
 app.get('/getUser/:id', (req, res) => {
@@ -113,19 +128,6 @@ app.get('/getUser/:id', (req, res) => {
             res.json([])
         }
     })
-    //console.log(req.params.id)
-})
-
-app.put('/edit/:id', (req, res) => {
-    const data = JSON.parse(req.query.data)
-
-    if(data){
-        User.updateOne({_id: req.params.id}, data, (err, arr) => {
-            if(!err){
-                res.json(arr)
-            }
-        })
-    }
 })
 
 app.post('/add', (req, res) => {

@@ -1,39 +1,39 @@
 import React from 'react'
 import './Card.styles.css'
 
-function Card({user, toggleFollow}) {
-    const timestamp = user.timestamp
-    const timeStampReformat = timestamp.slice(2, 7)
+function Card({post, toggleFollow}) {
+    const timestamp = post.timestamp
+    const timeStampReformat = timestamp.slice(2, timestamp.indexOf('T'))
 
     return (
       <div className="card">
         <div className="break" />
         <div className="section">
           <div className="user-info">
-            <img className="user-profile" src={user.avatar} width={"100%"} alt="user-profile" />
+            <img className="user-profile" src={post.avatar} width={"100%"} alt="user-profile" />
             <div>
               <div className="section">
-                <h3 className="bold">{user.username}</h3>
-                <p className="username">{user.name}</p>
+                <h3 className="bold">{post.username}</h3>
+                <p className="username">{post.name}</p>
                 <p>{timeStampReformat}</p>
               </div>
-              <p>{user.caption}</p>
+              <p>{post.caption}</p>
             </div>
           </div>
-          {<div className={user.is_followed ? "followed-button" : "follow-button"}
-          onClick={() => toggleFollow(user)}
+          {<div className="follow-button"
+          onClick={() => toggleFollow(post)}
           >
-              {user.is_followed ? "Following" : "Follow"}
+              Follow
             </div>}
         </div>
         <video className="video" controls>
-          <source src={user.video} type="video/mp4" />
+          <source src={post.content} type="video/mp4" />
         </video>
         <div className="section socials">
           <i className="far fa-heart"></i>
-          <div className="social-tag">{user.likes}</div>
+          <div className="social-tag">{post.likes}</div>
           <i className="far fa-comment-dots"></i>
-          <div className="social-tag">{user.comments}</div>
+          <div className="social-tag">{post.comments}</div>
           <i className="far fa-share-square"></i>
         </div>
       </div>
