@@ -68,6 +68,8 @@ app.post('/register',
                 if(arr.length !== 0){
                     return res.send(`account ${req.body.email} exists`)
                 }
+            } else {
+                return res.send(`An unknown error occured`)
             }
         })
         const defaultUsername = req.body.email.slice(0,req.body.email.indexOf('@'))
@@ -89,6 +91,26 @@ app.post('/register',
                 return res.send(`Account '${req.body.email}' has been created`)
             }
         })
+})
+
+app.post('/login', 
+    body('email').isEmail(),
+    body('password').isLength({ min: 6 }),
+    (req, res) => {
+    User.findOne({email: req.body.email}, (err, arr) => {
+        if(err) return res.send(`An error occured during login process`)
+        if(!arr) {
+            return res.send(`Your email or password is incorrect`) 
+        } else {
+            if(arr.password === req.body.password){
+                
+                return res.send(`Your data is corrent!`)
+            }else {
+                return res.send(`Your email or password is incorrect`) 
+            }
+        }
+    })
+
 })
 
 app.get('/posts', (req, res) => {
