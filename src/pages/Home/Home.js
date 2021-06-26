@@ -1,15 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import Card from '../../components/Card/Card'
 import MiniCard from '../../components/MiniCard/MiniCard'
 import FollowersColumn from '../../components/FollowersColumn/FollowersColumn'
-import {AppContext} from '../../context'
 import axios from 'axios'
 import './Home.styles.css'
 
 function Home() {
     const [posts, setPosts] = useState(null)
+    const [suggested, setSuggested] = useState(null)
     const [userToToggle, setUserToToggle] = useState(null)
-    const {user} = useContext(AppContext)
     let descendingPosts
     let topFiveFollowing
     let topFiveNotFollowing
@@ -22,7 +21,14 @@ function Home() {
 
     useEffect(() => {
         fetchData()
+        fetchNotFollowing()
     }, [])
+
+    const fetchNotFollowing = async () => {
+        await axios.get('http://localhost:5000/getUsers/5').then(data => {
+            setSuggested(data.data)
+        })
+    }
 
     if(userToToggle) {
         // const newValue = userToToggle.is_followed ? false : true
@@ -56,9 +62,9 @@ function Home() {
         // const following = posts.filter(post => post.is_followed)
         // topFiveFollowing = descendingFollowing.slice(0,5)
 
+        
         // const notFollowing = posts.filter(post => post.is_followed === false)
-        // const descendingNotFollowing = notFollowing.sort((a,b) => a.likes < b.likes ? 1 : -1)
-        // topFiveNotFollowing = descendingNotFollowing.slice(0,5)
+        topFiveNotFollowing = suggested.sort((a,b) => a.followers.length < b.followers.length ? 1 : -1)
     }
 
     return (

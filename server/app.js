@@ -150,6 +150,26 @@ app.get('/posts', (req, res) => {
 
 })
 
+app.get('/getUsers/:quantity', async (req, res) => {
+    let limit = parseInt(req.params.quantity)
+    if(isNaN(limit)) limit = 1
+
+    let users = await User.find({}).limit(limit)
+    if(!users) return res.send('Users cannot be retrieved')
+
+    let usersData = users.map((el) => {
+        return {
+            name: el.name,
+            username: el.username,
+            avatar: el.avatar,
+            following: el.following,
+            followers: el.followers,
+        }
+    })
+
+    return res.json(usersData)
+})
+
 app.get('/getUser/:id', (req, res) => {
     User.findOne({_id: req.params.id}, (err, arr) => {
         if(!err){

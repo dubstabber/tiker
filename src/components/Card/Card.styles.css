@@ -39,6 +39,7 @@
     padding: 2px 0 3px;
     text-align: center;
     font-size: 14px;
+    cursor: pointer;
   }
   
   .followed-button {
@@ -50,4 +51,5 @@
     padding: 2px 0 3px;
     text-align: center;
     font-size: 14px;
+    cursor: pointer;
   }
