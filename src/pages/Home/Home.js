@@ -9,6 +9,7 @@ import './Home.styles.css'
 function Home() {
     const [posts, setPosts] = useState(null)
     const [userToToggle, setUserToToggle] = useState(null)
+    const {user} = useContext(AppContext)
     let descendingPosts
     let topFiveFollowing
     let topFiveNotFollowing
@@ -53,7 +54,6 @@ function Home() {
         })
 
         // const following = posts.filter(post => post.is_followed)
-        // const descendingFollowing = following.sort((a,b) => a.likes < b.likes ? 1 : -1)
         // topFiveFollowing = descendingFollowing.slice(0,5)
 
         // const notFollowing = posts.filter(post => post.is_followed === false)

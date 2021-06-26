@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import {AppContext} from '../../context'
 import './Header.styles.css'
@@ -20,7 +20,7 @@ const Header = () => {
           <Link to='/upload'>
             <div className="upload" />
           </Link>
-          {user.isAuth ? <img className="personal" src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_960_720.png" alt='personal'/>
+          {user.isAuth ? <img className="personal" src={user.avatar ? user.avatar : './images/user-icon.jpg'} alt='personal'/>
         : <button onClick={handleLogin} className='login-btn'>Login</button>  
         }
         </div>

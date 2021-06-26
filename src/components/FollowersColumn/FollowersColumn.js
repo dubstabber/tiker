@@ -22,9 +22,9 @@ const FollowersColumn = (topFiveFollowing) => {
         <div className="following" />
         <h2>Following</h2>
       </div>
-      {(users && user.isAuth) && <p>Your top accounts</p>}
+      {(user.isAuth) && <p>Your top accounts</p>}
       <hr />
-      {(users && user.isAuth) ? users.map((user, index) => (
+      {(user.isAuth) ? users && users.map((user, index) => (
         <MicroCard 
             key={index} user={user}
         />)) : <><span className="login-caption">Log in to follow creators, like videos, and view comments.</span>

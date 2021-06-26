@@ -1,20 +1,18 @@
-import axios from 'axios'
-import React from 'react'
+import React, {useContext} from 'react'
+import {AppContext} from '../../../context'
 
 import './LoginDialog.styles.css'
 
 const LoginDialog = ({switchPage}) => {
+    const {login} = useContext(AppContext)
+    
     const handleLogin = (e) => {
         e.preventDefault()
-        //console.log(`Email: ${e.target.email.value}`)
-        //console.log(`Pw: ${e.target.password.value}`)
         const loginData = {
             email: e.target.email.value,
             password: e.target.password.value
         }
-        axios.post('http://localhost:5000/login', loginData).then(data => {
-            console.log(data.data)
-        })
+        login(loginData)
     }
 
     return (

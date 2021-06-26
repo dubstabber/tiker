@@ -1,9 +1,10 @@
 const express = require('express')
-const { body, validationResult } = require('express-validator');
+const { body, validationResult } = require('express-validator')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const axios = require('axios')
+const jwt = require('jsonwebtoken')
 
 const app = express()
 app.use(bodyParser.json())
@@ -96,21 +97,37 @@ app.post('/register',
 app.post('/login', 
     body('email').isEmail(),
     body('password').isLength({ min: 6 }),
-    (req, res) => {
-    User.findOne({email: req.body.email}, (err, arr) => {
-        if(err) return res.send(`An error occured during login process`)
-        if(!arr) {
-            return res.send(`Your email or password is incorrect`) 
-        } else {
-            if(arr.password === req.body.password){
-                
-                return res.send(`Your data is corrent!`)
-            }else {
-                return res.send(`Your email or password is incorrect`) 
+    async (req, res) => {
+        try{
+            let user = await User.findOne({email: req.body.email})
+            if(!user){
+                return res.send(`Your email or password is invalid`)
             }
-        }
-    })
 
+            const isMatch = req.body.password === user.password
+            if(!isMatch){
+                return res.send(`Your email or password is invalid`)
+            }
+
+            const payload = {
+                user: {
+                    id: user.id
+                }
+            }
+
+            jwt.sign(
+                payload, 
+                'jwtSecret', {
+                expiresIn: 360000
+            }, (err, token) => {
+                if(err) throw err
+                return res.json({ token })
+            })
+
+        }catch(err){
+            console.error(err.message);
+            res.status(500).send('Server Error');
+        }
 })
 
 app.get('/posts', (req, res) => {
@@ -152,13 +169,55 @@ app.get('/getUser/:id', (req, res) => {
     })
 })
 
-app.post('/add', (req, res) => {
+app.get('/getProfile',
+    auth,
+    async (req, res) => {
+        if(req.user.id){
+            let user = await User.findOne({_id: req.user.id})
+            if(!user) {
+                return res.send(`Cannot log in with this token`)
+            }
+
+            let userData = {
+                name: user.name,
+                username: user.username,
+                email: user.email,
+                avatar: user.avatar,
+                following: user.following,
+                followers: user.followers
+            }
+
+            return res.json(userData)
+        }
+        return res.json('You are not logged in')
+})
+
+app.post('/add', 
+    auth,
+    (req, res) => {
     if(req.body){
         User.create(req.body).then(data => {
             res.send('OK')
         })
     }
 })
+
+function auth(req, res, next){
+    const token = req.header('x-auth-token')
+
+    if(!token) {
+        return res.status(401).json({ msg: 'No token, authorization denied' })
+    }
+
+    try{
+        const decoded = jwt.verify(token, 'jwtSecret')
+
+        req.user = decoded.user
+        next()
+    }catch(err){
+        res.status(401).json({ msg: 'Token is not valid' })
+    }
+}
 
 const PORT = process.env.PORT || 5000
 
