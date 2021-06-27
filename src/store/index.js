@@ -49,13 +49,18 @@ const Store = ({children}) => {
         }
     }, [])
 
-    const login = (loginData) => {
-        axios.post('http://localhost:5000/login', loginData).then(data => {
+    const login = async (loginData) => {
+        await axios.post('http://localhost:5000/login', loginData)
+        .then(data => {
             if(data.data.token){
                 localStorage.setItem('token', data.data.token)
                 setUser({email: loginData.email, token: data.data.token, error: data.data.err, isAuth: true})
                 setShowModalDialog(false)
+                return false
             }
+        })
+        .catch(err => {
+            return true
         })
     }
 

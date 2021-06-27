@@ -1,9 +1,10 @@
-import React, {useContext} from 'react'
+import React, {useState, useContext} from 'react'
 import {AppContext} from '../../../context'
 
 import './LoginDialog.styles.css'
 
 const LoginDialog = ({switchPage}) => {
+    const [error, setError] = useState(false)
     const {login} = useContext(AppContext)
     
     const handleLogin = (e) => {
@@ -12,7 +13,7 @@ const LoginDialog = ({switchPage}) => {
             email: e.target.email.value,
             password: e.target.password.value
         }
-        login(loginData)
+        setError(login(loginData))
     }
 
     return (
@@ -26,7 +27,8 @@ const LoginDialog = ({switchPage}) => {
                     <div className='password-field'>
                         <input placeholder="Password" type='password' className='password-input' name='password' />
                     </div>
-                    <button className="submit-login">Log in</button>
+                    {error && <span className='login-error'>Invalid login or password</span>}
+                    <button className='submit-login'>Log in</button>
                 </form>
             </div>
             <hr />

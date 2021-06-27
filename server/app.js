@@ -1,5 +1,5 @@
 const express = require('express')
-const { body, validationResult } = require('express-validator')
+const { body, check, validationResult } = require('express-validator')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
@@ -96,17 +96,22 @@ app.post('/register',
 
 app.post('/login', 
     body('email').isEmail(),
+    check('password').exists(),
     body('password').isLength({ min: 6 }),
     async (req, res) => {
+        const errors = validationResult(req)
+        if(!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() })
+        }
         try{
             let user = await User.findOne({email: req.body.email})
             if(!user){
-                return res.send(`Your email or password is invalid`)
+                res.status(401).json({ msg: 'Your email or password is invalid' })
             }
 
             const isMatch = req.body.password === user.password
             if(!isMatch){
-                return res.send(`Your email or password is invalid`)
+                res.status(401).json({ msg: 'Your email or password is invalid' })
             }
 
             const payload = {
