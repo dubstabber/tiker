@@ -17,14 +17,14 @@ const Header = (props) => {
 
   return (
     <div className="header">
-      <Link to='/' onClick={() => window.location.reload()}>
+      <Link to='/'>
         <div className="logo"></div>
       </Link>
       <div className="upload-container">
         <div className="section">
-          <Link to='/upload'>
+          {user.isAuth ? <Link to='/upload'>
             <div className="upload" />
-          </Link>
+          </Link>: <div onClick={handleLogin} className="upload" />}
           {user.isAuth ? 
             <div>
               <img className="personal" src={user.avatar ? user.avatar : './images/user-icon.jpg'} alt='personal'/>

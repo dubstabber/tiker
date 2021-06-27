@@ -1,18 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import {Redirect} from 'react-router-dom'
+import {AppContext} from '../../context'
 import axios from 'axios'
 import faker from "faker"
 import './Upload.styles.css'
 
 const Upload = () => {
+  const {user} = useContext(AppContext)
   const username = 'luke123'
   const name = 'Luke April'
   const avatar = 'https://cdn2.iconfinder.com/data/icons/avatars-99/62/avatar-370-456322-512.png'
   const [video, setVideo] = useState(null)
+  const [image, setImage] = useState(null)
   const [caption, setCaption] = useState(null)
   const today = new Date()
   const timestamp = today.toISOString()
 
   let id = faker.random.uuid()
+
+  if(!user.isAuth){
+    return <Redirect to='/' />
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -31,7 +39,7 @@ const Upload = () => {
         button_visible: false  
       }
 
-      axios.post('http://localhost:5000/add', data)
+      axios.post('/add', data)
       .then((response) => {
       console.log(response)
       })

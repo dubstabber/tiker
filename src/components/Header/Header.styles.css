@@ -20,6 +20,7 @@
     margin-top: 15px;
     background-image: url('../../images/tiker-upload.png');
     background-size: 30px;
+    cursor: pointer;
   }
   
   .personal {

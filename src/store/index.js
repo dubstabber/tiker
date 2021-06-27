@@ -17,11 +17,11 @@ const Store = ({children}) => {
     useEffect(() => {
         if(localStorage.token){
             axios.defaults.headers.common['x-auth-token'] = localStorage.token
-            axios.get('http://localhost:5000/getProfile')
+            axios.get('/getProfile')
             .then(data => {
                 setUser({
                     name: data.data.name,
-                    usename: data.data.usename,
+                    username: data.data.username,
                     email: data.data.email, 
                     avatar: data.data.avatar,
                     following: data.data.following,
@@ -50,7 +50,7 @@ const Store = ({children}) => {
     }, [])
 
     const login = async (loginData) => {
-        await axios.post('http://localhost:5000/login', loginData)
+        await axios.post('/login', loginData)
         .then(data => {
             if(data.data.token){
                 localStorage.setItem('token', data.data.token)

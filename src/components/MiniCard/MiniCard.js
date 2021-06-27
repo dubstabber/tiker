@@ -1,7 +1,12 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import './MiniCard.styles.css'
 
-function MiniCard({user, toggleFollow}) {
+function MiniCard({user, follow}) {
+
+    useEffect(() => {
+        
+    })
+
     return (
         <div className="section minicard">
             <div className="section">
@@ -11,9 +16,7 @@ function MiniCard({user, toggleFollow}) {
                     <p>{user.name}</p>
                 </div>
             </div>
-            {<div className={user.is_followed ? "followed-button" : "follow-button"}
-            onClick={() => toggleFollow(user)}
-            >
+            {<div onClick={() => follow(user.username)} className={user.is_followed ? "followed-button" : "follow-button"}>
               {user.is_followed ? "Following" : "Follow"}
             </div>}
         </div>

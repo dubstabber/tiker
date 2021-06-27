@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import {AppContext} from '../../context'
 import Card from '../../components/Card/Card'
 import MiniCard from '../../components/MiniCard/MiniCard'
 import FollowersColumn from '../../components/FollowersColumn/FollowersColumn'
@@ -7,39 +8,41 @@ import './Home.styles.css'
 
 function Home() {
     const [posts, setPosts] = useState(null)
-    const [suggested, setSuggested] = useState(null)
-    const [userToToggle, setUserToToggle] = useState(null)
+    const [suggested, setSuggested] = useState([])
+    const {user} = useContext(AppContext)
     let descendingPosts
     let topFiveFollowing
     let topFiveNotFollowing
     
-    const fetchData = async () => {
-        await axios.get('http://localhost:5000/posts').then(data => {
+    useEffect(() => {
+        fetchPosts()
+    }, [])
+
+    useEffect(() => {
+        fetchNotFollowing()
+    }, [user])
+
+    const fetchPosts = async () => {
+        await axios.get('/posts').then(data => {
             setPosts(data.data)
         })
     }
 
-    useEffect(() => {
-        fetchData()
-        fetchNotFollowing()
-    }, [])
-
     const fetchNotFollowing = async () => {
-        await axios.get('http://localhost:5000/getUsers/5').then(data => {
-            setSuggested(data.data)
+        await axios.get('/getUsers/5').then(data => {
+            if(user.isAuth){ 
+                setSuggested(data.data.filter(el => el.username !== user.username))
+            }else setSuggested(data.data)
         })
-    }
-
-    if(userToToggle) {
-        // const newValue = userToToggle.is_followed ? false : true
-        // const data = JSON.stringify({is_followed: newValue})
-
-        // axios.put(`http://localhost:5000/edit/${userToToggle._id}/?data=${data}`)
-        // .then(() => fetchData())
-        // setUserToToggle(null)
-    }
-
+    }  
     
+    const followUser = async (username) => {
+        if(user.isAuth && user.username !== username){
+            await axios.put(`/follow/${username}`).then(data => {
+                console.log(data.data)
+            })
+        }
+    }
 
     if(posts) {
         descendingPosts = posts.sort((a,b) => {
@@ -76,7 +79,7 @@ function Home() {
                     {descendingPosts.map((descendingPost, index) => (<Card
                         key={index}
                         post={descendingPost}
-                        toggleFollow={userToToggle => setUserToToggle(userToToggle)}
+                        follow={followUser}
                     />)
                     )}
 
@@ -90,7 +93,7 @@ function Home() {
                                     <MiniCard 
                                         key={index}
                                         user={notFollowingUser}
-                                        toggleFollow={userToToggle => setUserToToggle(userToToggle)}
+                                        follow={followUser}
                                     />
                                 ))}
                         </div>

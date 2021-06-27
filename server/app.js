@@ -74,6 +74,20 @@ app.post('/register',
             }
         })
         const defaultUsername = req.body.email.slice(0,req.body.email.indexOf('@'))
+        let pending = true
+        while(pending){
+            User.find({username: defaultUsername}, (err, arr) => {
+                if(!err){
+                    if(arr.length !== 0){
+                        defaultUsername += "1"
+                    }else {
+                        pending = false
+                    }
+                } else {
+                    return res.send(`An unknown error occured`)
+                }
+            })
+        }
         const newUser = {
             name: "",
             username: defaultUsername,
@@ -216,6 +230,48 @@ app.get('/getProfile',
         }
         return res.json('You are not logged in')
 })
+
+app.get('/getFollowing/:username', async (req, res) => {
+    let user = await User.findOne({username: req.params.username})
+    if(!user) return res.send(`Something went wrong. Cannot get users for ${req.params.username}.`)
+
+    return res.json(user.following)
+})
+
+app.get('/getFollowers/:username', async (req, res) => {
+    let user = await User.findOne({username: req.params.username})
+    if(!user) return res.send(`Something went wrong. Cannot get users for ${req.params.username}.`)
+
+    return res.json(user.followers)
+})
+
+app.put('/follow/:username',
+    auth,
+    async (req, res) => {
+        if(req.user.id){
+            let followUser = await User.findOne({username: req.params.username})
+            if(!followUser) return res.send(`Something went wrong. User: ${req.params.username} cannot be followed`)
+
+            if(followUser.id === req.user.id) return res.send(`You cannot follow yourself.`)
+
+            let userData = await User.findOne({_id: req.user.id})
+            if(!userData) return res.send(`Something went wrong.`)
+
+            let isNotFollowed = userData.following.every((el) => el.id !== followUser.id)
+            if(isNotFollowed) {
+                userData.following.push({id: followUser.id})
+                await User.updateOne({_id: req.user.id}, {following: userData.following})
+                return res.send(`User successfully followed`)
+            }else {
+                let index = userData.following.findIndex((el) => el.id === followUser.id)
+                userData.following.splice(index, 1)
+                await User.updateOne({_id: req.user.id}, {following: userData.following})
+                return res.send(`User successfully unfollowed`)
+            }
+
+            
+        }
+    })
 
 app.post('/add', 
     auth,

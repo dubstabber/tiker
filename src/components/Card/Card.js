@@ -1,7 +1,7 @@
 import React from 'react'
 import './Card.styles.css'
 
-function Card({post, toggleFollow}) {
+function Card({post, follow}) {
     const timestamp = post.timestamp
     const timeStampReformat = timestamp.slice(2, timestamp.indexOf('T'))
 
@@ -20,9 +20,7 @@ function Card({post, toggleFollow}) {
               <p>{post.caption}</p>
             </div>
           </div>
-          {<div className="follow-button"
-          onClick={() => toggleFollow(post)}
-          >
+          {<div onClick={() => follow(post.username)} className="follow-button">
               Follow
             </div>}
         </div>
