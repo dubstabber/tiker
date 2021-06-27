@@ -23,11 +23,54 @@
   }
   
   .personal {
+    position:relative;
     width: 40px;
     height: 40px;
     background-color: purple;
     border-radius: 20px;
     margin: 5px 20px 0 20px;
+  }
+  
+  .personal-options {
+    visibility: hidden;
+    position:absolute;
+    background-color: white;
+    transform: translate(-70px, 10px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.419);
+    border-radius: 7px;
+    width: 7%;
+  }
+
+  .personal:hover + .personal-options {
+    visibility: visible;
+  }
+
+  .personal-options:hover{
+    visibility: visible;
+  }
+
+  .personal-options::after {
+    content: " ";
+    position: absolute;
+    border-width: 10px;
+    border-style: solid;
+    margin-left: -5px;
+    bottom: 100%;
+    left: 79%;
+    border-color: transparent transparent white transparent;
+  }
+
+  .personal-option {
+    color: black;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 5px 0;
+    padding: 20px 20px;
+  }
+
+  .personal-option:hover {
+    background-color: rgb(240, 239, 239);
+    cursor: pointer;
   }
 
   .login-btn {
