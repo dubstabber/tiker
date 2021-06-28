@@ -1,23 +1,21 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useContext} from 'react'
+import {AppContext} from '../../context'
 import './MiniCard.styles.css'
 
-function MiniCard({user, follow}) {
-
-    useEffect(() => {
-        
-    })
+function MiniCard({notFollowingUser, follow}) {
+    const {user} = useContext(AppContext)
 
     return (
         <div className="section minicard">
             <div className="section">
-                    <img className="user-profile" src={user.avatar ? user.avatar : './images/user-icon.jpg'} width={'100%'} alt="user-profile"/>
+                    <img className="user-profile" src={notFollowingUser.avatar ? notFollowingUser.avatar : './images/user-icon.jpg'} width={'100%'} alt="user-profile"/>
                 <div>
-                    <h3 className="bold">{user.username}</h3>
-                    <p>{user.name}</p>
+                    <h3 className="bold">{notFollowingUser.username}</h3>
+                    <p>{notFollowingUser.name}</p>
                 </div>
             </div>
-            {<div onClick={() => follow(user.username)} className={user.is_followed ? "followed-button" : "follow-button"}>
-              {user.is_followed ? "Following" : "Follow"}
+            {<div onClick={() => follow(notFollowingUser.username)} className="follow-button">
+              Follow
             </div>}
         </div>
     )

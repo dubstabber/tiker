@@ -29,17 +29,25 @@ function Home() {
     }
 
     const fetchNotFollowing = async () => {
-        await axios.get('/getUsers/5').then(data => {
-            if(user.isAuth){ 
-                setSuggested(data.data.filter(el => el.username !== user.username))
-            }else setSuggested(data.data)
-        })
+        if(user.isAuth){
+            await axios.get('/getSuggestedUsers').then(data => {
+                setSuggested(data.data)
+            })
+        }else {
+            await axios.get('/getUsers/5').then(data => {
+                setSuggested(data.data)
+            })
+        }
+
     }  
     
     const followUser = async (username) => {
         if(user.isAuth && user.username !== username){
             await axios.put(`/follow/${username}`).then(data => {
                 console.log(data.data)
+            })
+            await axios.get('/getSuggestedUsers').then(data => {
+                setSuggested(data.data)
             })
         }
     }
@@ -92,7 +100,7 @@ function Home() {
                                 {topFiveNotFollowing && topFiveNotFollowing.map((notFollowingUser, index) => (
                                     <MiniCard 
                                         key={index}
-                                        user={notFollowingUser}
+                                        notFollowingUser={notFollowingUser}
                                         follow={followUser}
                                     />
                                 ))}

@@ -169,6 +169,42 @@ app.get('/posts', (req, res) => {
 
 })
 
+app.get('/getSuggestedUsers',
+    auth,
+    async (req, res) => {
+        try{
+            let loggedUser = await User.findOne({_id: req.user.id})
+            if(!loggedUser) return res.send('Logged user cannot be retrieved')
+
+            let skipIndex = 0
+            let users = []
+            let currentUsers = await User.find({}).skip(skipIndex).limit(5)
+            if(!currentUsers) return res.send('Users cannot be retrieved')
+            skipIndex += 5
+            
+            while((users.length < 5) && currentUsers.length){
+                currentUsers = currentUsers.filter(user => {
+                    if(user.id === req.user.id) return false
+                    return loggedUser.following.every(followed => {
+                        if(followed.id !== user.id){
+                            return true
+                        } else return false
+                    })
+                })
+                
+                users.push(...currentUsers)
+                currentUsers = await User.find({}).skip(skipIndex).limit(5)
+                if(!currentUsers) return res.send('Users cannot be retrieved')
+                skipIndex += 5
+            }
+            
+            return res.json(users)
+        }catch(err){
+            console.error(err.message)
+            res.status(500).send('Server Error')
+        }
+})
+
 app.get('/getUsers/:quantity', async (req, res) => {
     let limit = parseInt(req.params.quantity)
     if(isNaN(limit)) limit = 1
