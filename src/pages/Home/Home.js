@@ -8,6 +8,7 @@ import './Home.styles.css'
 
 function Home() {
     const [posts, setPosts] = useState(null)
+    const [followed, setFollowed] = useState([])
     const [suggested, setSuggested] = useState([])
     const {user} = useContext(AppContext)
     let descendingPosts
@@ -16,11 +17,17 @@ function Home() {
     
     useEffect(() => {
         fetchPosts()
-    }, [])
-
-    useEffect(() => {
+        fetchFollowing()
         fetchNotFollowing()
     }, [user])
+
+    const fetchFollowing = async () => {
+        if(user.isAuth){
+            await axios.get('/getFollowing'). then(data => {
+                setFollowed(data.data)
+            })
+        }
+    }
 
     const fetchPosts = async () => {
         await axios.get('/posts').then(data => {
@@ -43,12 +50,11 @@ function Home() {
     
     const followUser = async (username) => {
         if(user.isAuth && user.username !== username){
-            await axios.put(`/follow/${username}`).then(data => {
-                console.log(data.data)
+            await axios.put(`/follow/${username}`).catch(err => {
+                console.log(err)
             })
-            await axios.get('/getSuggestedUsers').then(data => {
-                setSuggested(data.data)
-            })
+            fetchFollowing()
+            fetchNotFollowing()
         }
     }
 
@@ -88,6 +94,7 @@ function Home() {
                         key={index}
                         post={descendingPost}
                         follow={followUser}
+                        followedUsers={followed}
                     />)
                     )}
 

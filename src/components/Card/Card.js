@@ -1,9 +1,14 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import './Card.styles.css'
 
-function Card({post, follow}) {
+function Card({post, follow, followedUsers}) {
+    const [isFollowed, setIsFollowed] = useState(false)
     const timestamp = post.timestamp
     const timeStampReformat = timestamp.slice(2, timestamp.indexOf('T'))
+
+    useEffect(() => {
+      setIsFollowed(!followedUsers.every(user => user.id !== post.userId))
+    })
 
     return (
       <div className="card">
@@ -20,13 +25,13 @@ function Card({post, follow}) {
               <p>{post.caption}</p>
             </div>
           </div>
-          {<div onClick={() => follow(post.username)} className="follow-button">
-              Follow
+          {<div onClick={() => follow(post.username)} className={isFollowed ? "followed-button":"follow-button"}>
+              {isFollowed ? "Following" :"Follow"}
             </div>}
         </div>
-        <video className="video" controls>
+        {post.contentType === 'video' && <video className="video" controls>
           <source src={post.content} type="video/mp4" />
-        </video>
+        </video>}
         <div className="section socials">
           <i className="far fa-heart"></i>
           <div className="social-tag">{post.likes}</div>

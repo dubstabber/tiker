@@ -267,6 +267,15 @@ app.get('/getProfile',
         return res.json('You are not logged in')
 })
 
+app.get('/getFollowing', 
+    auth,
+    async (req, res) => {
+    let user = await User.findOne({_id: req.user.id})
+    if(!user) return res.send(`Something went wrong. Cannot get users for user with id ${req.user.id}.`)
+
+    return res.json(user.following)
+})
+
 app.get('/getFollowing/:username', async (req, res) => {
     let user = await User.findOne({username: req.params.username})
     if(!user) return res.send(`Something went wrong. Cannot get users for ${req.params.username}.`)
