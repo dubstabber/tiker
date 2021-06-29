@@ -39,6 +39,8 @@ function Home() {
         if(user.isAuth){
             await axios.get('/getSuggestedUsers').then(data => {
                 setSuggested(data.data)
+            }).catch(err => {
+                console.error(err)
             })
         }else {
             await axios.get('/getUsers/5').then(data => {
@@ -51,7 +53,7 @@ function Home() {
     const followUser = async (username) => {
         if(user.isAuth && user.username !== username){
             await axios.put(`/follow/${username}`).catch(err => {
-                console.log(err)
+                console.error(err)
             })
             fetchFollowing()
             fetchNotFollowing()
@@ -76,11 +78,8 @@ function Home() {
             return 0
         })
 
-        // const following = posts.filter(post => post.is_followed)
-        // topFiveFollowing = descendingFollowing.slice(0,5)
+        topFiveFollowing = followed.slice(0,5)
 
-        
-        // const notFollowing = posts.filter(post => post.is_followed === false)
         topFiveNotFollowing = suggested.sort((a,b) => a.followers.length < b.followers.length ? 1 : -1)
     }
 

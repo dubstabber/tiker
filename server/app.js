@@ -273,7 +273,21 @@ app.get('/getFollowing',
     let user = await User.findOne({_id: req.user.id})
     if(!user) return res.send(`Something went wrong. Cannot get users for user with id ${req.user.id}.`)
 
-    return res.json(user.following)
+    let followers = []
+    
+    for(const el of user.following){
+        let follower = await User.findOne({_id: el.id})
+        if(!follower)return res.send(`Follower could not be found`)
+        let sanitizedFollower = {
+            id: el.id,
+            name: follower.name,
+            username: follower.username,
+            avatar: follower.avatar
+        }
+        followers.push(sanitizedFollower)
+    }
+
+    return res.json(followers)
 })
 
 app.get('/getFollowing/:username', async (req, res) => {
