@@ -1,10 +1,7 @@
-import React, {useEffect, useContext} from 'react'
-import {AppContext} from '../../context'
+import React from 'react'
 import './MiniCard.styles.css'
 
 function MiniCard({notFollowingUser, follow}) {
-    const {user} = useContext(AppContext)
-
     return (
         <div className="section minicard">
             <div className="section">

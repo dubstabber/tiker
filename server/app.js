@@ -320,11 +320,20 @@ app.put('/follow/:username',
             if(isNotFollowed) {
                 userData.following.push({id: followUser.id})
                 await User.updateOne({_id: req.user.id}, {following: userData.following})
+
+                followUser.followers.push({id: req.user.id})
+                await User.updateOne({_id: followUser.id}, {followers: followUser.followers})
+
                 return res.send(`User successfully followed`)
             }else {
                 let index = userData.following.findIndex((el) => el.id === followUser.id)
                 userData.following.splice(index, 1)
                 await User.updateOne({_id: req.user.id}, {following: userData.following})
+
+                index = followUser.followers.findIndex((el) => el.id === req.user.id)
+                followUser.followers.splice(index, 1)
+                await User.updateOne({_id: followUser.id}, {followers: followUser.followers})
+
                 return res.send(`User successfully unfollowed`)
             }
 

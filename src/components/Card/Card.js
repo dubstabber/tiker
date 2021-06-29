@@ -8,7 +8,7 @@ function Card({post, follow, followedUsers}) {
 
     useEffect(() => {
       setIsFollowed(!followedUsers.every(user => user.id !== post.userId))
-    })
+    },[followedUsers, post.userId])
 
     return (
       <div className="card">

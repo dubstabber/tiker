@@ -10,21 +10,41 @@ function Home() {
     const [posts, setPosts] = useState(null)
     const [followed, setFollowed] = useState([])
     const [suggested, setSuggested] = useState([])
-    const {user} = useContext(AppContext)
+    const {user, setShowModalDialog} = useContext(AppContext)
     let descendingPosts
     let topFiveFollowing
     let topFiveNotFollowing
-    
+
     useEffect(() => {
         fetchPosts()
-        fetchFollowing()
-        fetchNotFollowing()
+        if(user.isAuth){
+            axios.get('/getFollowing').then(data => {
+                setFollowed(data.data)
+            }).catch(err => {
+                console.error(err)
+            })
+        }
+        if(user.isAuth){
+            axios.get('/getSuggestedUsers').then(data => {
+                setSuggested(data.data)
+            }).catch(err => {
+                console.error(err)
+            })
+        }else {
+            axios.get('/getUsers/5').then(data => {
+                setSuggested(data.data)
+            }).catch(err => {
+                console.error(err)
+            })
+        }
     }, [user])
 
     const fetchFollowing = async () => {
         if(user.isAuth){
-            await axios.get('/getFollowing'). then(data => {
+            await axios.get('/getFollowing').then(data => {
                 setFollowed(data.data)
+            }).catch(err => {
+                console.error(err)
             })
         }
     }
@@ -32,6 +52,8 @@ function Home() {
     const fetchPosts = async () => {
         await axios.get('/posts').then(data => {
             setPosts(data.data)
+        }).catch(err => {
+            console.error(err)
         })
     }
 
@@ -57,6 +79,8 @@ function Home() {
             })
             fetchFollowing()
             fetchNotFollowing()
+        }else {
+            setShowModalDialog(true)
         }
     }
 
