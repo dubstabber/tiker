@@ -15,7 +15,7 @@ function Card({post, follow, followedUsers}) {
         <div className="break" />
         <div className="section">
           <div className="user-info">
-            <img className="user-profile" src={post.avatar} width={"100%"} alt="user-profile" />
+            <img className="user-profile" src={post.avatar ? post.avatar : "./images/user-icon.jpg"} width={"100%"} alt="user-profile" />
             <div>
               <div className="section">
                 <h3 className="bold">{post.username}</h3>
@@ -29,9 +29,9 @@ function Card({post, follow, followedUsers}) {
               {isFollowed ? "Following" :"Follow"}
             </div>}
         </div>
-        {post.contentType === 'video' && <video className="video" controls>
-          <source src={post.content} type="video/mp4" />
-        </video>}
+        <video className="video" controls>
+          <source src={post.video} type="video/mp4" />
+        </video>
         <div className="section socials">
           <i className="far fa-heart"></i>
           <div className="social-tag">{post.likes}</div>

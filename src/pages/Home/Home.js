@@ -69,7 +69,6 @@ function Home() {
                 setSuggested(data.data)
             })
         }
-
     }  
     
     const followUser = async (username) => {

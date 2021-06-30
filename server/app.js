@@ -33,8 +33,7 @@ const userSchema = new mongoose.Schema({
 const postSchema = new mongoose.Schema({
     userId: String,
     caption: String,
-    contentType: String,
-    content: String,
+    video: String,
     likes: Number,
     comments: Number,
     timestamp: String
@@ -252,8 +251,9 @@ app.get('/getProfile',
             if(!user) {
                 return res.send(`Cannot log in with this token`)
             }
-
+            
             let userData = {
+                id: req.user.id,
                 name: user.name,
                 username: user.username,
                 email: user.email,
@@ -344,12 +344,24 @@ app.put('/follow/:username',
 app.post('/add', 
     auth,
     (req, res) => {
-    if(req.body){
-        User.create(req.body).then(data => {
-            res.send('OK')
-        })
+
+    const timestamp = new Date()
+    const timestampString = `${timestamp.getFullYear()}-${timestamp.getMonth() +1}-${timestamp.getDate()}T${timestamp.getHours()}:${timestamp.getMinutes()}:${timestamp.getSeconds()}`
+
+    const newPost = {
+        userId: req.user.id,
+        caption: req.body.caption,
+        video: req.body.video,
+        likes: 0,
+        comments: 0,
+        timestamp: timestampString
     }
+    
+    
+
+    return res.json('data passed')
 })
+
 
 function auth(req, res, next){
     const token = req.header('x-auth-token')
