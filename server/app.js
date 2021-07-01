@@ -17,7 +17,7 @@ const db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', function() {
   console.log('connected to mongoDB!')
-});
+})
 
 const userSchema = new mongoose.Schema({
     name: String,
@@ -34,7 +34,7 @@ const postSchema = new mongoose.Schema({
     userId: String,
     caption: String,
     video: String,
-    likes: Number,
+    likes: Array,
     comments: Number,
     timestamp: String
 },{ collection : 'posts' })
@@ -95,6 +95,7 @@ app.post('/register',
             avatar: null,
             following: [],
             followers: [],
+            likedPosts: [],
             createdAt: new Date()
         }
         User.create(newUser, (err, arr) => {
@@ -217,7 +218,7 @@ app.get('/getUsers/:quantity', async (req, res) => {
             username: el.username,
             avatar: el.avatar,
             following: el.following,
-            followers: el.followers,
+            followers: el.followers
         }
     })
 
@@ -259,7 +260,8 @@ app.get('/getProfile',
                 email: user.email,
                 avatar: user.avatar,
                 following: user.following,
-                followers: user.followers
+                followers: user.followers,
+                likedPosts: user.likedPosts
             }
 
             return res.json(userData)
@@ -341,6 +343,33 @@ app.put('/follow/:username',
         }
     })
 
+app.put('/likePost',
+    auth,
+    async (req, res) => {
+        try{
+            let post = await Post.findOne({_id: req.body.id})
+            if(!post) return res.status(401).json({msg: 'Error: Post could not be liked'})
+
+            let isNotLiked = post.likes.every(userId => userId !== req.user.id)
+            if(isNotLiked) {
+                post.likes.push(req.user.id)
+                await Post.updateOne({_id: req.body.id}, {likes: post.likes})
+                
+                return res.send(`${post.likes.length}`)
+            }else{
+                let index = post.likes.indexOf(`${req.user.id}`)
+                post.likes.splice(index, 1)
+                await Post.updateOne({_id: req.body.id}, {likes: post.likes})
+
+                return res.send(`${post.likes.length}`)
+            }
+
+        }catch(err) {
+            console.error(err.message)
+            res.status(500).send('Server Error') 
+        }
+})
+    
 app.post('/add', 
     auth,
     async (req, res) => {

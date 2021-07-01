@@ -1,20 +1,36 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {AppContext} from '../../context'
+import axios from 'axios'
 import './Card.styles.css'
 
 function Card({post, follow, followedUsers}) {
     const [isFollowed, setIsFollowed] = useState(false)
     const [isMyPost, setIsMyPost] = useState(false)
-    const {user} = useContext(AppContext)
+    const [likes, setLikes] = useState(0)
+    const {user, setShowModalDialog} = useContext(AppContext)
     const timestamp = post.timestamp
     const timeStampReformat = timestamp.slice(2, timestamp.indexOf('T'))
 
     useEffect(() => {
-      if(user.id === post.userId)
-        setIsMyPost(true)
-      else
-        setIsFollowed(!followedUsers.every(followed => followed.id !== post.userId))
-    },[followedUsers, post.userId, user.id])
+      if(user.isAuth){
+        if(user.id === post.userId)
+          setIsMyPost(true)
+        else
+          setIsFollowed(!followedUsers.every(followed => followed.id !== post.userId))
+
+        setLikes(post.likes.length)
+      }
+    },[followedUsers, post, user])
+
+    const handleLike = async () => {
+      if(user.isAuth){
+        await axios.put('/likePost', {id: post._id}).then((data) => {
+          setLikes(data.data)
+        })
+      }else {
+        setShowModalDialog(true)
+      }
+    }
 
     return (
       <div className="card">
@@ -39,11 +55,11 @@ function Card({post, follow, followedUsers}) {
           <source src={post.video} type="video/mp4" />
         </video>
         <div className="section socials">
-          <i className="far fa-heart"></i>
-          <div className="social-tag">{post.likes}</div>
-          <i className="far fa-comment-dots"></i>
+          <i onClick={handleLike} className="far fa-heart social-mini-icon"></i>
+          <div className="social-tag">{likes}</div>
+          <i className="far fa-comment-dots social-mini-icon"></i>
           <div className="social-tag">{post.comments}</div>
-          <i className="far fa-share-square"></i>
+          <i className="far fa-share-square social-mini-icon"></i>
         </div>
       </div>
     );

@@ -7,6 +7,10 @@
   .social-tag {
     margin: 0 20px 0 5px;
   }
+
+  .social-mini-icon{
+    cursor: pointer;
+  }
   
   .video {
     width: 270px;

@@ -4,7 +4,7 @@ import {AppContext} from '../../context'
 import './Header.styles.css'
 
 const Header = (props) => {
-  const {user, setShowModalDialog} = useContext(AppContext)
+  const {user, setShowModalDialog, resetState} = useContext(AppContext)
 
   const handleLogin = () => {
     setShowModalDialog(true);
@@ -12,6 +12,7 @@ const Header = (props) => {
 
   const handleLogout = () => {
     localStorage.removeItem('token')
+    resetState()
     window.location.reload()
   }
 

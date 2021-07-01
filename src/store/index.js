@@ -67,12 +67,27 @@ const Store = ({children}) => {
         })
     }
 
+    const resetState = () => {
+        setUser({id: "",
+                 name: "",
+                 username: "",
+                 email: "",  
+                 avatar: null,
+                 following: [],
+                 followers: [],
+                 token: undefined, 
+                 error: undefined, 
+                 isAuth: false
+        })
+    }
+
     const state = {
         user,
         setUser,
         showModalDialog,
         setShowModalDialog,
-        login
+        login,
+        resetState
     }
 
     return <AppContext.Provider value={state}>{children}</AppContext.Provider>
