@@ -1,14 +1,20 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
+import {AppContext} from '../../context'
 import './Card.styles.css'
 
 function Card({post, follow, followedUsers}) {
     const [isFollowed, setIsFollowed] = useState(false)
+    const [isMyPost, setIsMyPost] = useState(false)
+    const {user} = useContext(AppContext)
     const timestamp = post.timestamp
     const timeStampReformat = timestamp.slice(2, timestamp.indexOf('T'))
 
     useEffect(() => {
-      setIsFollowed(!followedUsers.every(user => user.id !== post.userId))
-    },[followedUsers, post.userId])
+      if(user.id === post.userId)
+        setIsMyPost(true)
+      else
+        setIsFollowed(!followedUsers.every(followed => followed.id !== post.userId))
+    },[followedUsers, post.userId, user.id])
 
     return (
       <div className="card">
@@ -25,7 +31,7 @@ function Card({post, follow, followedUsers}) {
               <p>{post.caption}</p>
             </div>
           </div>
-          {<div onClick={() => follow(post.username)} className={isFollowed ? "followed-button":"follow-button"}>
+          {!isMyPost && <div onClick={() => follow(post.username)} className={isFollowed ? "followed-button":"follow-button"}>
               {isFollowed ? "Following" :"Follow"}
             </div>}
         </div>

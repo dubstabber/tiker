@@ -3,7 +3,8 @@ import React, {useState, useEffect} from 'react'
 import {AppContext} from '../context'
 
 const Store = ({children}) => {
-    const [user, setUser] = useState({name: "",
+    const [user, setUser] = useState({id: "",
+                                      name: "",
                                       username: "",
                                       email: "",  
                                       avatar: null,
@@ -20,6 +21,7 @@ const Store = ({children}) => {
             axios.get('/getProfile')
             .then(data => {
                 setUser({
+                    id: data.data.id,
                     name: data.data.name,
                     username: data.data.username,
                     email: data.data.email, 
@@ -33,6 +35,7 @@ const Store = ({children}) => {
             })
             .catch((err) => {
                 setUser({
+                    id: "",
                     name: "", 
                     username: "", 
                     email: "", 

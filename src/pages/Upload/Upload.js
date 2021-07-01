@@ -21,7 +21,7 @@ const Upload = () => {
 
       axios.post('/add', postData)
       .then((response) => {
-          console.log(response.data)
+        return <Redirect to='/' />
       })
       .catch((err) => {
         console.error(err)

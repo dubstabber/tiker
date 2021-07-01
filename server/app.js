@@ -343,7 +343,7 @@ app.put('/follow/:username',
 
 app.post('/add', 
     auth,
-    (req, res) => {
+    async (req, res) => {
 
     const timestamp = new Date()
     const timestampString = `${timestamp.getFullYear()}-${timestamp.getMonth() +1}-${timestamp.getDate()}T${timestamp.getHours()}:${timestamp.getMinutes()}:${timestamp.getSeconds()}`
@@ -357,9 +357,12 @@ app.post('/add',
         timestamp: timestampString
     }
     
-    
+    await Post.create(newPost, (err, arr) => {
+        if(err) return res.status(401).json({msg: 'Error: Post could not be created'})
+        if(arr) return res.json('Post has been created')
+    })
 
-    return res.json('data passed')
+    
 })
 
 
