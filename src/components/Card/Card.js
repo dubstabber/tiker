@@ -7,7 +7,7 @@ function Card({post, follow, followedUsers}) {
     const [isFollowed, setIsFollowed] = useState(false)
     const [isMyPost, setIsMyPost] = useState(false)
     const [likes, setLikes] = useState(0)
-    const {user, setShowModalDialog} = useContext(AppContext)
+    const {user, setShowModalDialog, setPostDialog, setCurrentPost} = useContext(AppContext)
     const timestamp = post.timestamp
     const timeStampReformat = timestamp.slice(2, timestamp.indexOf('T'))
 
@@ -27,6 +27,15 @@ function Card({post, follow, followedUsers}) {
         await axios.put('/likePost', {id: post._id}).then((data) => {
           setLikes(data.data)
         })
+      }else {
+        setShowModalDialog(true)
+      }
+    }
+
+    const handleComment = async () => {
+      if(user.isAuth){
+        setCurrentPost(post)
+        setPostDialog(true)
       }else {
         setShowModalDialog(true)
       }
@@ -57,7 +66,7 @@ function Card({post, follow, followedUsers}) {
         <div className="section socials">
           <i onClick={handleLike} className="far fa-heart social-mini-icon"></i>
           <div className="social-tag">{likes}</div>
-          <i className="far fa-comment-dots social-mini-icon"></i>
+          <i onClick={handleComment} className="far fa-comment-dots social-mini-icon"></i>
           <div className="social-tag">{post.comments}</div>
           <i className="far fa-share-square social-mini-icon"></i>
         </div>

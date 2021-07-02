@@ -6,6 +6,7 @@ import Header from './components/Header/Header'
 import Home from './pages/Home/Home'
 import Upload from './pages/Upload/Upload'
 import ModalDialog from './components/ModalDialog/ModalDialog'
+import PostDialog from './components/PostDialog/PostDialog'
 
 import './App.css'
 
@@ -14,6 +15,7 @@ function App() {
     <HashRouter>
       <Store>
         <ModalDialog />
+        <PostDialog />
         <Header />
         <Switch>
           <Route path='/upload' component={Upload} />

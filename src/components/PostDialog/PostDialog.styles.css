@@ -1,0 +1,114 @@
+.post-container{
+    position: fixed;
+    background-color: white;
+    top:0;
+    left:0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index:2;
+}
+
+.post-close{
+    position:absolute;
+    top:1%;
+    left:1%;
+    width: 45px;
+    height: 45px;
+    background-color: rgb(163, 163, 163);
+    border-radius: 50%; 
+    cursor: pointer;
+}
+
+.post-close::before{
+    content: "";
+    position: absolute;
+    top: 21px;
+    left: 7px;
+    width: 30px;
+    height: 2px;
+    background-color: black;
+    transform: rotate(45deg);
+}
+
+.post-close::after{
+    content: "";
+    position: absolute;
+    top: 21px;
+    left: 7px;
+    width: 30px;
+    height: 2px;
+    background-color: black;
+    transform: rotate(135deg);
+}
+
+.post-left-side {
+    width: 70vw;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-page{
+    width: 30vw;
+}
+
+.post-right-side {
+    width: 30vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-info{
+    height: 40vh;
+    width:100%;
+    padding: 10%;
+}
+
+
+
+.post-comments {
+    height: 52vh;
+    width:100%;
+    background-color: rgb(211, 211, 211);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-add-comment {
+    height: 8vh;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-form {
+    width: 90%;
+    height:auto;
+}
+
+.post-input {
+    width: 83%;
+    height: 10%;
+    border: 0;
+    border-radius: 15px;
+    font-size: 16px;
+    padding: 10px 10px 10px 15px;
+    background-color: rgb(211, 211, 211);
+}
+
+.post-button {
+    width: 12%;
+    height: 40%;
+    background-color: white;
+    border: 0;
+    color: gray;
+}

@@ -13,7 +13,9 @@ const Store = ({children}) => {
                                       token: undefined, 
                                       error: undefined, 
                                       isAuth: false})
-    const [showModalDialog, setShowModalDialog] = useState(false)    
+    const [showModalDialog, setShowModalDialog] = useState(false) 
+    const [postDialog, setPostDialog] = useState(false)  
+    const [currentPost, setCurrentPost] = useState({})
 
     useEffect(() => {
         if(localStorage.token){
@@ -87,7 +89,11 @@ const Store = ({children}) => {
         showModalDialog,
         setShowModalDialog,
         login,
-        resetState
+        resetState,
+        postDialog,
+        setPostDialog,
+        currentPost,
+        setCurrentPost
     }
 
     return <AppContext.Provider value={state}>{children}</AppContext.Provider>
