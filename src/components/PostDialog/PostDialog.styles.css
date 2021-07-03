@@ -54,6 +54,7 @@
 
 .video-page{
     width: 30vw;
+    height: 100vh;
 }
 
 .post-right-side {
@@ -66,11 +67,31 @@
 }
 
 .post-info{
-    height: 40vh;
+    position: relative;
+    height: 30vh;
     width:100%;
-    padding: 10%;
+    padding: 0 5% 5% 10%;
 }
 
+.post-user{
+    display: flex;
+}
+
+.post-follow-btn{
+    position:absolute;
+    top: 5%;
+    right: 15%;
+}
+
+.post-caption {
+    padding: 2% 0 2% 0;
+}
+
+.post-socials{
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+}
 
 
 .post-comments {
@@ -81,6 +102,7 @@
     justify-content: center;
     align-items: center;
 }
+
 
 .post-add-comment {
     height: 8vh;

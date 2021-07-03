@@ -4,6 +4,7 @@
     align-items: center;
     flex-wrap: wrap;
     height: 87%;
+    z-index: 5;
 }
 
 .login-title {

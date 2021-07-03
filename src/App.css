@@ -34,7 +34,7 @@ h3 {
   color:#fe2c55;
 }
 
-p {
+p, span {
   color: grey;
   font-size: 12px;
   line-height: 0;
