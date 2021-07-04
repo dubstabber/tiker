@@ -10,16 +10,12 @@ const PostDialog = ({post, isFollowed, isMyPost, setPostDialogVisibility, handle
     const timestamp = post.timestamp.split('T')[0]
 
     useEffect(() =>{
-        fetchComments()
-    }, [])
-
-    const fetchComments = async () => {
-        await axios.post('/postComments', {postId: post._id}).then(data => {
+        axios.post('/postComments', {postId: post._id}).then(data => {
             setPostComments(data.data)
         }).catch(err => {
             console.log(err)
         })
-    }
+    }, [post])
 
     const closeDialog = () => {
         setPostDialogVisibility(false)
@@ -53,9 +49,9 @@ const PostDialog = ({post, isFollowed, isMyPost, setPostDialogVisibility, handle
             <div className='post-right-side'>
                 <div className='post-info'>
                     <div className='post-follow-btn'>
-                        <div className={isFollowed ? "followed-button":"follow-button"}>
+                        {!isMyPost && <div className={isFollowed ? "followed-button":"follow-button"}>
                             {isFollowed ? "Following" :"Follow"}
-                        </div>
+                        </div>}
                     </div>
                     <div className='post-user'>
                         <img className='user-profile' src={post.avatar ? post.avatar : './images/user-icon.jpg'} alt='user-avatar' />
