@@ -64,4 +64,6 @@ hr {
   margin-right: 15px;
   }
 
-
+.hide-scroll {
+  overflow: hidden;
+}

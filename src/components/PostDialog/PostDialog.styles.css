@@ -99,8 +99,9 @@
     width:100%;
     background-color: rgb(211, 211, 211);
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 
@@ -133,4 +134,12 @@
     background-color: white;
     border: 0;
     color: gray;
+}
+
+.post-button-ready {
+    width: 12%;
+    height: 40%;
+    background-color: white;
+    border: 0;
+    color: #fe2c55;
 }

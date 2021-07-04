@@ -1,0 +1,7 @@
+.comment-container{
+    padding: 2% 5%;
+}
+
+.comment-user{
+    display: flex;
+}

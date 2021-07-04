@@ -35,6 +35,7 @@ function Card({post, follow, followedUsers}) {
     const handleComment = async () => {
       if(user.isAuth){
         setPostDialogVisibility(true)
+        document.querySelector('body').classList.add('hide-scroll')
       }else {
         setShowModalDialog(true)
       }
@@ -46,6 +47,7 @@ function Card({post, follow, followedUsers}) {
                                                 setPostDialogVisibility={setPostDialogVisibility}
                                                 handleLike={handleLike}
                                                 handleComment={handleComment}
+                                                likes={likes}
                                                 />
 
     return (
@@ -74,7 +76,7 @@ function Card({post, follow, followedUsers}) {
           <i onClick={handleLike} className="far fa-heart social-mini-icon"></i>
           <div className="social-tag">{likes}</div>
           <i onClick={handleComment} className="far fa-comment-dots social-mini-icon"></i>
-          <div className="social-tag">{post.comments}</div>
+          <div className="social-tag">{post.comments.length}</div>
           <i className="far fa-share-square social-mini-icon"></i>
         </div>
       </div>
