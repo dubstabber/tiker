@@ -30,14 +30,23 @@ const userSchema = new mongoose.Schema({
     createdAt: String
 },{ collection : 'users' })
 
+const commentSchema = new mongoose.Schema({
+    userId: String,
+    comment: String,
+    timestamp: String,
+    likes: Array,
+    subComments: Array
+})
+
 const postSchema = new mongoose.Schema({
     userId: String,
     caption: String,
     video: String,
     likes: Array,
-    comments: Array,
+    comments: [commentSchema],
     timestamp: String
 },{ collection : 'posts' })
+
 
 const User = mongoose.model('User', userSchema)
 const Post = mongoose.model('Post', postSchema)
@@ -426,9 +435,10 @@ app.post('/comment',
             }
 
             post.comments.push(newComment)
-                await Post.updateOne({_id : req.body.postId}, {comments: post.comments}).catch(err =>{
-                console.log(err)
-            })   
+                await Post.updateOne({_id : req.body.postId}, {comments: post.comments})
+                .catch(err =>{
+                    console.log(err)
+                })   
 
             return res.json(newComment)
         }else{
@@ -439,6 +449,50 @@ app.post('/comment',
         res.status(500).send('Server Error') 
     }
 })
+
+app.post('/commentTheComment',
+    auth,
+    async (req, res) => {
+    let comment = req.body.comment
+    comment = comment.trim()
+    comment = comment.slice(req.body.replyPlaceholder.length, comment.length).trim()
+    try{
+        if(comment){
+            await Post.findOne({_id : req.body.postId})
+            .then((post) => {
+                const date = new Date()
+                let formattedDate = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}T${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+
+                const replyComment = {
+                    userId: req.user.id,
+                    comment: comment,
+                    timestamp: formattedDate,
+                    likes: []
+                }
+
+                post.comments[req.body.commentToReply].subComments.push(replyComment)
+                post.save()
+                .then((data) =>{
+                    res.send(replyComment)
+                })
+                .catch(err => {
+                    res.send('This post cannot be commented')
+                })
+                
+            })
+            .catch((err) => {
+                res.send('This post cannot be commented')
+            })
+            
+        }else{
+            return res.send('This comment cannot be published')
+        }
+    }catch(err){
+        console.error(err.message)
+        res.status(500).send('Server Error') 
+    }
+})
+
 
 app.post('/add', 
     auth,

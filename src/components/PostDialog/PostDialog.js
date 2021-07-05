@@ -61,14 +61,27 @@ const PostDialog = ({post, isFollowed, isMyPost, setPostDialogVisibility, handle
     const addComment = async (e) => {
         e.preventDefault()
         if(comment){
-            await axios.post('/comment', {postId: post._id, comment}).then(data => {
-                setComment('')
-                setCommentToReply(null)
-                setReplyPlaceholder('')
-            })
-            .catch(err => {
-                console.log(err)
-            })
+            if(commentToReply || commentToReply === 0){
+                await axios.post('/commentTheComment', {postId: post._id, comment, commentToReply, replyPlaceholder}).then(data => {
+                    console.log(data.data)
+                    setComment('')
+                    setCommentToReply(null)
+                    setReplyPlaceholder('')
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+            }else{
+                await axios.post('/comment', {postId: post._id, comment}).then(data => {
+                    setComment('')
+                    setCommentToReply(null)
+                    setReplyPlaceholder('')
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+            }
+            
         }
     }
 
