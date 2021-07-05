@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import axios from 'axios'
 import CommentCard from './CommentCard/CommentCard'
 
@@ -7,10 +7,13 @@ import './PostDialog.styles.css'
 const PostDialog = ({post, isFollowed, isMyPost, setPostDialogVisibility, handleLike, likes}) => {
     const [comment, setComment] = useState('')
     const [postComments, setPostComments] = useState([])
+    const [commentToReply, setCommentToReply] = useState(null)
+    const [replyPlaceholder, setReplyPlaceholder] = useState('')
+    const inputElement = useRef(null)
     const timestamp = post.timestamp.split('T')[0]
 
     useEffect(() =>{
-        axios.post('/postComments', {postId: post._id}).then(data => {
+        axios.post('/getPostComments', {postId: post._id}).then(data => {
             setPostComments(data.data)
         }).catch(err => {
             console.log(err)
@@ -22,8 +25,37 @@ const PostDialog = ({post, isFollowed, isMyPost, setPostDialogVisibility, handle
         document.querySelector('body').classList.remove('hide-scroll')
     }
 
+    const reply = (index) => {
+        setCommentToReply(index)
+        inputElement.current.focus()
+    }
+
+    useEffect(() => {
+        if(commentToReply || commentToReply === 0){
+            setReplyPlaceholder(`@${postComments[commentToReply].username} :`)
+        }else {
+            setReplyPlaceholder('')
+        }
+    },[commentToReply, postComments])
+
+    useEffect(() => {
+        setComment(prev => `${replyPlaceholder + prev}`)
+    }, [replyPlaceholder])
+
+    useEffect(() => {
+        isValidReply()
+    }, [comment])
+
     const checkComment = (e) => {
         setComment(e.target.value)
+    }
+
+    const isValidReply = () => {
+        if(comment.slice(0, replyPlaceholder.length) !== replyPlaceholder) {
+            setCommentToReply(null)
+            setComment('')
+            setReplyPlaceholder('')
+        }
     }
 
     const addComment = async (e) => {
@@ -31,6 +63,8 @@ const PostDialog = ({post, isFollowed, isMyPost, setPostDialogVisibility, handle
         if(comment){
             await axios.post('/comment', {postId: post._id, comment}).then(data => {
                 setComment('')
+                setCommentToReply(null)
+                setReplyPlaceholder('')
             })
             .catch(err => {
                 console.log(err)
@@ -73,12 +107,16 @@ const PostDialog = ({post, isFollowed, isMyPost, setPostDialogVisibility, handle
                 </div>
                 <div className='post-comments'>
                     {postComments.map((postComment, index) => {
-                        return <CommentCard key={index} postComment={postComment} />
+                        return <CommentCard key={index} 
+                                            postComment={postComment} 
+                                            index={index}
+                                            reply={reply}
+                                            />
                     })}
                 </div>
                 <div className='post-add-comment'>
                     <form onSubmit={addComment} className='post-form'>
-                        <input onChange={checkComment} value={comment} name='addComment' className='post-input' placeholder='Add comment...' />
+                        <input onChange={checkComment} value={comment} name='addComment' className='post-input' placeholder='Add comment...' ref={inputElement}/>
                         <button className={comment ? 'post-button-ready' : 'post-button'}>Post</button>
                     </form>
                 </div>

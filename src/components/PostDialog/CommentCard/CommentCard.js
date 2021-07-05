@@ -3,11 +3,11 @@ import SubCommentCard from './SubCommentCard/SubCommentCard'
 
 import './CommentCard.styles.css'
 
-const CommentCard = ({postComment}) => {
+const CommentCard = ({postComment, reply, index}) => {
     const timestampString = postComment.timestamp.split('T')[0]
 
     const handleReply = () => {
-        console.log('clicked reply')
+        reply(index)
     }
 
     return (

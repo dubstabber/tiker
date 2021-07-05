@@ -169,7 +169,7 @@ app.get('/posts', (req, res) => {
 
 })
 
-app.post('/postComments',
+app.post('/getPostComments',
     auth,
     async (req, res) => {
     try{
@@ -411,6 +411,9 @@ app.post('/comment',
     comment = comment.trim()
     try{
         if(comment){
+            const post = await Post.findOne({_id : req.body.postId})
+            if(!post) return res.send('This post cannot be commented')
+
             const date = new Date()
             let formattedDate = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}T${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
 
@@ -421,14 +424,11 @@ app.post('/comment',
                 likes: [],
                 subComments: []
             }
-            
-            const post = await Post.findOne({_id : req.body.postId})
-            if(!post) return res.send('This post cannot be commented')
 
             post.comments.push(newComment)
-            await Post.updateOne({_id : req.body.postId}, {comments: post.comments}).catch(err =>{
+                await Post.updateOne({_id : req.body.postId}, {comments: post.comments}).catch(err =>{
                 console.log(err)
-            })
+            })   
 
             return res.json(newComment)
         }else{

@@ -119,6 +119,11 @@
     height:auto;
 }
 
+.post-reply{
+    position:absolute;
+    margin-left: 1%;
+}
+
 .post-input {
     width: 83%;
     height: 10%;
