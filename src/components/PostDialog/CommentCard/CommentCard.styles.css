@@ -30,3 +30,8 @@
     margin-left: 30px;
     cursor: pointer;
 }
+
+.reply-section{
+    display: flex;
+    flex-direction: column;
+}

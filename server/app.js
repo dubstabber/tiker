@@ -193,6 +193,16 @@ app.post('/getPostComments',
             if(!currentUser) {
                 comments.push({})
             }else{
+
+                for(let subComment of comment.subComments){
+                    await User.findOne({_id: subComment.userId}).then((data) => {
+                        Object.assign(subComment, {username: data.username, 
+                                                   avatar: data.avatar,
+                                                   name: data.name
+                                                   })
+                    })
+                }
+
                 comments.push({
                     name: currentUser.name,
                     username: currentUser.username,
