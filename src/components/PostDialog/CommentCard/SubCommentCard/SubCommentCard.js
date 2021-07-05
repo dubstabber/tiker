@@ -7,7 +7,11 @@ const SubCommentCard = ({reply}) => {
 
     return (
         <div className='reply-container'>
-            <img className='user-profile'  src={reply.avatar ? reply.avatar : './images/user-icon.jpg'} width={'100%'} alt="user-profile" />
+            <div className='reply-socials'>
+                    <i className="far fa-heart social-mini-icon"></i>
+                    <div className="social-tag">{reply.likes.length}</div>
+                </div>
+            <img className='user-profile-small'  src={reply.avatar ? reply.avatar : './images/user-icon.jpg'} width={'100%'} alt="user-profile" />
             <div className='reply-user'>
                 <h3 className='bold'>{reply.username}</h3>
                 <div className='reply-field'>{reply.comment}</div>

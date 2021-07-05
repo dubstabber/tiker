@@ -1,7 +1,28 @@
 .reply-container{
-    
+    display: flex;
+    margin-left: 12%;
+    padding: 2% 15% 2% 5%;
+    width:68%;
+    position: relative;
+}
+
+.reply-socials{
+    position: absolute;
+    right:2%;
+    margin-top: 5%;
 }
 
 .reply-user{
-    
+    display: flex;
+    flex-direction: column;
+}
+
+.reply-field{
+    font-size: 15px;
+    color: black;
+    white-space: normal;
+}
+
+.reply-timestamp{
+    margin-top: 8px;
 }

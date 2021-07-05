@@ -27,9 +27,7 @@ const CommentCard = ({postComment, reply, index}) => {
                     </div>
                 </div>
             </div>
-            <div className='reply-section'>
-                    {postComment.subComments.map((reply, index) => <SubCommentCard key={index} reply={reply} />)}
-            </div>
+                {postComment.subComments.map((reply, index) => <SubCommentCard key={index} reply={reply} />)}
         </>
     )
 }
