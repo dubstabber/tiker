@@ -30,6 +30,16 @@ const PostDialog = ({post, isFollowed, isMyPost, setPostDialogVisibility, handle
         inputElement.current.focus()
     }
 
+    const likeComment = async (index) => {
+        await axios.post('/likeComment', {postId: post._id ,commentToLike: index})
+        .then((data) =>{
+            console.log(data.data)
+        })
+        .catch(err =>{
+            console.log(err)
+        })
+    }
+
     useEffect(() => {
         if(commentToReply || commentToReply === 0){
             setReplyPlaceholder(`@${postComments[commentToReply].username} :`)
@@ -124,6 +134,7 @@ const PostDialog = ({post, isFollowed, isMyPost, setPostDialogVisibility, handle
                                             postComment={postComment} 
                                             index={index}
                                             reply={reply}
+                                            likeComment={likeComment}
                                             />
                     })}
                 </div>

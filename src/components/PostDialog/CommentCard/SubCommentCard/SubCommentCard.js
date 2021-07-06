@@ -2,7 +2,7 @@ import React from 'react'
 
 import './SubCommentCard.styles.css'
 
-const SubCommentCard = ({reply}) => {
+const SubCommentCard = ({reply, handleReply}) => {
     const timestampString = reply.timestamp.split('T')[0]
 
     return (
@@ -17,7 +17,7 @@ const SubCommentCard = ({reply}) => {
                 <div className='reply-field'>{reply.comment}</div>
                 <div>
                     <span className='reply-timestamp'>{timestampString}</span>
-                    <span className='reply-btn'>Reply</span>
+                    <span onClick={handleReply} className='reply-btn'>Reply</span>
                 </div>
             </div>
         </div>
