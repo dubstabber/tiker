@@ -4,7 +4,7 @@ import CommentCard from './CommentCard/CommentCard'
 
 import './PostDialog.styles.css'
 
-const PostDialog = ({post, isFollowed, isMyPost, setPostDialogVisibility, handleLike, likes}) => {
+const PostDialog = ({post, isFollowed, follow, isMyPost, setPostDialogVisibility, handleLike, likes}) => {
     const [comment, setComment] = useState('')
     const [postComments, setPostComments] = useState([])
     const [commentToReply, setCommentToReply] = useState(null)
@@ -20,6 +20,14 @@ const PostDialog = ({post, isFollowed, isMyPost, setPostDialogVisibility, handle
         })
     }, [post])
 
+    const getPostComments = () => {
+        axios.post('/getPostComments', {postId: post._id}).then(data => {
+            setPostComments(data.data)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
     const closeDialog = () => {
         setPostDialogVisibility(false)
         document.querySelector('body').classList.remove('hide-scroll')
@@ -32,22 +40,18 @@ const PostDialog = ({post, isFollowed, isMyPost, setPostDialogVisibility, handle
 
     const likeComment = async (index) => {
         await axios.post('/likeComment', {postId: post._id ,commentToLike: index})
-        .then((data) =>{
-            
-        })
         .catch(err =>{
             console.log(err)
         })
+        getPostComments()
     }
 
     const likeSubcomment =  async (commentIndex, subCommentIndex) => {
         await axios.post('/likeSubcomment', {postId: post._id ,commentIndex, subCommentIndex })
-        .then((data) => {
-            console.log(data.data)
-        })
         .catch(err => {
             console.log(err)
         })
+        getPostComments()
     }
 
     useEffect(() => {
@@ -83,7 +87,6 @@ const PostDialog = ({post, isFollowed, isMyPost, setPostDialogVisibility, handle
         if(comment){
             if(commentToReply || commentToReply === 0){
                 await axios.post('/commentTheComment', {postId: post._id, comment, commentToReply, replyPlaceholder}).then(data => {
-                    console.log(data.data)
                     setComment('')
                     setCommentToReply(null)
                     setReplyPlaceholder('')
@@ -101,8 +104,12 @@ const PostDialog = ({post, isFollowed, isMyPost, setPostDialogVisibility, handle
                     console.log(err)
                 })
             }
-            
+            getPostComments()
         }
+    }
+
+    const followUser = () => {
+        follow(post.username)
     }
 
     return (
@@ -116,7 +123,7 @@ const PostDialog = ({post, isFollowed, isMyPost, setPostDialogVisibility, handle
             <div className='post-right-side'>
                 <div className='post-info'>
                     <div className='post-follow-btn'>
-                        {!isMyPost && <div className={isFollowed ? "followed-button":"follow-button"}>
+                        {!isMyPost && <div onClick={followUser} className={isFollowed ? "followed-button":"follow-button"}>
                             {isFollowed ? "Following" :"Follow"}
                         </div>}
                     </div>

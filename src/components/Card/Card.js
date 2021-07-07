@@ -43,6 +43,7 @@ function Card({post, follow, followedUsers}) {
 
     if(postDialogVisibility) return <PostDialog post={post} 
                                                 isFollowed={isFollowed} 
+                                                follow={follow}
                                                 isMyPost={isMyPost} 
                                                 setPostDialogVisibility={setPostDialogVisibility}
                                                 handleLike={handleLike}
