@@ -28,13 +28,20 @@ const PostDialog = ({post, isFollowed, follow, isMyPost, setPostDialogVisibility
         })
     }
 
-    const closeDialog = () => {
-        setPostDialogVisibility(false)
-        document.querySelector('body').classList.remove('hide-scroll')
+    const checkComment = (e) => {
+        if(e.target.value.slice(0, replyPlaceholder.length) !== replyPlaceholder) {
+            setCommentToReply(null)
+            setComment('')
+            setReplyPlaceholder('')
+        }else{
+            setComment(e.target.value)
+        }
     }
 
     const reply = (index) => {
         setCommentToReply(index)
+        setReplyPlaceholder(`@${postComments[index].username} :`)
+        setComment(prev => `@${postComments[index].username} :${prev}`)
         inputElement.current.focus()
     }
 
@@ -52,34 +59,6 @@ const PostDialog = ({post, isFollowed, follow, isMyPost, setPostDialogVisibility
             console.log(err)
         })
         getPostComments()
-    }
-
-    useEffect(() => {
-        if(commentToReply || commentToReply === 0){
-            setReplyPlaceholder(`@${postComments[commentToReply].username} :`)
-        }else {
-            setReplyPlaceholder('')
-        }
-    },[commentToReply, postComments])
-
-    useEffect(() => {
-        setComment(prev => `${replyPlaceholder + prev}`)
-    }, [replyPlaceholder])
-
-    useEffect(() => {
-        isValidReply()
-    }, [comment])
-
-    const checkComment = (e) => {
-        setComment(e.target.value)
-    }
-
-    const isValidReply = () => {
-        if(comment.slice(0, replyPlaceholder.length) !== replyPlaceholder) {
-            setCommentToReply(null)
-            setComment('')
-            setReplyPlaceholder('')
-        }
     }
 
     const addComment = async (e) => {
@@ -110,6 +89,11 @@ const PostDialog = ({post, isFollowed, follow, isMyPost, setPostDialogVisibility
 
     const followUser = () => {
         follow(post.username)
+    }
+
+    const closeDialog = () => {
+        setPostDialogVisibility(false)
+        document.querySelector('body').classList.remove('hide-scroll')
     }
 
     return (
