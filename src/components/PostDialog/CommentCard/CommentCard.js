@@ -3,7 +3,7 @@ import SubCommentCard from './SubCommentCard/SubCommentCard'
 
 import './CommentCard.styles.css'
 
-const CommentCard = ({postComment, reply, index, likeComment}) => {
+const CommentCard = ({postComment, reply, index, likeComment, likeSubcomment}) => {
     const timestampString = postComment.timestamp.split('T')[0]
 
     const handleReply = () => {
@@ -31,7 +31,13 @@ const CommentCard = ({postComment, reply, index, likeComment}) => {
                     </div>
                 </div>
             </div>
-                {postComment.subComments.map((reply, index) => <SubCommentCard key={index} reply={reply} handleReply={handleReply} />)}
+                {postComment.subComments.map((reply, i) => <SubCommentCard key={i} 
+                                                                               parentComment={index}
+                                                                               subCommentIndex={i}
+                                                                               reply={reply} 
+                                                                               handleReply={handleReply} 
+                                                                               likeSubcomment={likeSubcomment}
+                                                                               />)}
         </>
     )
 }

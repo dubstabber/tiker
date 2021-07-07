@@ -33,9 +33,19 @@ const PostDialog = ({post, isFollowed, isMyPost, setPostDialogVisibility, handle
     const likeComment = async (index) => {
         await axios.post('/likeComment', {postId: post._id ,commentToLike: index})
         .then((data) =>{
-            console.log(data.data)
+            
         })
         .catch(err =>{
+            console.log(err)
+        })
+    }
+
+    const likeSubcomment =  async (commentIndex, subCommentIndex) => {
+        await axios.post('/likeSubcomment', {postId: post._id ,commentIndex, subCommentIndex })
+        .then((data) => {
+            console.log(data.data)
+        })
+        .catch(err => {
             console.log(err)
         })
     }
@@ -135,6 +145,7 @@ const PostDialog = ({post, isFollowed, isMyPost, setPostDialogVisibility, handle
                                             index={index}
                                             reply={reply}
                                             likeComment={likeComment}
+                                            likeSubcomment={likeSubcomment}
                                             />
                     })}
                 </div>

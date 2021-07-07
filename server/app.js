@@ -30,12 +30,22 @@ const userSchema = new mongoose.Schema({
     createdAt: String
 },{ collection : 'users' })
 
+const subCommentSchema = new mongoose.Schema({
+    username: String,
+    name: String,
+    avatar: String,
+    userId: String,
+    comment: String,
+    timestamp: String,
+    likes: Array
+})
+
 const commentSchema = new mongoose.Schema({
     userId: String,
     comment: String,
     timestamp: String,
     likes: Array,
-    subComments: Array
+    subComments: [subCommentSchema]
 })
 
 const postSchema = new mongoose.Schema({
@@ -202,7 +212,6 @@ app.post('/getPostComments',
                                                    })
                     })
                 }
-
                 comments.push({
                     name: currentUser.name,
                     username: currentUser.username,
@@ -488,6 +497,43 @@ app.post('/likeComment',
                     res.send('This comment cannot be unliked')
                 })
             }
+        })
+    }catch(err){
+        console.error(err.message)
+        res.status(500).send('Server Error') 
+    }
+})
+
+app.post('/likeSubcomment',
+    auth,
+    async (req, res) => {
+    try{
+        await Post.findOne({_id: req.body.postId})
+        .then(post => {
+            const isNotLiked = post.comments[req.body.commentIndex].subComments[req.body.subCommentIndex].likes.every(like => like !== req.user.id)
+            if(isNotLiked){
+                post.comments[req.body.commentIndex].subComments[req.body.subCommentIndex].likes.push(req.user.id)
+                post.save()
+                .then(() => {
+                    res.send(`Liked`)
+                })
+                .catch((err) => {
+                    res.send('This subcomment cannot be liked')
+                })
+            }else{
+                const index = post.comments[req.body.commentIndex].subComments[req.body.subCommentIndex].likes.indexOf(req.user.id)
+                post.comments[req.body.commentIndex].subComments[req.body.subCommentIndex].likes.splice(index, 1)
+                post.save()
+                .then(() => {
+                    res.send(`Unliked`)
+                })
+                .catch((err) => {
+                    res.send('This subComment cannot be unliked')
+                })
+            }
+        })
+        .catch(err => {
+            console.log(err)
         })
     }catch(err){
         console.error(err.message)
