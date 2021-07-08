@@ -1,4 +1,5 @@
 import React, {useState, useContext} from 'react'
+import {Redirect} from 'react-router-dom'
 import {AppContext} from '../../../context'
 
 import './LoginDialog.styles.css'
@@ -14,6 +15,8 @@ const LoginDialog = ({switchPage}) => {
             password: e.target.password.value
         }
         setError(login(loginData))
+        window.location.reload()
+        return <Redirect to='/' />
     }
 
     return (

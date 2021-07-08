@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import {AppContext} from '../../context'
 import './Header.styles.css'
 
@@ -14,6 +14,7 @@ const Header = (props) => {
     localStorage.removeItem('token')
     resetState()
     window.location.reload()
+    return <Redirect to='/' />
   }
 
   return (
