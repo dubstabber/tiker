@@ -5,9 +5,48 @@
     height:100vh;
     left: 0;
     width: 100vw;
+    position: absolute;
     background-color: rgb(235, 234, 234);
 }
 
 .settings-container{
+    background-color: white;
+    width: 30%;
+    height: 60%;
+    padding: 8rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.settings-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.settings-item{
+    display: flex;
+    align-items: center;
+}
+
+.settings-label{
+    font-size: 2rem;
+}
+
+.settings-input{
+    width: 30rem;
+    font-size: 1.8rem;
+    margin: 0.8rem;
+    border-radius:10px;
+}
+
+.settings-submit{
+    margin-top: 3rem;
+    font-size: 1.8rem;
+    align-self: center;
+    width: 17rem;
+    height: 4rem;
 }

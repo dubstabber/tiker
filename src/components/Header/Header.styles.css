@@ -40,6 +40,7 @@
     box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.419);
     border-radius: 7px;
     width: 7%;
+    z-index: 2;
   }
 
   .personal:hover + .personal-options {

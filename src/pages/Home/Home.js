@@ -16,6 +16,10 @@ function Home() {
     let topFiveNotFollowing
 
     useEffect(() => {
+        document.querySelector('body').classList.remove('hide-scroll')
+    }, [])
+
+    useEffect(() => {
         fetchPosts()
         if(user.isAuth){
             axios.get('/getFollowing').then(data => {
