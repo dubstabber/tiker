@@ -32,7 +32,9 @@ const Header = (props) => {
               <img className="personal" src={user.avatar ? user.avatar : './images/user-icon.jpg'} alt='personal'/>
               <div className='personal-options'>
                 <p className="personal-option">View profile</p>
-                <p className="personal-option">Settings</p>
+                <Link to='/settings' style={{ textDecoration: 'none' }}>
+                  <p className="personal-option">Settings</p>
+                </Link>
                 <hr/>
                 <p onClick={handleLogout} className="personal-option">Log out</p>
               </div>

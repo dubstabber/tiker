@@ -1,29 +1,29 @@
 .followers-column {
-    width: 230px;
-    height: 600px;
-    padding: 10px;
+    width: 23rem;
+    height: 60rem;
+    padding: 1rem;
   }
   
   .followers-section {
     display: flex;
     flex-direction: row;
-    margin: 30px 0 30px 0;
+    margin: 3rem 0 3rem 0;
   }
   
   .home {
-    width: 30px;
-    height: 29px;
+    width: 3rem;
+    height: 2.9rem;
     background-image: url('https://i.imgur.com/Q582Dp0.png');
-    background-size: 30px;
-    margin-right: 15px;
+    background-size: 3rem;
+    margin-right: 1.5rem;
   }
   
   .following {
-    width: 30px;
-    height: 29px;
+    width: 3rem;
+    height: 2.9rem;
     background-image: url('https://i.imgur.com/Aq7L3jv.png');
-    background-size: 30px;
-    margin-right: 15px;
+    background-size: 3rem;
+    margin-right: 1.5rem;
   }
 
   .white-btn {
@@ -32,11 +32,11 @@
     align-items: center;
     color: #fe2c55;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 1.4rem;
     border: 1px solid #fe2c55;
     border-radius: 5px;
     text-align: center;
-    height: 40px;
+    height: 4rem;
     cursor: pointer;
   }
 
@@ -45,5 +45,5 @@
   }
 
   .login-caption {
-    font-size: 14px;
+    font-size: 1.4rem;
   }

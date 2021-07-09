@@ -1,0 +1,13 @@
+.settings-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:100vh;
+    left: 0;
+    width: 100vw;
+    background-color: rgb(235, 234, 234);
+}
+
+.settings-container{
+
+}

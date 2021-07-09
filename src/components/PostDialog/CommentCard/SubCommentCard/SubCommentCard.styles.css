@@ -10,6 +10,7 @@
     position: absolute;
     right:2%;
     margin-top: 5%;
+    font-size: 1.7rem;
 }
 
 .reply-user{
@@ -18,11 +19,12 @@
 }
 
 .reply-field{
-    font-size: 15px;
+    font-size: 1.5rem;
     color: black;
     white-space: normal;
+    margin-bottom: .8rem;
 }
 
 .reply-timestamp{
-    margin-top: 8px;
+    margin-top: .8rem;
 }

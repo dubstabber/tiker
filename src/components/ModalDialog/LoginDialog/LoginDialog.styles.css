@@ -8,7 +8,7 @@
 }
 
 .login-title {
-    font-size: 20px;
+    font-size: 2rem;
     font-weight: 600;
     align-self: center;
 }
@@ -28,7 +28,7 @@
 
 .email-input {
     width: 100%;
-    font-size: 18px;
+    font-size: 1.8rem;
 }
 
 .password-field{
@@ -37,12 +37,12 @@
 
 .password-input {
     width: 100%;
-    font-size: 18px;
+    font-size: 1.8rem;
 }
 
 .login-error{
     color: red;
-    font-size: 14px;
+    font-size: 1.4rem;
 }
 
 .submit-login{
@@ -50,7 +50,7 @@
     width: 100%;
     background-color: #fe2c55;
     height: 20%;
-    font-size: 18px;
+    font-size: 1.8rem;
     border-radius: 5px;
     color: white;
     cursor: pointer;

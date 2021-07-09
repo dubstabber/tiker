@@ -1,5 +1,5 @@
 .header {
-    height: 60px;
+    height: 6rem;
     width: 100%;
     border-bottom: solid 1px rgb(227,227,228);
     display: flex;
@@ -7,37 +7,37 @@
     justify-content: space-between;
   }
   .logo {
-    width: 129px;
-    height: 40px;
+    width: 12.9rem;
+    height: 4rem;
     background-image: url('../../images/tiker-logo.png');
     background-repeat: no-repeat;
-    background-size: 110px;
-    margin: 5px;
+    background-size: 11rem;
+    margin: 0.5rem;
   }
   .upload {
-    width: 30px;
-    height: 25px;
-    margin-top: 15px;
+    width: 3rem;
+    height: 2.5rem;
+    margin-top: 1.5rem;
     background-image: url('../../images/tiker-upload.png');
-    background-size: 30px;
+    background-size: 3rem;
     cursor: pointer;
   }
   
   .personal {
     position:relative;
-    width: 40px;
-    height: 40px;
+    width: 4rem;
+    height: 4rem;
     background-color: purple;
-    border-radius: 20px;
-    margin: 5px 20px 0 20px;
+    border-radius: 2rem;
+    margin: 0.5rem 2rem 0 2rem;
   }
   
   .personal-options {
     visibility: hidden;
     position:absolute;
     background-color: white;
-    transform: translate(-70px, 10px);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.419);
+    transform: translate(-7rem, 1rem);
+    box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.419);
     border-radius: 7px;
     width: 7%;
   }
@@ -53,9 +53,9 @@
   .personal-options::after {
     content: " ";
     position: absolute;
-    border-width: 10px;
+    border-width: 1rem;
     border-style: solid;
-    margin-left: -5px;
+    margin-left: -0.5rem;
     bottom: 100%;
     left: 79%;
     border-color: transparent transparent white transparent;
@@ -63,10 +63,10 @@
 
   .personal-option {
     color: black;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 600;
-    margin: 5px 0;
-    padding: 20px 20px;
+    margin: .5rem 0;
+    padding: 2rem 2rem;
   }
 
   .personal-option:hover {
@@ -78,9 +78,9 @@
     background:#fe2c55;
     color: white;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 1.4rem;
     border-radius: 5px;
-    margin: 10px;
+    margin: 1rem;
     cursor: pointer;
   }
   
