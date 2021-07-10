@@ -27,6 +27,23 @@
     align-items: flex-end;
 }
 
+.settings-avatar{
+    display: flex;
+    align-self:center;
+    margin-right: 6rem;
+}
+
+.settings-avatar-config{
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.settings-avatar-picker{
+    font-size: 1.6rem;
+    color: blue;
+    cursor: pointer;
+}
+
 .settings-item{
     display: flex;
     align-items: center;
