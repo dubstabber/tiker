@@ -3,6 +3,7 @@ const { body, check, validationResult } = require('express-validator')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest
 const axios = require('axios')
 const jwt = require('jsonwebtoken')
 
@@ -166,6 +167,43 @@ app.post('/login',
             console.error(err.message);
             res.status(500).send('Server Error');
         }
+})
+
+app.put('/updateAccount',
+    body('email').isEmail(),
+    body('password').isLength({ min: 6 }),
+    auth,
+    async(req, res) => {
+    try{
+        if(req.body.password !== req.body.password2) res.send('Password does not match')
+
+        const usernameExists = await User.findOne({username: req.body.username})
+        if(usernameExists) res.send('Username already exists')
+
+        const emailExists = await User.findOne({email: req.body.email})
+        if(emailExists) res.send('Email already exists')
+
+        // if(req.body.avatar){
+        //     let http = new XMLHttpRequest();
+        //     http.open('GET', req.body.avatar, false)
+        //     http.onreadystatechange = function(){
+        //         console.log(http.getAllResponseHeaders())
+        //     }
+        //     http.send()
+        //     if(!(http.status != 404 && http.status != 0)) res.send('The link does not contain an image')
+        // }
+        
+
+        
+        
+
+        
+
+        res.json(req.body)
+    }catch(err){
+            console.error(err.message);
+            res.status(500).send('Server Error');
+    }
 })
 
 app.get('/posts', (req, res) => {
