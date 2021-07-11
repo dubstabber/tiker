@@ -27,21 +27,17 @@
     align-items: flex-end;
 }
 
+.settings-title{
+    align-self: center;
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 4rem;
+}
+
 .settings-avatar{
     display: flex;
     align-self:center;
     margin-right: 6rem;
-}
-
-.settings-avatar-config{
-    font-size: 2rem;
-    font-weight: 600;
-}
-
-.settings-avatar-picker{
-    font-size: 1.6rem;
-    color: blue;
-    cursor: pointer;
 }
 
 .settings-item{
@@ -66,4 +62,7 @@
     align-self: center;
     width: 17rem;
     height: 4rem;
+    background:#fe2c55;
+    color: white;
+    border-radius: 5px;
 }

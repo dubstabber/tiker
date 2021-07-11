@@ -5,7 +5,6 @@ import './Settings.styles.css'
 
 const Settings = () => {
     const {user} = useContext(AppContext)
-    const [avatar, setAvatar] = useState(`${user.avatar}`)
     const [username, setUsername] = useState(`${user.username}`)
     const [name, setName] = useState(`${user.name}`)
     const [email, setEmail] = useState(`${user.email}`)
@@ -36,10 +35,6 @@ const Settings = () => {
         setPassword2(e.target.value)
     }
 
-    const changeAvatar = (e) =>{
-        console.log('change avatar')
-    }
-
     const handleUpdate = (e) => {
         e.preventDefault()
         console.log('handle update')
@@ -49,12 +44,10 @@ const Settings = () => {
         <div className='settings-page'>
             <div className='settings-container'>
                 <form onSubmit={handleUpdate} className='settings-form'>
-                    <div className='settings-avatar'>
-                        <img className="user-profile" src={avatar ? avatar : "./images/user-icon.jpg"} width={"100%"} alt="user-profile" />
-                        <div>
-                            <div className='settings-avatar-config'>{user.username}</div>
-                            <input type='file' className='settings-avatar-picker' accept='image/*' />
-                        </div>
+                    <div className='settings-title'>Manage your account</div>
+                    <div className='settings-item'>
+                        <img className="user-profile" src={user.avatar ? user.avatar : "./images/user-icon.jpg"} width={"100%"} alt="user-profile" />
+                        <input className='settings-input' placeholder='Enter a link to change your photo' />
                     </div>
                     <div className='settings-item'>
                         <div className='settings-label'>User name:</div>

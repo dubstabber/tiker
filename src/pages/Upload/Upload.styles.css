@@ -3,40 +3,40 @@
     margin-left: 3rem;
   }
   
-  .image-upload {
-    width: 40rem;
-    height: 23rem;
-    background-color: rgb(22,24,35,0.03);
-    border-radius: 10px;
-  }
+.image-upload {
+  width: 40rem;
+  height: 23rem;
+  background-color: rgb(22,24,35,0.03);
+  border-radius: 10px;
+}
   
-  .input-section {
-    margin: 1rem;
-    width: 70rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
+.input-section {
+  margin: 1rem;
+  width: 70rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.form-section {
+  margin-left: 2rem;
+  margin-top: 6rem;
+}
   
-  .form-section {
-    margin-left: 2rem;
-    margin-top: 6rem;
-  }
-  
-  label {
-    font-size: 4rem;
-    line-height: 0; 
-  }
-  
-  input {
-    height: 4.5rem;
-    width: 50rem;
-    font-size: 3.5rem;
-    margin-top: -2rem;
-  }
-  
-  button {
-    height: 3rem;
-    width: 10rem;
-    float: right;
-  }
+label {
+  font-size: 4rem;
+  line-height: 0; 
+}
+
+input {
+  height: 4.5rem;
+  width: 50rem;
+  font-size: 3.5rem;
+  margin-top: -2rem;
+}
+
+button {
+  height: 3rem;
+  width: 10rem;
+  float: right;
+}
