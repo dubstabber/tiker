@@ -27,6 +27,7 @@ const userSchema = new mongoose.Schema({
     avatar: String,
     following: Array,
     followers: Array,
+    bio: String,
     createdAt: String
 },{ collection : 'users' })
 
@@ -114,7 +115,7 @@ app.post('/register',
             avatar: null,
             following: [],
             followers: [],
-            likedPosts: [],
+            bio: "",
             createdAt: new Date()
         }
         User.create(newUser, (err, arr) => {
@@ -359,7 +360,10 @@ app.get('/getUser/:id', (req, res) => {
                 const user = {
                     username: arr.username,
                     name: arr.name,
-                    avatar: arr.avatar
+                    avatar: arr.avatar,
+                    following: arr.following,
+                    followers: arr.followers,
+                    bio: arr.bio
                 }
                 res.json(user)
             }else {
