@@ -16,6 +16,10 @@ const Store = ({children}) => {
     const [showModalDialog, setShowModalDialog] = useState(false)
 
     useEffect(() => {
+        getUser()
+    }, [])
+
+    const getUser = () => {
         if(localStorage.token){
             axios.defaults.headers.common['x-auth-token'] = localStorage.token
             axios.get('/getProfile')
@@ -50,7 +54,7 @@ const Store = ({children}) => {
         } else{
             delete axios.defaults.headers.common['x-auth-token']
         }
-    }, [])
+    }
 
     const login = async (loginData) => {
         await axios.post('/login', loginData)
@@ -84,6 +88,7 @@ const Store = ({children}) => {
     const state = {
         user,
         setUser,
+        getUser,
         showModalDialog,
         setShowModalDialog,
         login,

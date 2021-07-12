@@ -5,7 +5,7 @@ import {AppContext} from '../../context'
 import './Settings.styles.css'
 
 const Settings = () => {
-    const {user} = useContext(AppContext)
+    const {user, getUser} = useContext(AppContext)
     const [avatar, setAvatar] = useState('')
     const [username, setUsername] = useState(`${user.username}`)
     const [name, setName] = useState(`${user.name}`)
@@ -17,8 +17,16 @@ const Settings = () => {
         document.querySelector('body').classList.add('hide-scroll')
     }, [])
 
+    useEffect(() =>{
+        setAvatar('')
+        setUsername(`${user.username}`)
+        setName(`${user.name}`)
+        setEmail(`${user.email}`)
+        setPassword('')
+        setPassword2('')
+    }, [user])
+
     const handleUpdate = async (e) => {
-        e.preventDefault()
         const updateData = {
             username, 
             name,
@@ -28,12 +36,14 @@ const Settings = () => {
             password2
         }
         await axios.put('/updateAccount', updateData)
-        .then((data) => {
-            console.log(data.data)
+        .then(() => {
+            getUser()
+            window.location.reload()
         })
         .catch(err => {
             console.log(err)
         })
+
     }
 
     return (
