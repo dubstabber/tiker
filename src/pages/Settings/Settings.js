@@ -58,7 +58,7 @@ const Settings = () => {
                         <input onChange={e => setEmail(e.target.value)} type='email' className='settings-input' value={email} required/>
                     </div>
                     <div className='settings-item'>
-                        <div className='settings-label'>Password:</div>
+                        <div className='settings-label'>New password:</div>
                         <input type='password' onChange={e => setPassword(e.target.value)} className='settings-input' placeholder='Change password' value={password} />
                     </div>
                     <div className='settings-item'>
