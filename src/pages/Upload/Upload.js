@@ -19,9 +19,9 @@ const Upload = () => {
           video: e.target.video.value
         }
 
-      axios.post('/add', postData)
+      axios.post('/addPost', postData)
       .then((response) => {
-        return <Redirect to='/' />
+        window.location.reload()
       })
       .catch((err) => {
         console.error(err)
