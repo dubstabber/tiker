@@ -8,7 +8,7 @@ function Card({post, follow, followedUsers}) {
     const [isFollowed, setIsFollowed] = useState(false)
     const [isMyPost, setIsMyPost] = useState(false)
     const [likes, setLikes] = useState(0)
-    const {user, setShowModalDialog} = useContext(AppContext)
+    const {user, setShowModalDialog, setShowProfile} = useContext(AppContext)
     const [postDialogVisibility, setPostDialogVisibility] = useState(false)
     const timestamp = post.timestamp
     const timeStampReformat = timestamp.slice(2, timestamp.indexOf('T'))
@@ -21,6 +21,10 @@ function Card({post, follow, followedUsers}) {
         setLikes(post.likes.length)
       }
     },[followedUsers, post, user])
+
+    const handleShowProfile = () => {
+      setShowProfile(post.userId)
+    }
 
     const handleLike = async () => {
       if(user.isAuth){
@@ -56,7 +60,7 @@ function Card({post, follow, followedUsers}) {
         <div className="break" />
         <div className="section">
           <div className="user-info">
-            <img className="user-profile" src={post.avatar ? post.avatar : "./images/user-icon.jpg"} width={"100%"} alt="user-profile" />
+            <img onClick={handleShowProfile} className="user-profile" src={post.avatar ? post.avatar : "./images/user-icon.jpg"} width={"100%"} alt="user-profile" />
             <div>
               <div className="section">
                 <h3 className="bold">{post.username}</h3>

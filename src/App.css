@@ -67,7 +67,8 @@ hr {
   background-color: red;
   border-radius: 2.5rem;
   margin-right: 1.5rem;
-  }
+  cursor: pointer;
+}
 
 .user-profile-small {
     width: 2.5rem;
@@ -75,7 +76,8 @@ hr {
     background-color: red;
     border-radius: 2.5rem;
     margin-right: 1.5rem;
-    }
+    cursor: pointer;
+}
 
 .hide-scroll {
   overflow: hidden;

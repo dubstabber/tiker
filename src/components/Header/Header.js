@@ -4,7 +4,7 @@ import {AppContext} from '../../context'
 import './Header.styles.css'
 
 const Header = (props) => {
-  const {user, setShowModalDialog, resetState} = useContext(AppContext)
+  const {user, setShowModalDialog, setShowProfile, resetState} = useContext(AppContext)
 
   const handleLogin = () => {
     setShowModalDialog(true);
@@ -20,7 +20,7 @@ const Header = (props) => {
   return (
     <div className="header">
       <Link to='/'>
-        <div className="logo"></div>
+        <div onClick={() => setShowProfile(null)} className="logo"></div>
       </Link>
       <div className="upload-container">
         <div className="section">

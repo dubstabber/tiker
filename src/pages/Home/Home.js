@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import {AppContext} from '../../context'
 import Card from '../../components/Card/Card'
+import Profile from '../../components/Profile/Profile'
 import MiniCard from '../../components/MiniCard/MiniCard'
 import FollowersColumn from '../../components/FollowersColumn/FollowersColumn'
 import axios from 'axios'
@@ -10,7 +11,7 @@ function Home() {
     const [posts, setPosts] = useState(null)
     const [followed, setFollowed] = useState([])
     const [suggested, setSuggested] = useState([])
-    const {user, setShowModalDialog} = useContext(AppContext)
+    const {user, setShowModalDialog, showProfile} = useContext(AppContext)
     let descendingPosts
     let topFiveFollowing
     let topFiveNotFollowing
@@ -115,7 +116,8 @@ function Home() {
         {descendingPosts && (
             <div className='container'>
                 <FollowersColumn users={topFiveFollowing} />
-                <div className='feed'>
+                {showProfile ? <Profile /> 
+                :<div className='feed'>
                     {descendingPosts.map((descendingPost, index) => (<Card
                         key={index}
                         post={descendingPost}
@@ -123,8 +125,7 @@ function Home() {
                         followedUsers={followed}
                     />)
                     )}
-
-                </div>
+                </div>}
                 <div className='suggested-box'>
                     <div className='section'>
                         <div className='suggested'>

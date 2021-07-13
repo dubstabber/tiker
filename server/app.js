@@ -346,7 +346,7 @@ app.get('/getUsers/:quantity', async (req, res) => {
             username: el.username,
             avatar: el.avatar,
             following: el.following,
-            followers: el.followers
+            followers: el.followers,
         }
     })
 

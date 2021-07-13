@@ -14,6 +14,7 @@ const Store = ({children}) => {
                                       error: undefined, 
                                       isAuth: false})
     const [showModalDialog, setShowModalDialog] = useState(false)
+    const [showProfile, setShowProfile] = useState(null)
 
     useEffect(() => {
         getUser()
@@ -91,6 +92,8 @@ const Store = ({children}) => {
         getUser,
         showModalDialog,
         setShowModalDialog,
+        showProfile,
+        setShowProfile,
         login,
         resetState
     }
