@@ -308,10 +308,24 @@ app.get('/getSuggestedUsers',
             let users = []
             let currentUsers = await User.find({}).skip(skipIndex).limit(5)
             if(!currentUsers) return res.send('Users cannot be retrieved')
+            let readyUsers
             skipIndex += 5
+
             
             while((users.length < 5) && currentUsers.length){
-                currentUsers = currentUsers.filter(user => {
+                readyUsers = currentUsers.map(user => {
+                    return {
+                        id: user.id,
+                        username: user.username,
+                        user: user.name,
+                        email: user.email,
+                        avatar: user.avatar,
+                        bio: user.bio,
+                        followers: user.followers,
+                        following: user.following
+                    }
+                })
+                readyUsers = readyUsers.filter(user => {
                     if(user.id === req.user.id) return false
                     return loggedUser.following.every(followed => {
                         if(followed.id !== user.id){
@@ -320,7 +334,7 @@ app.get('/getSuggestedUsers',
                     })
                 })
                 
-                users.push(...currentUsers)
+                users.push(...readyUsers)
                 currentUsers = await User.find({}).skip(skipIndex).limit(5)
                 if(!currentUsers) return res.send('Users cannot be retrieved')
                 skipIndex += 5

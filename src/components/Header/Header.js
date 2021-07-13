@@ -31,9 +31,7 @@ const Header = (props) => {
             <div>
               <img className="personal" src={user.avatar ? user.avatar : './images/user-icon.jpg'} alt='personal'/>
               <div className='personal-options'>
-                <Link to='/profile' style={{ textDecoration: 'none' }}>
-                  <p className="personal-option">View profile</p>
-                </Link>
+                <p onClick={() => setShowProfile(user.id)} className="personal-option">View profile</p>
                 <Link to='/settings' style={{ textDecoration: 'none' }}>
                   <p className="personal-option">Settings</p>
                 </Link>

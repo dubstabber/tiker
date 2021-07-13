@@ -16,7 +16,7 @@ const Profile = () => {
         .catch(err => {
             console.error('User could not be fetched')
         })
-    }, [])
+    }, [showProfile])
 
     return (
         <div>

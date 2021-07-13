@@ -107,7 +107,6 @@ function Home() {
         })
 
         topFiveFollowing = followed.slice(0,5)
-
         topFiveNotFollowing = suggested.sort((a,b) => a.followers.length < b.followers.length ? 1 : -1)
     }
 
