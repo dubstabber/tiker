@@ -1,16 +1,15 @@
-import React, {useContext} from 'react'
-import MicroCard from '../MicroCard/MicroCard'
-import {AppContext} from '../../context'
-import './FollowersColumn.styles.css'
-
+import React, { useContext } from 'react';
+import MicroCard from '../MicroCard/MicroCard';
+import { AppContext } from '../../context';
+import './FollowersColumn.styles.css';
 
 const FollowersColumn = (topFiveFollowing) => {
-  const {user, setShowModalDialog} = useContext(AppContext)
-  const users = topFiveFollowing.users
+  const { user, setShowModalDialog } = useContext(AppContext);
+  const users = topFiveFollowing.users;
 
   const handleLogin = () => {
-    setShowModalDialog(true)
-  }
+    setShowModalDialog(true);
+  };
 
   return (
     <div className="followers-column">
@@ -22,16 +21,24 @@ const FollowersColumn = (topFiveFollowing) => {
         <div className="following" />
         <h2>Following</h2>
       </div>
-      {(user.isAuth) && <p>Your top accounts</p>}
+      {user.isAuth && <p>Your top accounts</p>}
       <hr />
-      {(user.isAuth) ? users && users.map((user, index) => (
-        <MicroCard 
-            key={index} user={user}
-        />)) : <><span className="login-caption">Log in to follow creators, like videos, and view comments.</span>
-        <div onClick={handleLogin} className="white-btn">Login</div></>}
+      {user.isAuth ? (
+        users &&
+        users.map((user, index) => <MicroCard key={index} user={user} />)
+      ) : (
+        <>
+          <span className="login-caption">
+            Log in to follow creators, like videos, and view comments.
+          </span>
+          <div onClick={handleLogin} className="white-btn">
+            Login
+          </div>
+        </>
+      )}
       <hr />
     </div>
-  )
-}
+  );
+};
 
-export default FollowersColumn
+export default FollowersColumn;

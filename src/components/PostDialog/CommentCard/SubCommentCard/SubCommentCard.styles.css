@@ -1,30 +1,30 @@
-.reply-container{
-    display: flex;
-    margin-left: 12%;
-    padding: 2% 15% 2% 5%;
-    width:68%;
-    position: relative;
+.reply-container {
+  display: flex;
+  margin-left: 12%;
+  padding: 2% 15% 2% 5%;
+  width: 68%;
+  position: relative;
 }
 
-.reply-socials{
-    position: absolute;
-    right:2%;
-    margin-top: 5%;
-    font-size: 1.7rem;
+.reply-socials {
+  position: absolute;
+  right: 2%;
+  margin-top: 5%;
+  font-size: 1.7rem;
 }
 
-.reply-user{
-    display: flex;
-    flex-direction: column;
+.reply-user {
+  display: flex;
+  flex-direction: column;
 }
 
-.reply-field{
-    font-size: 1.5rem;
-    color: black;
-    white-space: normal;
-    margin-bottom: .8rem;
+.reply-field {
+  font-size: 1.5rem;
+  color: black;
+  white-space: normal;
+  margin-bottom: 0.8rem;
 }
 
-.reply-timestamp{
-    margin-top: .8rem;
+.reply-timestamp {
+  margin-top: 0.8rem;
 }

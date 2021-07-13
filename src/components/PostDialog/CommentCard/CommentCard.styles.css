@@ -1,34 +1,34 @@
-.comment-container{
-    display: flex;
-    padding: 2% 15% 2% 5%;
-    width:80%;
-    position: relative;
+.comment-container {
+  display: flex;
+  padding: 2% 15% 2% 5%;
+  width: 80%;
+  position: relative;
 }
 
-.comment-socials{
-    position: absolute;
-    right:2%;
-    margin-top: 5%;
-    font-size: 1.7rem;
+.comment-socials {
+  position: absolute;
+  right: 2%;
+  margin-top: 5%;
+  font-size: 1.7rem;
 }
 
-.comment-user{
-    display: flex;
-    flex-direction: column;
+.comment-user {
+  display: flex;
+  flex-direction: column;
 }
 
-.comment-field{
-    font-size: 1.5rem;
-    color: black;
-    white-space: normal;
-    margin-bottom: .8rem;
+.comment-field {
+  font-size: 1.5rem;
+  color: black;
+  white-space: normal;
+  margin-bottom: 0.8rem;
 }
 
-.comment-timestamp{
-    margin-top: .8rem;
+.comment-timestamp {
+  margin-top: 0.8rem;
 }
 
-.reply-btn{
-    margin-left: 3rem;
-    cursor: pointer;
+.reply-btn {
+  margin-left: 3rem;
+  cursor: pointer;
 }

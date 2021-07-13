@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap');
 
-:root{
+:root {
   /* This defines what 1rem is */
   font-size: 62.5%;
 }
@@ -36,20 +36,21 @@ h3 {
 }
 
 .red {
-  color:#fe2c55;
+  color: #fe2c55;
 }
 
-p, span {
+p,
+span {
   color: grey;
   font-size: 1.4rem;
   line-height: 0;
 }
 
-hr { 
-  display: block; 
+hr {
+  display: block;
   height: 1px;
-  border: 0; 
-  border-top: 1px solid rgb(227,227,228);
+  border: 0;
+  border-top: 1px solid rgb(227, 227, 228);
 }
 
 .section {
@@ -59,6 +60,15 @@ hr {
 
 .break {
   height: 1rem;
+}
+
+.user-profile-big {
+  width: 10rem;
+  height: 10rem;
+  background-color: red;
+  border-radius: 5rem;
+  margin-right: 1.5rem;
+  cursor: pointer;
 }
 
 .user-profile {
@@ -71,12 +81,12 @@ hr {
 }
 
 .user-profile-small {
-    width: 2.5rem;
-    height: 2.5rem;
-    background-color: red;
-    border-radius: 2.5rem;
-    margin-right: 1.5rem;
-    cursor: pointer;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: red;
+  border-radius: 2.5rem;
+  margin-right: 1.5rem;
+  cursor: pointer;
 }
 
 .hide-scroll {

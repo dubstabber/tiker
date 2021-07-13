@@ -1,153 +1,151 @@
-.post-container{
-    position: fixed;
-    background-color: white;
-    top:0;
-    left:0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index:2;
+.post-container {
+  position: fixed;
+  background-color: white;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
 }
 
-.post-close{
-    position:absolute;
-    top:1%;
-    left:1%;
-    width: 4.5rem;
-    height: 4.5rem;
-    background-color: rgb(163, 163, 163);
-    border-radius: 50%; 
-    cursor: pointer;
+.post-close {
+  position: absolute;
+  top: 1%;
+  left: 1%;
+  width: 4.5rem;
+  height: 4.5rem;
+  background-color: rgb(163, 163, 163);
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-.post-close::before{
-    content: "";
-    position: absolute;
-    top: 2.1rem;
-    left: .7rem;
-    width: 3rem;
-    height: 2px;
-    background-color: black;
-    transform: rotate(45deg);
+.post-close::before {
+  content: '';
+  position: absolute;
+  top: 2.1rem;
+  left: 0.7rem;
+  width: 3rem;
+  height: 2px;
+  background-color: black;
+  transform: rotate(45deg);
 }
 
-.post-close::after{
-    content: "";
-    position: absolute;
-    top: 2.1rem;
-    left: .7rem;
-    width: 3rem;
-    height: 2px;
-    background-color: black;
-    transform: rotate(135deg);
+.post-close::after {
+  content: '';
+  position: absolute;
+  top: 2.1rem;
+  left: 0.7rem;
+  width: 3rem;
+  height: 2px;
+  background-color: black;
+  transform: rotate(135deg);
 }
 
 .post-left-side {
-    width: 70vw;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 70vw;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.video-page{
-    width: 30vw;
-    height: 100vh;
+.video-page {
+  width: 30vw;
+  height: 100vh;
 }
 
 .post-right-side {
-    width: 30vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 30vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.post-info{
-    position: relative;
-    height: 30vh;
-    width:100%;
-    padding: 0 5% 5% 10%;
+.post-info {
+  position: relative;
+  height: 30vh;
+  width: 100%;
+  padding: 0 5% 5% 10%;
 }
 
-.post-user{
-    display: flex;
+.post-user {
+  display: flex;
 }
 
-.post-follow-btn{
-    position:absolute;
-    top: 5%;
-    right: 15%;
+.post-follow-btn {
+  position: absolute;
+  top: 5%;
+  right: 15%;
 }
 
 .post-caption {
-    font-size: 1.7rem;
-    padding: 2% 0 2% 0;
+  font-size: 1.7rem;
+  padding: 2% 0 2% 0;
 }
 
-.post-socials{
-    position: absolute;
-    bottom: 5%;
-    left: 0;
+.post-socials {
+  position: absolute;
+  bottom: 5%;
+  left: 0;
 }
-
 
 .post-comments {
-    height: 52vh;
-    width:100%;
-    background-color: rgb(211, 211, 211);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    overflow-y: scroll;
+  height: 52vh;
+  width: 100%;
+  background-color: rgb(211, 211, 211);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow-y: scroll;
 }
 
-
 .post-add-comment {
-    height: 8vh;
-    width:100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 8vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .post-form {
-    width: 90%;
-    height:auto;
+  width: 90%;
+  height: auto;
 }
 
-.post-reply{
-    position:absolute;
-    margin-left: 1%;
+.post-reply {
+  position: absolute;
+  margin-left: 1%;
 }
 
 .post-input {
-    width: 83%;
-    height: 10%;
-    border: 0;
-    border-radius: 15px;
-    font-size: 1.6rem;
-    padding: 1rem 1rem 1rem 1.5rem;
-    background-color: rgb(211, 211, 211);
+  width: 83%;
+  height: 10%;
+  border: 0;
+  border-radius: 15px;
+  font-size: 1.6rem;
+  padding: 1rem 1rem 1rem 1.5rem;
+  background-color: rgb(211, 211, 211);
 }
 
 .post-button {
-    width: 12%;
-    height: 40%;
-    background-color: white;
-    border: 0;
-    color: gray;
+  width: 12%;
+  height: 40%;
+  background-color: white;
+  border: 0;
+  color: gray;
 }
 
 .post-button-ready {
-    width: 12%;
-    height: 40%;
-    background-color: white;
-    border: 0;
-    color: #fe2c55;
-    cursor: pointer;
+  width: 12%;
+  height: 40%;
+  background-color: white;
+  border: 0;
+  color: #fe2c55;
+  cursor: pointer;
 }
