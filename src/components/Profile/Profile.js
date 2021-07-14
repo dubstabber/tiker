@@ -23,19 +23,41 @@ const Profile = () => {
 
   return (
     <div className="profile__container">
-      <img
-        className="user-profile-big"
-        src={userData.avatar ? userData.avatar : './images/user-icon.jpg'}
-        alt="profile-avatar"
-      />
-      <div>{userData.username}</div>
-      <div>{userData.name}</div>
-      {user.id !== showProfile && (
-        <div>{isFollowed ? 'Following' : 'Follow'}</div>
-      )}
-      <div>{userData.following && userData.following.length} Following</div>
-      <div>{userData.followers && userData.followers.length} Followers</div>
-      <div>{userData.bio}</div>
+      <div className="profile__info">
+        <img
+          className="user-profile-big"
+          src={userData.avatar ? userData.avatar : './images/user-icon.jpg'}
+          alt="profile-avatar"
+        />
+        <div className="profile__data">
+          <div className="profile__username">{userData.username}</div>
+          <div className="profile__name">{userData.name}</div>
+          {user.id !== showProfile && (
+            <div className={isFollowed ? 'followed-button' : 'follow-button'}>
+              {isFollowed ? 'Following' : 'Follow'}
+            </div>
+          )}
+        </div>
+        <div className="profile__stats">
+          <div className="profile__following">
+            <span className="profile__following--number">
+              {userData.following && userData.following.length}
+            </span>{' '}
+            Following
+          </div>
+          <div className="profile__followers">
+            <span className="profile__followers--number">
+              {userData.followers && userData.followers.length}
+            </span>{' '}
+            Followers
+          </div>
+        </div>
+        <div className="profile__bio">
+          <div>{userData.bio}</div>
+        </div>
+      </div>
+
+      <div className="profile__posts"></div>
     </div>
   );
 };
