@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { AppContext } from '../../context';
+import Video from './Video/Video';
 
 import './Profile.styles.css';
 
 const Profile = () => {
   const [userData, setUserData] = useState({});
   const [isFollowed, setIsFollowed] = useState(false);
+  const [viewContent, setViewContent] = useState(true);
+  const [videos, setVideos] = useState([]);
   const { user, showProfile } = useContext(AppContext);
 
   useEffect(() => {
@@ -20,6 +23,27 @@ const Profile = () => {
         console.error('User could not be fetched');
       });
   }, [showProfile, user]);
+
+  useEffect(() => {
+    axios
+      .get('/posts')
+      .then((data) => {
+        if (viewContent) {
+          const owned = data.data.filter(
+            (video) => video.userId === showProfile
+          );
+          setVideos(owned);
+        } else {
+          const liked = data.data.filter((video) =>
+            video.likes.includes(showProfile)
+          );
+          setVideos(liked);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [viewContent, showProfile]);
 
   return (
     <div className="profile__container">
@@ -57,7 +81,25 @@ const Profile = () => {
         </div>
       </div>
 
-      <div className="profile__posts"></div>
+      <div className="profile__posts">
+        <div
+          onClick={() => setViewContent(true)}
+          className={viewContent ? 'posts__owned--active' : 'posts__owned'}
+        >
+          Videos
+        </div>
+        <div
+          onClick={() => setViewContent(false)}
+          className={viewContent ? 'posts__liked' : 'posts__liked--active'}
+        >
+          Liked
+        </div>
+        <div className="profile__content">
+          {videos.map((video) => (
+            <Video key={video._id} video={video} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

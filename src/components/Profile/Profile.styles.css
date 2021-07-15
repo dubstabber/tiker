@@ -53,5 +53,56 @@
 
 .profile__bio {
   grid-column: 1 / -1;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
+}
+
+.profile__posts {
+  display: grid;
+  grid-template-rows: 20% 80%;
+  grid-template-columns: repeat(2, 1fr);
+  text-align: center;
+}
+
+.posts__owned {
+  font-size: 2rem;
+  font-weight: 600;
+  color: lightgray;
+  border-bottom: 2px solid lightgray;
+  width: 100%;
+  cursor: pointer;
+}
+
+.posts__owned--active {
+  font-size: 2rem;
+  font-weight: 600;
+  border-bottom: 2px solid black;
+  width: 100%;
+  cursor: pointer;
+}
+
+.posts__liked {
+  font-size: 2rem;
+  font-weight: 600;
+  color: lightgray;
+  border-bottom: 2px solid lightgray;
+  width: 100%;
+  cursor: pointer;
+}
+
+.posts__liked--active {
+  font-size: 2rem;
+  font-weight: 600;
+  color: black;
+  border-bottom: 2px solid black;
+  width: 100%;
+  cursor: pointer;
+}
+
+.profile__content {
+  grid-column: 1 / -1;
+  margin-top: 2px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  grid-gap: 2px;
 }
