@@ -96,6 +96,16 @@ const Store = ({ children }) => {
     });
   };
 
+  const followUser = async (username) => {
+    if (user.isAuth && user.username !== username) {
+      await axios.put(`/follow/${username}`).catch((err) => {
+        console.error(err);
+      });
+    } else {
+      setShowModalDialog(true);
+    }
+  };
+
   const state = {
     user,
     setUser,
@@ -106,6 +116,7 @@ const Store = ({ children }) => {
     setShowProfile,
     login,
     resetState,
+    followUser,
   };
 
   return <AppContext.Provider value={state}>{children}</AppContext.Provider>;

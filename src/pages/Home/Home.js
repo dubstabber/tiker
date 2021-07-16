@@ -68,7 +68,7 @@ function Home() {
 
   const fetchPosts = async () => {
     await axios
-      .get('/posts')
+      .get('/getPosts')
       .then((data) => {
         setPosts(data.data);
       })
