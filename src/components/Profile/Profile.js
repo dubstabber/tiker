@@ -26,7 +26,7 @@ const Profile = () => {
 
   useEffect(() => {
     axios
-      .get('/posts')
+      .get('/getPosts')
       .then((data) => {
         if (viewContent) {
           const owned = data.data.filter(

@@ -21,7 +21,7 @@ app.get('/', auth, async (req, res) => {
         return {
           id: user.id,
           username: user.username,
-          user: user.name,
+          name: user.name,
           email: user.email,
           avatar: user.avatar,
           bio: user.bio,

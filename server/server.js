@@ -35,9 +35,9 @@ app.use('/getFollowing', require('./routes/getFollowing'));
 app.use('/follow', require('./routes/follow'));
 app.use('/likePost', require('./routes/likePost'));
 app.use('/comment', require('./routes/comment'));
+app.use('/commentTheComment', require('./routes/commentTheComment'));
 app.use('/likeComment', require('./routes/likeComment'));
 app.use('/likeSubcomment', require('./routes/likeSubcomment'));
-app.use('/commentTheComment', require('./routes/commentTheComment'));
 app.use('/addPost', require('./routes/addPost'));
 
 const PORT = process.env.PORT || 5000;
