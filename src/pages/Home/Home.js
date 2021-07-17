@@ -9,9 +9,7 @@ import './Home.styles.css';
 
 function Home() {
   const [posts, setPosts] = useState(null);
-  const [followed, setFollowed] = useState([]);
-  const [suggested, setSuggested] = useState([]);
-  const { user, setShowModalDialog, showProfile } = useContext(AppContext);
+  const { user, showProfile, followed, suggested } = useContext(AppContext);
   let descendingPosts;
   let topFiveFollowing;
   let topFiveNotFollowing;
@@ -22,49 +20,7 @@ function Home() {
 
   useEffect(() => {
     fetchPosts();
-    if (user.isAuth) {
-      axios
-        .get('/getFollowing')
-        .then((data) => {
-          setFollowed(data.data);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-    if (user.isAuth) {
-      axios
-        .get('/getSuggestedUsers')
-        .then((data) => {
-          setSuggested(data.data);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    } else {
-      axios
-        .get('/getUsers/5')
-        .then((data) => {
-          setSuggested(data.data);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
   }, [user]);
-
-  const fetchFollowing = async () => {
-    if (user.isAuth) {
-      await axios
-        .get('/getFollowing')
-        .then((data) => {
-          setFollowed(data.data);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-  };
 
   const fetchPosts = async () => {
     await axios
@@ -75,35 +31,6 @@ function Home() {
       .catch((err) => {
         console.error(err);
       });
-  };
-
-  const fetchNotFollowing = async () => {
-    if (user.isAuth) {
-      await axios
-        .get('/getSuggestedUsers')
-        .then((data) => {
-          setSuggested(data.data);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    } else {
-      await axios.get('/getUsers/5').then((data) => {
-        setSuggested(data.data);
-      });
-    }
-  };
-
-  const followUser = async (username) => {
-    if (user.isAuth && user.username !== username) {
-      await axios.put(`/follow/${username}`).catch((err) => {
-        console.error(err);
-      });
-      fetchFollowing();
-      fetchNotFollowing();
-    } else {
-      setShowModalDialog(true);
-    }
   };
 
   if (posts) {
@@ -157,7 +84,6 @@ function Home() {
                 <Card
                   key={index}
                   post={descendingPost}
-                  follow={followUser}
                   followedUsers={followed}
                 />
               ))}
@@ -170,11 +96,7 @@ function Home() {
                 <div className="break" />
                 {topFiveNotFollowing &&
                   topFiveNotFollowing.map((notFollowingUser, index) => (
-                    <MiniCard
-                      key={index}
-                      notFollowingUser={notFollowingUser}
-                      follow={followUser}
-                    />
+                    <MiniCard key={index} notFollowingUser={notFollowingUser} />
                   ))}
               </div>
             </div>

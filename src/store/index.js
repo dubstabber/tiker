@@ -18,14 +18,42 @@ const Store = ({ children }) => {
   const [showModalDialog, setShowModalDialog] = useState(false);
   const [showProfile, setShowProfile] = useState(null);
 
+  const [followed, setFollowed] = useState([]);
+  const [suggested, setSuggested] = useState([]);
+
   useEffect(() => {
     getUser();
-  }, []);
+    async function fetchData() {
+      if (user.isAuth) {
+        await axios
+          .get('/getFollowing')
+          .then((data) => {
+            setFollowed(data.data);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+        await axios
+          .get('/getSuggestedUsers')
+          .then((data) => {
+            setSuggested(data.data);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      } else {
+        await axios.get('/getUsers/5').then((data) => {
+          setSuggested(data.data);
+        });
+      }
+    }
+    fetchData();
+  }, [user.isAuth]);
 
-  const getUser = () => {
+  const getUser = async () => {
     if (localStorage.token) {
       axios.defaults.headers.common['x-auth-token'] = localStorage.token;
-      axios
+      await axios
         .get('/getProfile')
         .then((data) => {
           setUser({
@@ -96,13 +124,68 @@ const Store = ({ children }) => {
     });
   };
 
+  const likePost = async (postId) => {
+    if (user.isAuth) {
+      const likesCount = await axios.put('/likePost', { id: postId });
+      return likesCount.data;
+    } else {
+      setShowModalDialog(true);
+    }
+  };
+
   const followUser = async (username) => {
-    if (user.isAuth && user.username !== username) {
+    if (user.isAuth) {
       await axios.put(`/follow/${username}`).catch((err) => {
         console.error(err);
       });
+      await axios
+        .get('/getFollowing')
+        .then((data) => {
+          setFollowed(data.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+      await axios
+        .get('/getSuggestedUsers')
+        .then((data) => {
+          setSuggested(data.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     } else {
       setShowModalDialog(true);
+    }
+  };
+
+  const fetchFollowing = async () => {
+    if (user.isAuth) {
+      await axios
+        .get('/getFollowing')
+        .then((data) => {
+          setFollowed(data.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  };
+
+  const fetchNotFollowing = async () => {
+    if (user.isAuth) {
+      await axios
+        .get('/getSuggestedUsers')
+        .then((data) => {
+          setSuggested(data.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      await axios.get('/getUsers/5').then((data) => {
+        setSuggested(data.data);
+      });
     }
   };
 
@@ -117,6 +200,13 @@ const Store = ({ children }) => {
     login,
     resetState,
     followUser,
+    followed,
+    setFollowed,
+    suggested,
+    setSuggested,
+    fetchFollowing,
+    fetchNotFollowing,
+    likePost,
   };
 
   return <AppContext.Provider value={state}>{children}</AppContext.Provider>;

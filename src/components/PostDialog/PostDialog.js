@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { AppContext } from '../../context';
 import axios from 'axios';
 import CommentCard from './CommentCard/CommentCard';
 
@@ -7,12 +8,12 @@ import './PostDialog.styles.css';
 const PostDialog = ({
   post,
   isFollowed,
-  follow,
   isMyPost,
   setPostDialogVisibility,
   handleLike,
   likes,
 }) => {
+  const { followUser } = useContext(AppContext);
   const [comment, setComment] = useState('');
   const [postComments, setPostComments] = useState([]);
   const [commentToReply, setCommentToReply] = useState(null);
@@ -116,10 +117,6 @@ const PostDialog = ({
     }
   };
 
-  const followUser = () => {
-    follow(post.username);
-  };
-
   const closeDialog = () => {
     setPostDialogVisibility(false);
     document.querySelector('body').classList.remove('hide-scroll');
@@ -138,7 +135,7 @@ const PostDialog = ({
           <div className="post-follow-btn">
             {!isMyPost && (
               <div
-                onClick={followUser}
+                onClick={() => followUser(post.username)}
                 className={isFollowed ? 'followed-button' : 'follow-button'}
               >
                 {isFollowed ? 'Following' : 'Follow'}

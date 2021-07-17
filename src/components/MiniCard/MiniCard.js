@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { AppContext } from '../../context';
 import './MiniCard.styles.css';
 
-function MiniCard({ notFollowingUser, follow }) {
-  const { setShowProfile } = useContext(AppContext);
+function MiniCard({ notFollowingUser }) {
+  const { setShowProfile, followUser } = useContext(AppContext);
 
   return (
     <div className="section minicard">
@@ -26,7 +26,7 @@ function MiniCard({ notFollowingUser, follow }) {
       </div>
       {
         <div
-          onClick={() => follow(notFollowingUser.username)}
+          onClick={() => followUser(notFollowingUser.username)}
           className="follow-button"
         >
           Follow

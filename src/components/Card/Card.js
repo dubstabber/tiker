@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../../context';
-import axios from 'axios';
 import PostDialog from '../PostDialog/PostDialog';
 import './Card.styles.css';
 
-function Card({ post, follow, followedUsers }) {
+function Card({ post, followedUsers }) {
   const [isFollowed, setIsFollowed] = useState(false);
   const [isMyPost, setIsMyPost] = useState(false);
   const [likes, setLikes] = useState(0);
-  const { user, setShowModalDialog, setShowProfile } = useContext(AppContext);
+  const { user, setShowModalDialog, setShowProfile, followUser, likePost } =
+    useContext(AppContext);
   const [postDialogVisibility, setPostDialogVisibility] = useState(false);
   const timestamp = post.timestamp;
   const timeStampReformat = timestamp.slice(2, timestamp.indexOf('T'));
@@ -31,9 +31,8 @@ function Card({ post, follow, followedUsers }) {
 
   const handleLike = async () => {
     if (user.isAuth) {
-      await axios.put('/likePost', { id: post._id }).then((data) => {
-        setLikes(data.data);
-      });
+      const likesCount = await likePost(post._id);
+      setLikes(likesCount);
     } else {
       setShowModalDialog(true);
     }
@@ -53,10 +52,8 @@ function Card({ post, follow, followedUsers }) {
       <PostDialog
         post={post}
         isFollowed={isFollowed}
-        follow={follow}
         isMyPost={isMyPost}
         setPostDialogVisibility={setPostDialogVisibility}
-        handleLike={handleLike}
         handleComment={handleComment}
         likes={likes}
       />
@@ -85,7 +82,7 @@ function Card({ post, follow, followedUsers }) {
         </div>
         {!isMyPost && (
           <div
-            onClick={() => follow(post.username)}
+            onClick={() => followUser(post.username)}
             className={isFollowed ? 'followed-button' : 'follow-button'}
           >
             {isFollowed ? 'Following' : 'Follow'}
