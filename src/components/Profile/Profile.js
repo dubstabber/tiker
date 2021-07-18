@@ -10,7 +10,7 @@ const Profile = () => {
   const [isFollowed, setIsFollowed] = useState(false);
   const [viewContent, setViewContent] = useState(true);
   const [videos, setVideos] = useState([]);
-  const { user, showProfile } = useContext(AppContext);
+  const { user, showProfile, followUser } = useContext(AppContext);
 
   useEffect(() => {
     axios
@@ -57,7 +57,10 @@ const Profile = () => {
           <div className="profile__username">{userData.username}</div>
           <div className="profile__name">{userData.name}</div>
           {user.id !== showProfile && (
-            <div className={isFollowed ? 'followed-button' : 'follow-button'}>
+            <div
+              onClick={() => followUser(userData.username)}
+              className={isFollowed ? 'followed-button' : 'follow-button'}
+            >
               {isFollowed ? 'Following' : 'Follow'}
             </div>
           )}

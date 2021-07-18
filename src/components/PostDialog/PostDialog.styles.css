@@ -5,6 +5,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+  text-align: left;
   display: flex;
   justify-content: center;
   align-items: center;
