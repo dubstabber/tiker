@@ -52,6 +52,14 @@ const Store = ({ children }) => {
             console.error(err);
           });
       } else {
+        await axios
+          .get('/getPosts')
+          .then((data) => {
+            setPosts(data.data);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
         await axios.get('/getUsers/5').then((data) => {
           setSuggested(data.data);
         });
