@@ -38,8 +38,7 @@ function Card({ post }) {
 
   const handleLike = async () => {
     if (user.isAuth) {
-      const likesCount = await likePost(post._id);
-      setLikes(likesCount);
+      await likePost(post._id);
     } else {
       setShowModalDialog(true);
     }

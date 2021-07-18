@@ -147,10 +147,13 @@ const Store = ({ children }) => {
 
   const likePost = async (postId) => {
     if (user.isAuth) {
-      await axios.put('/likePost', { id: postId }).catch((err) => {
-        console.error(err);
-      });
+      const likeCount = await axios
+        .put('/likePost', { id: postId })
+        .catch((err) => {
+          console.error(err);
+        });
       await fetchPosts();
+      return likeCount;
     } else {
       setShowModalDialog(true);
     }
@@ -161,6 +164,7 @@ const Store = ({ children }) => {
       await axios.put(`/follow/${username}`).catch((err) => {
         console.error(err);
       });
+      await fetchPosts();
       await axios
         .get('/getFollowing')
         .then((data) => {

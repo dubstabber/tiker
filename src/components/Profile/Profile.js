@@ -10,19 +10,21 @@ const Profile = () => {
   const [isFollowed, setIsFollowed] = useState(false);
   const [viewContent, setViewContent] = useState(true);
   const [videos, setVideos] = useState([]);
-  const { user, showProfile, followUser } = useContext(AppContext);
+  const { user, showProfile, followUser, followed } = useContext(AppContext);
 
   useEffect(() => {
-    axios
-      .get('/getUser/' + showProfile)
-      .then((data) => {
-        setUserData(data.data);
-        setIsFollowed(!user.following.every((id) => id.id !== showProfile));
-      })
-      .catch((err) => {
-        console.error('User could not be fetched');
-      });
-  }, [showProfile, user]);
+    if (user.isAuth) {
+      axios
+        .get('/getUser/' + showProfile)
+        .then((data) => {
+          setUserData(data.data);
+          setIsFollowed(!followed.every((id) => id.id !== showProfile));
+        })
+        .catch((err) => {
+          console.error('User could not be fetched');
+        });
+    }
+  }, [showProfile, user, followed]);
 
   useEffect(() => {
     axios

@@ -6,8 +6,14 @@ import CommentCard from './CommentCard/CommentCard';
 import './PostDialog.styles.css';
 
 const PostDialog = ({ post }) => {
-  const { user, followUser, likePost, followed, setPostDialogToShow } =
-    useContext(AppContext);
+  const {
+    user,
+    followUser,
+    likePost,
+    followed,
+    setPostDialogToShow,
+    setShowModalDialog,
+  } = useContext(AppContext);
   const [likes, setLikes] = useState(0);
   const [isMyPost, setIsMyPost] = useState(false);
   const [isFollowed, setIsFollowed] = useState(false);
@@ -36,7 +42,6 @@ const PostDialog = ({ post }) => {
         setIsFollowed(
           !followed.every((followedUser) => followedUser.id !== post.userId)
         );
-
       setLikes(post.likes.length);
     }
   }, [followed, post, user]);
@@ -126,6 +131,16 @@ const PostDialog = ({ post }) => {
     }
   };
 
+  const handleLike = async () => {
+    if (user.isAuth) {
+      await likePost(post._id).then((data) => {
+        setLikes(data.data);
+      });
+    } else {
+      setShowModalDialog(true);
+    }
+  };
+
   const closeDialog = () => {
     setPostDialogToShow(null);
     document.querySelector('body').classList.remove('hide-scroll');
@@ -168,7 +183,7 @@ const PostDialog = ({ post }) => {
           <div className="post-socials">
             <div className="section socials">
               <i
-                onClick={() => likePost(post._id)}
+                onClick={handleLike}
                 className="far fa-heart social-mini-icon"
               ></i>
               <div className="social-tag">{likes}</div>
