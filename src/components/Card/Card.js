@@ -3,13 +3,20 @@ import { AppContext } from '../../context';
 import PostDialog from '../PostDialog/PostDialog';
 import './Card.styles.css';
 
-function Card({ post, followedUsers }) {
+function Card({ post }) {
   const [isFollowed, setIsFollowed] = useState(false);
   const [isMyPost, setIsMyPost] = useState(false);
   const [likes, setLikes] = useState(0);
-  const { user, setShowModalDialog, setShowProfile, followUser, likePost } =
-    useContext(AppContext);
-  const [postDialogVisibility, setPostDialogVisibility] = useState(false);
+  const {
+    user,
+    setShowModalDialog,
+    setShowProfile,
+    followUser,
+    likePost,
+    followed,
+    postDialogToShow,
+    showPostDialog,
+  } = useContext(AppContext);
   const timestamp = post.timestamp;
   const timeStampReformat = timestamp.slice(2, timestamp.indexOf('T'));
 
@@ -18,12 +25,12 @@ function Card({ post, followedUsers }) {
       if (user.id === post.userId) setIsMyPost(true);
       else
         setIsFollowed(
-          !followedUsers.every((followed) => followed.id !== post.userId)
+          !followed.every((followedUser) => followedUser.id !== post.userId)
         );
 
       setLikes(post.likes.length);
     }
-  }, [followedUsers, post, user]);
+  }, [followed, post, user]);
 
   const handleShowProfile = () => {
     setShowProfile(post.userId);
@@ -38,26 +45,7 @@ function Card({ post, followedUsers }) {
     }
   };
 
-  const handleComment = async () => {
-    if (user.isAuth) {
-      setPostDialogVisibility(true);
-      document.querySelector('body').classList.add('hide-scroll');
-    } else {
-      setShowModalDialog(true);
-    }
-  };
-
-  if (postDialogVisibility)
-    return (
-      <PostDialog
-        post={post}
-        isFollowed={isFollowed}
-        isMyPost={isMyPost}
-        setPostDialogVisibility={setPostDialogVisibility}
-        handleComment={handleComment}
-        likes={likes}
-      />
-    );
+  if (postDialogToShow === post._id) return <PostDialog post={post} />;
 
   return (
     <div className="card">
@@ -96,7 +84,7 @@ function Card({ post, followedUsers }) {
         <i onClick={handleLike} className="far fa-heart social-mini-icon"></i>
         <div className="social-tag">{likes}</div>
         <i
-          onClick={handleComment}
+          onClick={() => showPostDialog(post._id)}
           className="far fa-comment-dots social-mini-icon"
         ></i>
         <div className="social-tag">{post.comments.length}</div>

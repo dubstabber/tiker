@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { AppContext } from '../context';
 
 const Store = ({ children }) => {
@@ -18,13 +18,23 @@ const Store = ({ children }) => {
   const [showModalDialog, setShowModalDialog] = useState(false);
   const [showProfile, setShowProfile] = useState(null);
 
+  const [posts, setPosts] = useState(null);
   const [followed, setFollowed] = useState([]);
   const [suggested, setSuggested] = useState([]);
+  const [postDialogToShow, setPostDialogToShow] = useState(null);
 
   useEffect(() => {
     getUser();
     async function fetchData() {
       if (user.isAuth) {
+        await axios
+          .get('/getPosts')
+          .then((data) => {
+            setPosts(data.data);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
         await axios
           .get('/getFollowing')
           .then((data) => {
@@ -124,10 +134,23 @@ const Store = ({ children }) => {
     });
   };
 
+  const fetchPosts = async () => {
+    await axios
+      .get('/getPosts')
+      .then((data) => {
+        setPosts(data.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   const likePost = async (postId) => {
     if (user.isAuth) {
-      const likesCount = await axios.put('/likePost', { id: postId });
-      return likesCount.data;
+      await axios.put('/likePost', { id: postId }).catch((err) => {
+        console.error(err);
+      });
+      await fetchPosts();
     } else {
       setShowModalDialog(true);
     }
@@ -189,6 +212,15 @@ const Store = ({ children }) => {
     }
   };
 
+  const showPostDialog = async (postId) => {
+    if (user.isAuth) {
+      setPostDialogToShow(postId);
+      document.querySelector('body').classList.add('hide-scroll');
+    } else {
+      setShowModalDialog(true);
+    }
+  };
+
   const state = {
     user,
     setUser,
@@ -199,6 +231,7 @@ const Store = ({ children }) => {
     setShowProfile,
     login,
     resetState,
+    posts,
     followUser,
     followed,
     setFollowed,
@@ -207,6 +240,9 @@ const Store = ({ children }) => {
     fetchFollowing,
     fetchNotFollowing,
     likePost,
+    showPostDialog,
+    postDialogToShow,
+    setPostDialogToShow,
   };
 
   return <AppContext.Provider value={state}>{children}</AppContext.Provider>;

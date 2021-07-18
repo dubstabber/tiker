@@ -5,15 +5,12 @@ import CommentCard from './CommentCard/CommentCard';
 
 import './PostDialog.styles.css';
 
-const PostDialog = ({
-  post,
-  isFollowed,
-  isMyPost,
-  setPostDialogVisibility,
-  handleLike,
-  likes,
-}) => {
-  const { followUser } = useContext(AppContext);
+const PostDialog = ({ post }) => {
+  const { user, followUser, likePost, followed, setPostDialogToShow } =
+    useContext(AppContext);
+  const [likes, setLikes] = useState(0);
+  const [isMyPost, setIsMyPost] = useState(false);
+  const [isFollowed, setIsFollowed] = useState(false);
   const [comment, setComment] = useState('');
   const [postComments, setPostComments] = useState([]);
   const [commentToReply, setCommentToReply] = useState(null);
@@ -31,6 +28,18 @@ const PostDialog = ({
         console.log(err);
       });
   }, [post]);
+
+  useEffect(() => {
+    if (user.isAuth) {
+      if (user.id === post.userId) setIsMyPost(true);
+      else
+        setIsFollowed(
+          !followed.every((followedUser) => followedUser.id !== post.userId)
+        );
+
+      setLikes(post.likes.length);
+    }
+  }, [followed, post, user]);
 
   const getPostComments = () => {
     axios
@@ -118,7 +127,7 @@ const PostDialog = ({
   };
 
   const closeDialog = () => {
-    setPostDialogVisibility(false);
+    setPostDialogToShow(null);
     document.querySelector('body').classList.remove('hide-scroll');
   };
 
@@ -159,7 +168,7 @@ const PostDialog = ({
           <div className="post-socials">
             <div className="section socials">
               <i
-                onClick={handleLike}
+                onClick={() => likePost(post._id)}
                 className="far fa-heart social-mini-icon"
               ></i>
               <div className="social-tag">{likes}</div>

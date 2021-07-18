@@ -1,15 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { AppContext } from '../../context';
 import Card from '../../components/Card/Card';
 import Profile from '../../components/Profile/Profile';
 import MiniCard from '../../components/MiniCard/MiniCard';
 import FollowersColumn from '../../components/FollowersColumn/FollowersColumn';
-import axios from 'axios';
 import './Home.styles.css';
 
 function Home() {
-  const [posts, setPosts] = useState(null);
-  const { user, showProfile, followed, suggested } = useContext(AppContext);
+  const { showProfile, followed, suggested, posts } = useContext(AppContext);
   let descendingPosts;
   let topFiveFollowing;
   let topFiveNotFollowing;
@@ -17,21 +15,6 @@ function Home() {
   useEffect(() => {
     document.querySelector('body').classList.remove('hide-scroll');
   }, []);
-
-  useEffect(() => {
-    fetchPosts();
-  }, [user]);
-
-  const fetchPosts = async () => {
-    await axios
-      .get('/getPosts')
-      .then((data) => {
-        setPosts(data.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
 
   if (posts) {
     descendingPosts = posts.sort((a, b) => {
@@ -81,11 +64,7 @@ function Home() {
           ) : (
             <div className="feed">
               {descendingPosts.map((descendingPost, index) => (
-                <Card
-                  key={index}
-                  post={descendingPost}
-                  followedUsers={followed}
-                />
+                <Card key={index} post={descendingPost} />
               ))}
             </div>
           )}
