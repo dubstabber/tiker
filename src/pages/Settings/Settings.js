@@ -12,6 +12,7 @@ const Settings = () => {
   const [email, setEmail] = useState(`${user.email}`);
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
+  const [bio, setBio] = useState('');
 
   useEffect(() => {
     document.querySelector('body').classList.add('hide-scroll');
@@ -24,9 +25,11 @@ const Settings = () => {
     setEmail(`${user.email}`);
     setPassword('');
     setPassword2('');
+    setBio(`${user.bio}`);
   }, [user]);
 
   const handleUpdate = async (e) => {
+    e.preventDefault();
     const updateData = {
       username,
       name,
@@ -34,7 +37,9 @@ const Settings = () => {
       avatar,
       password,
       password2,
+      bio,
     };
+
     await axios
       .put('/updateAccount', updateData)
       .then(() => {
@@ -111,6 +116,16 @@ const Settings = () => {
               placeholder="Change password"
               value={password2}
             />
+          </div>
+          <div className="settings-item">
+            <div className="settings-label">Your bio:</div>
+            <textarea
+              onChange={(e) => setBio(e.target.value)}
+              className="settings-input settings-textarea"
+              cols="40"
+              rows="5"
+              value={bio}
+            ></textarea>
           </div>
           <button className="settings-submit">Update account</button>
         </form>

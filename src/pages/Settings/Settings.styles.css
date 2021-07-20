@@ -1,69 +1,73 @@
-.settings-page{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height:100vh;
-    left: 0;
-    width: 100vw;
-    position: absolute;
-    background-color: rgb(235, 234, 234);
+.settings-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  left: 0;
+  width: 100vw;
+  position: absolute;
+  background-color: rgb(235, 234, 234);
 }
 
-.settings-container{
-    background-color: white;
-    width: 30%;
-    height: 60%;
-    padding: 8rem;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.settings-container {
+  background-color: white;
+  width: 30%;
+  height: 60%;
+  padding: 8rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.settings-form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
 }
 
-.settings-title{
-    align-self: center;
-    font-size: 3rem;
-    font-weight: 600;
-    margin-bottom: 4rem;
+.settings-title {
+  align-self: center;
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 4rem;
 }
 
-.settings-avatar{
-    display: flex;
-    align-self:center;
-    margin-right: 6rem;
+.settings-avatar {
+  display: flex;
+  align-self: center;
+  margin-right: 6rem;
 }
 
-.settings-item{
-    display: flex;
-    align-items: center;
+.settings-item {
+  display: flex;
+  align-items: center;
 }
 
-.settings-label{
-    font-size: 2rem;
+.settings-label {
+  font-size: 2rem;
 }
 
-.settings-input{
-    width: 30rem;
-    font-size: 1.8rem;
-    margin: 0.8rem;
-    border-radius:10px;
+.settings-input {
+  width: 30rem;
+  font-size: 1.8rem;
+  margin: 0.8rem;
+  border-radius: 10px;
 }
 
-.settings-submit{
-    margin-top: 3rem;
-    font-size: 1.8rem;
-    align-self: center;
-    width: 17rem;
-    height: 4rem;
-    background:#fe2c55;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
+.settings-textarea {
+  resize: none;
+}
+
+.settings-submit {
+  margin-top: 3rem;
+  font-size: 1.8rem;
+  align-self: center;
+  width: 17rem;
+  height: 4rem;
+  background: #fe2c55;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
 }

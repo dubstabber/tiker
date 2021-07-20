@@ -55,6 +55,8 @@ app.put(
         else updateUser.password = req.body.password;
       }
 
+      updateUser.bio = req.body.bio;
+
       await User.updateOne({ _id: req.user.id }, updateUser)
         .then(() => {
           res.send('Your profile has been updated');
