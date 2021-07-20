@@ -8,12 +8,25 @@
   display: flex;
   flex-direction: row;
   margin: 3rem 0 3rem 0;
+  cursor: pointer;
+}
+
+.followers-section:hover {
+  background-color: rgb(245, 245, 245);
 }
 
 .home {
   width: 3rem;
   height: 2.9rem;
-  background-image: url('https://i.imgur.com/Q582Dp0.png');
+  background-image: url('../../images/home-icon.svg');
+  background-size: 3rem;
+  margin-right: 1.5rem;
+}
+
+.home-red {
+  width: 3rem;
+  height: 2.9rem;
+  background-image: url('../../images/home-icon-red.svg');
   background-size: 3rem;
   margin-right: 1.5rem;
 }
@@ -21,7 +34,15 @@
 .following {
   width: 3rem;
   height: 2.9rem;
-  background-image: url('https://i.imgur.com/Aq7L3jv.png');
+  background-image: url('../../images/following-icon.svg');
+  background-size: 3rem;
+  margin-right: 1.5rem;
+}
+
+.following-red {
+  width: 3rem;
+  height: 2.9rem;
+  background-image: url('../../images/following-icon-red.svg');
   background-size: 3rem;
   margin-right: 1.5rem;
 }

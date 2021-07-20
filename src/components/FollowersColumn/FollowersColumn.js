@@ -3,9 +3,8 @@ import MicroCard from '../MicroCard/MicroCard';
 import { AppContext } from '../../context';
 import './FollowersColumn.styles.css';
 
-const FollowersColumn = (topFiveFollowing) => {
+const FollowersColumn = ({ users, allPosts, setAllPosts }) => {
   const { user, setShowModalDialog } = useContext(AppContext);
-  const users = topFiveFollowing.users;
 
   const handleLogin = () => {
     setShowModalDialog(true);
@@ -13,13 +12,13 @@ const FollowersColumn = (topFiveFollowing) => {
 
   return (
     <div className="followers-column">
-      <div className="followers-section">
-        <div className="home" />
-        <h2 className="bold red">For You</h2>
+      <div onClick={() => setAllPosts(true)} className="followers-section">
+        <div className={allPosts ? 'home-red' : 'home'} />
+        <h2 className={allPosts && 'bold red'}>For You</h2>
       </div>
-      <div className="followers-section">
-        <div className="following" />
-        <h2>Following</h2>
+      <div onClick={() => setAllPosts(false)} className="followers-section">
+        <div className={allPosts ? 'following' : 'following-red'} />
+        <h2 className={!allPosts && 'bold red'}>Following</h2>
       </div>
       {user.isAuth && <p>Your top accounts</p>}
       <hr />

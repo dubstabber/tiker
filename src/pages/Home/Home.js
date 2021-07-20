@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../../context';
 import Card from '../../components/Card/Card';
 import Profile from '../../components/Profile/Profile';
@@ -8,6 +8,7 @@ import './Home.styles.css';
 
 function Home() {
   const { showProfile, followed, suggested, posts } = useContext(AppContext);
+  const [allPosts, setAllPosts] = useState(true);
   let descendingPosts;
   let topFiveFollowing;
   let topFiveNotFollowing;
@@ -58,7 +59,11 @@ function Home() {
     <>
       {descendingPosts && (
         <div className="container">
-          <FollowersColumn users={topFiveFollowing} />
+          <FollowersColumn
+            users={topFiveFollowing}
+            allPosts={allPosts}
+            setAllPosts={setAllPosts}
+          />
           {showProfile ? (
             <Profile />
           ) : (
