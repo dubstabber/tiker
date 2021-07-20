@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { AppContext } from '../../context';
 import './Header.styles.css';
@@ -6,6 +6,12 @@ import './Header.styles.css';
 const Header = (props) => {
   const { user, setShowModalDialog, setShowProfile, resetState, setAllPosts } =
     useContext(AppContext);
+  const [search, setSearch] = useState('');
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    console.log(search);
+  };
 
   const handleLogin = () => {
     setShowModalDialog(true);
@@ -29,6 +35,16 @@ const Header = (props) => {
           className="logo"
         ></div>
       </Link>
+      <form onSubmit={handleSearch} className="search-container">
+        <input
+          onChange={(e) => setSearch(e.target.value)}
+          className="search-input"
+          placeholder="Search accounts"
+          value={search}
+        />
+        <span className="search-split"></span>
+        <button className="search-btn"></button>
+      </form>
       <div className="upload-container">
         <div className="section">
           {user.isAuth ? (
