@@ -2,14 +2,17 @@ import React, { useContext } from 'react';
 import { AppContext } from '../../context';
 import './MiniCard.styles.css';
 
-function MiniCard({ notFollowingUser }) {
+function MiniCard({ notFollowingUser, setAllPosts }) {
   const { setShowProfile, followUser } = useContext(AppContext);
 
   return (
     <div className="section minicard">
       <div className="section">
         <img
-          onClick={() => setShowProfile(notFollowingUser.id)}
+          onClick={() => {
+            setAllPosts(0);
+            setShowProfile(notFollowingUser.id);
+          }}
           className="user-profile"
           src={
             notFollowingUser.avatar

@@ -1,52 +1,80 @@
-import React, {useContext} from 'react'
-import {Link, Redirect} from 'react-router-dom'
-import {AppContext} from '../../context'
-import './Header.styles.css'
+import React, { useContext } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import { AppContext } from '../../context';
+import './Header.styles.css';
 
 const Header = (props) => {
-  const {user, setShowModalDialog, setShowProfile, resetState} = useContext(AppContext)
+  const { user, setShowModalDialog, setShowProfile, resetState, setAllPosts } =
+    useContext(AppContext);
 
   const handleLogin = () => {
     setShowModalDialog(true);
-  }
+  };
 
   const handleLogout = () => {
-    localStorage.removeItem('token')
-    resetState()
-    window.location.reload()
-    return <Redirect to='/' />
-  }
+    localStorage.removeItem('token');
+    resetState();
+    window.location.reload();
+    return <Redirect to="/" />;
+  };
 
   return (
     <div className="header">
-      <Link to='/'>
-        <div onClick={() => setShowProfile(null)} className="logo"></div>
+      <Link to="/">
+        <div
+          onClick={() => {
+            setAllPosts(2);
+            setShowProfile(null);
+          }}
+          className="logo"
+        ></div>
       </Link>
       <div className="upload-container">
         <div className="section">
-          {user.isAuth ? <Link to='/upload'>
-            <div className="upload" />
-          </Link>: <div onClick={handleLogin} className="upload" />}
-          {user.isAuth ? 
+          {user.isAuth ? (
+            <Link to="/upload">
+              <div className="upload" />
+            </Link>
+          ) : (
+            <div onClick={handleLogin} className="upload" />
+          )}
+          {user.isAuth ? (
             <div>
-              <img className="personal" src={user.avatar ? user.avatar : './images/user-icon.jpg'} alt='personal'/>
-              <div className='personal-options'>
-                <Link to='/' style={{ textDecoration: 'none' }}>
-                  <p onClick={() => setShowProfile(user.id)} className="personal-option">View profile</p>
+              <img
+                className="personal"
+                src={user.avatar ? user.avatar : './images/user-icon.jpg'}
+                alt="personal"
+              />
+              <div className="personal-options">
+                <Link to="/" style={{ textDecoration: 'none' }}>
+                  <p
+                    onClick={() => {
+                      setAllPosts(0);
+                      setShowProfile(user.id);
+                    }}
+                    className="personal-option"
+                  >
+                    View profile
+                  </p>
                 </Link>
-                <Link to='/settings' style={{ textDecoration: 'none' }}>
+                <Link to="/settings" style={{ textDecoration: 'none' }}>
                   <p className="personal-option">Settings</p>
                 </Link>
-                <hr/>
-                <p onClick={handleLogout} className="personal-option">Log out</p>
+                <hr />
+                <p onClick={handleLogout} className="personal-option">
+                  Log out
+                </p>
               </div>
             </div>
-        : <button onClick={handleLogin} className='login-btn'>Login</button>  
-        }
+          ) : (
+            <button onClick={handleLogin} className="login-btn">
+              Login
+            </button>
+          )}
         </div>
       </div>
     </div>
-  )  
-}
-  
-export default Header
+  );
+};
+
+export default Header;

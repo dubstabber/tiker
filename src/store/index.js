@@ -19,6 +19,7 @@ const Store = ({ children }) => {
   const [showModalDialog, setShowModalDialog] = useState(false);
   const [showProfile, setShowProfile] = useState(null);
 
+  const [allPosts, setAllPosts] = useState(2);
   const [posts, setPosts] = useState(null);
   const [followed, setFollowed] = useState([]);
   const [suggested, setSuggested] = useState([]);
@@ -176,6 +177,7 @@ const Store = ({ children }) => {
       await axios.put(`/follow/${username}`).catch((err) => {
         console.error(err);
       });
+      getUser();
       await fetchPosts();
       await axios
         .get('/getFollowing')
@@ -259,6 +261,9 @@ const Store = ({ children }) => {
     showPostDialog,
     postDialogToShow,
     setPostDialogToShow,
+    allPosts,
+    setAllPosts,
+    fetchPosts,
   };
 
   return <AppContext.Provider value={state}>{children}</AppContext.Provider>;

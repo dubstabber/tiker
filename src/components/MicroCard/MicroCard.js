@@ -2,13 +2,16 @@ import React, { useContext } from 'react';
 import { AppContext } from '../../context';
 import './MicroCard.styles.css';
 
-const MicroCard = ({ user }) => {
+const MicroCard = ({ user, setAllPosts }) => {
   const { setShowProfile } = useContext(AppContext);
 
   return (
     <div className="section microcard">
       <img
-        onClick={() => setShowProfile(user.id)}
+        onClick={() => {
+          setAllPosts(0);
+          setShowProfile(user.id);
+        }}
         className="user-profile"
         src={user.avatar ? user.avatar : './images/user-icon.jpg'}
         width={'100%'}

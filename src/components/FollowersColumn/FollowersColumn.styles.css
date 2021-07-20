@@ -7,7 +7,7 @@
 .followers-section {
   display: flex;
   flex-direction: row;
-  margin: 3rem 0 3rem 0;
+  padding: 1rem 0 1rem 0;
   cursor: pointer;
 }
 

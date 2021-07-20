@@ -76,7 +76,7 @@ function Card({ post }) {
           </div>
         )}
       </div>
-      <video className="video" controls>
+      <video key={post._id} className="video" controls>
         <source src={post.video} type="video/mp4" />
       </video>
       <div className="section socials">

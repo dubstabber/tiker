@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { AppContext } from '../../context';
 import Card from '../../components/Card/Card';
 import Profile from '../../components/Profile/Profile';
@@ -7,9 +7,17 @@ import FollowersColumn from '../../components/FollowersColumn/FollowersColumn';
 import './Home.styles.css';
 
 function Home() {
-  const { showProfile, followed, suggested, posts } = useContext(AppContext);
-  const [allPosts, setAllPosts] = useState(true);
+  const {
+    user,
+    showProfile,
+    followed,
+    suggested,
+    posts,
+    allPosts,
+    setAllPosts,
+  } = useContext(AppContext);
   let descendingPosts;
+  let followingPosts;
   let topFiveFollowing;
   let topFiveNotFollowing;
 
@@ -49,6 +57,10 @@ function Home() {
       return 0;
     });
 
+    followingPosts = descendingPosts.filter((el) => {
+      return !user.following.every((id) => id.id !== el.userId);
+    });
+
     topFiveFollowing = followed.slice(0, 5);
     topFiveNotFollowing = suggested.sort((a, b) =>
       a.followers.length < b.followers.length ? 1 : -1
@@ -68,9 +80,14 @@ function Home() {
             <Profile />
           ) : (
             <div className="feed">
-              {descendingPosts.map((descendingPost, index) => (
-                <Card key={index} post={descendingPost} />
-              ))}
+              {allPosts === 2
+                ? descendingPosts.map((descendingPost, index) => (
+                    <Card key={index} post={descendingPost} />
+                  ))
+                : allPosts === 1 &&
+                  followingPosts.map((followingPost, index) => (
+                    <Card key={index} post={followingPost} />
+                  ))}
             </div>
           )}
           <div className="suggested-box">
@@ -80,7 +97,11 @@ function Home() {
                 <div className="break" />
                 {topFiveNotFollowing &&
                   topFiveNotFollowing.map((notFollowingUser, index) => (
-                    <MiniCard key={index} notFollowingUser={notFollowingUser} />
+                    <MiniCard
+                      key={index}
+                      notFollowingUser={notFollowingUser}
+                      setAllPosts={setAllPosts}
+                    />
                   ))}
               </div>
             </div>
