@@ -11,6 +11,7 @@ const Header = (props) => {
   const handleSearch = (e) => {
     e.preventDefault();
     console.log(search);
+    setSearch('');
   };
 
   const handleLogin = () => {
@@ -42,6 +43,9 @@ const Header = (props) => {
           placeholder="Search accounts"
           value={search}
         />
+        {search && (
+          <div onClick={() => setSearch('')} className="search-clear"></div>
+        )}
         <span className="search-split"></span>
         <button className="search-btn"></button>
       </form>

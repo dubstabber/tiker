@@ -20,7 +20,6 @@ app.get('/', auth, async (req, res) => {
       following: user.following,
       followers: user.followers,
       bio: user.bio,
-      likedPosts: user.likedPosts,
     };
 
     return res.json(userData);

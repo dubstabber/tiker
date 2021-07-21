@@ -1,19 +1,14 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { AppContext } from '../../context';
+import { AuthContext } from '../../context/dialog/authState';
+import { DialogContext } from '../../context/dialog/dialogState';
 import axios from 'axios';
 import CommentCard from './CommentCard/CommentCard';
 
 import './PostDialog.styles.css';
 
-const PostDialog = ({ post }) => {
-  const {
-    user,
-    followUser,
-    likePost,
-    followed,
-    setPostDialogToShow,
-    setShowModalDialog,
-  } = useContext(AppContext);
+const PostDialog = () => {
+  const authContext = useContext(AuthContext);
+  const { postDialog } = useContext(DialogContext);
   const [likes, setLikes] = useState(0);
   const [isMyPost, setIsMyPost] = useState(false);
   const [isFollowed, setIsFollowed] = useState(false);
@@ -26,7 +21,7 @@ const PostDialog = ({ post }) => {
 
   useEffect(() => {
     axios
-      .post('/getPostComments', { postId: post._id })
+      .post('/getPostComments', { postId: postDialog.id })
       .then((data) => {
         setPostComments(data.data);
       })
@@ -36,15 +31,15 @@ const PostDialog = ({ post }) => {
   }, [post]);
 
   useEffect(() => {
-    if (user.isAuth) {
-      if (user.id === post.userId) setIsMyPost(true);
+    if (authContext.isAuth) {
+      if (authContext.user.id === postDialog.userId) setIsMyPost(true);
       else
         setIsFollowed(
           !followed.every((followedUser) => followedUser.id !== post.userId)
         );
-      setLikes(post.likes.length);
+      setLikes(postDialog.likes.length);
     }
-  }, [followed, post, user]);
+  }, [followed, postDialog, user]);
 
   const getPostComments = () => {
     axios

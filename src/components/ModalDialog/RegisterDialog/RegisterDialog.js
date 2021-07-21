@@ -1,9 +1,10 @@
-import axios from 'axios';
-import React from 'react';
+import React, { useContext } from 'react';
+import AuthContext from '../../../context/auth/authContext';
 
 import './RegisterDialog.styles.css';
 
 const RegisterDialog = ({ switchPage }) => {
+  const authContext = useContext(AuthContext);
   const registerUser = (e) => {
     e.preventDefault();
     const registerData = {
@@ -11,9 +12,7 @@ const RegisterDialog = ({ switchPage }) => {
       password: e.target.password.value,
       password2: e.target.password2.value,
     };
-    axios.post('http://localhost:5000/register', registerData).then((res) => {
-      console.log(res.data);
-    });
+    authContext.register(registerData);
   };
 
   return (

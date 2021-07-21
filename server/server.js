@@ -26,6 +26,8 @@ app.use('/register', require('./routes/register'));
 app.use('/login', require('./routes/login'));
 app.use('/updateAccount', require('./routes/updateAccount'));
 app.use('/getPosts', require('./routes/getPosts'));
+app.use('/getPost', require('./routes/getPost'));
+app.use('/getFollowedPosts', require('./routes/getFollowedPosts'));
 app.use('/getPostComments', require('./routes/getPostComments'));
 app.use('/getSuggestedUsers', require('./routes/getSuggestedUsers'));
 app.use('/getUsers', require('./routes/getUsers'));

@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
-import { AppContext } from '../../../context';
+import AuthContext from '../../../context/auth/authContext';
 
 import './LoginDialog.styles.css';
 
 const LoginDialog = ({ switchPage }) => {
   const [error, setError] = useState(false);
-  const { login } = useContext(AppContext);
+  const authContext = useContext(AuthContext);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -14,7 +14,7 @@ const LoginDialog = ({ switchPage }) => {
       email: e.target.email.value,
       password: e.target.password.value,
     };
-    setError(login(loginData));
+    authContext.login(loginData);
     window.location.reload();
     return <Redirect to="/" />;
   };

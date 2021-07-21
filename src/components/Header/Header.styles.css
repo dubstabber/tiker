@@ -29,6 +29,18 @@
   height: 4rem;
 }
 
+.search-clear {
+  background-image: url('../../images/close-icon.svg');
+  background-repeat: no-repeat;
+  margin: 0 auto;
+  position: absolute;
+  width: 5rem;
+  height: 2rem;
+  top: 1.4rem;
+  right: 6rem;
+  cursor: pointer;
+}
+
 .search-split {
   position: absolute;
   background-color: rgb(202, 202, 202);
@@ -41,7 +53,6 @@
 .search-btn {
   background-image: url('../../images/search-icon.svg');
   background-repeat: no-repeat;
-  margin: 0 auto;
   width: 3rem;
   background-color: white;
   border: none;

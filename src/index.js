@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import Store from './store';
+import AuthState from './context/auth/authState';
+import DialogState from './context/auth/dialogState';
+import HomeState from './context/home/homeState';
 import Header from './components/Header/Header';
 import Home from './pages/Home/Home';
 import Upload from './pages/Upload/Upload';
@@ -13,15 +15,19 @@ import './App.css';
 function App() {
   return (
     <HashRouter>
-      <Store>
-        <ModalDialog />
-        <Header />
-        <Switch>
-          <Route path="/settings" component={Settings} />
-          <Route path="/upload" component={Upload} />
-          <Route path="/" component={Home} />
-        </Switch>
-      </Store>
+      <AuthState>
+        <DialogState>
+          <ModalDialog />
+          <Header />
+          <Switch>
+            <Route path="/settings" component={Settings} />
+            <Route path="/upload" component={Upload} />
+            <HomeState>
+              <Route path="/" component={Home} />
+            </HomeState>
+          </Switch>
+        </DialogState>
+      </AuthState>
     </HashRouter>
   );
 }
