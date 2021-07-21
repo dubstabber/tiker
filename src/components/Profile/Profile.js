@@ -13,17 +13,15 @@ const Profile = () => {
   const { user, showProfile, followUser, followed } = useContext(AppContext);
 
   useEffect(() => {
-    if (user.isAuth) {
-      axios
-        .get('/getUser/' + showProfile)
-        .then((data) => {
-          setUserData(data.data);
-          setIsFollowed(!followed.every((id) => id.id !== showProfile));
-        })
-        .catch((err) => {
-          console.error('User could not be fetched');
-        });
-    }
+    axios
+      .get('/getUser/' + showProfile)
+      .then((data) => {
+        setUserData(data.data);
+        setIsFollowed(!followed.every((id) => id.id !== showProfile));
+      })
+      .catch((err) => {
+        console.error('User could not be fetched');
+      });
   }, [showProfile, user, followed]);
 
   useEffect(() => {

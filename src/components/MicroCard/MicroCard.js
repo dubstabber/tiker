@@ -5,13 +5,15 @@ import './MicroCard.styles.css';
 const MicroCard = ({ user, setAllPosts }) => {
   const { setShowProfile } = useContext(AppContext);
 
+  const handleShowProfile = () => {
+    setAllPosts(0);
+    setShowProfile(user.id);
+  };
+
   return (
     <div className="section microcard">
       <img
-        onClick={() => {
-          setAllPosts(0);
-          setShowProfile(user.id);
-        }}
+        onClick={handleShowProfile}
         className="user-profile"
         src={user.avatar ? user.avatar : './images/user-icon.jpg'}
         width={'100%'}

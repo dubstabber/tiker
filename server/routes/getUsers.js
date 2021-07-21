@@ -12,6 +12,7 @@ app.get('/:quantity', async (req, res) => {
 
   let usersData = users.map((el) => {
     return {
+      id: el.id,
       name: el.name,
       username: el.username,
       avatar: el.avatar,

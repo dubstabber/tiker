@@ -5,14 +5,16 @@ import './MiniCard.styles.css';
 function MiniCard({ notFollowingUser, setAllPosts }) {
   const { setShowProfile, followUser } = useContext(AppContext);
 
+  const handleShowProfile = () => {
+    setAllPosts(0);
+    setShowProfile(notFollowingUser.id);
+  };
+
   return (
     <div className="section minicard">
       <div className="section">
         <img
-          onClick={() => {
-            setAllPosts(0);
-            setShowProfile(notFollowingUser.id);
-          }}
+          onClick={handleShowProfile}
           className="user-profile"
           src={
             notFollowingUser.avatar
