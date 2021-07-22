@@ -6,8 +6,8 @@ const Post = require('../models/Post');
 
 app.get('/:id', async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
-    const user = await User.findById(post.userId);
+    const post = await Post.findById(req.params.id).lean();
+    const user = await User.findById(post.userId).lean();
 
     const readyPost = {
       id: post._id,
@@ -21,6 +21,22 @@ app.get('/:id', async (req, res) => {
       name: user.name,
       avatar: user.avatar,
     };
+
+    for (let comment of readyPost.comments) {
+      const userComment = await User.findById(comment.userId);
+
+      comment.username = userComment.username;
+      comment.name = userComment.name;
+      comment.avatar = userComment.avatar;
+
+      for (let subComment of comment.subComments) {
+        const userSubcomment = await User.findById(subComment.userId);
+
+        subComment.username = userSubcomment.username;
+        subComment.name = userSubcomment.name;
+        subComment.avatar = userSubcomment.avatar;
+      }
+    }
 
     res.json(readyPost);
   } catch (error) {

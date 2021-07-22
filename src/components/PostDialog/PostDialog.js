@@ -20,15 +20,8 @@ const PostDialog = () => {
   const timestamp = post.timestamp.split('T')[0];
 
   useEffect(() => {
-    axios
-      .post('/getPostComments', { postId: postDialog.id })
-      .then((data) => {
-        setPostComments(data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [post]);
+    showPostDialog(postDialog.id);
+  }, [postDialog]);
 
   useEffect(() => {
     if (authContext.isAuth) {
