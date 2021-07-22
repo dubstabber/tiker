@@ -8,7 +8,8 @@ import './PostDialog.styles.css';
 
 const PostDialog = () => {
   const authContext = useContext(AuthContext);
-  const { postDialog } = useContext(DialogContext);
+  const { postDialog, showPostDialog, showModalDialog, closeDialog } =
+    useContext(DialogContext);
   const [likes, setLikes] = useState(0);
   const [isMyPost, setIsMyPost] = useState(false);
   const [isFollowed, setIsFollowed] = useState(false);
@@ -20,10 +21,6 @@ const PostDialog = () => {
   const timestamp = post.timestamp.split('T')[0];
 
   useEffect(() => {
-    showPostDialog(postDialog.id);
-  }, [postDialog]);
-
-  useEffect(() => {
     if (authContext.isAuth) {
       if (authContext.user.id === postDialog.userId) setIsMyPost(true);
       else
@@ -31,18 +28,12 @@ const PostDialog = () => {
           !followed.every((followedUser) => followedUser.id !== post.userId)
         );
       setLikes(postDialog.likes.length);
+      setPostComments(postDialog.comments);
     }
-  }, [followed, postDialog, user]);
+  }, [postDialog]);
 
-  const getPostComments = () => {
-    axios
-      .post('/getPostComments', { postId: post._id })
-      .then((data) => {
-        setPostComments(data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const refreshPost = () => {
+    showPostDialog(postDialog.id);
   };
 
   const checkComment = (e) => {
@@ -64,24 +55,24 @@ const PostDialog = () => {
 
   const likeComment = async (index) => {
     await axios
-      .post('/likeComment', { postId: post._id, commentToLike: index })
+      .post('/likeComment', { postId: postDialog.id, commentToLike: index })
       .catch((err) => {
         console.log(err);
       });
-    getPostComments();
+    refreshPost();
   };
 
   const likeSubcomment = async (commentIndex, subCommentIndex) => {
     await axios
       .post('/likeSubcomment', {
-        postId: post._id,
+        postId: postDialog.id,
         commentIndex,
         subCommentIndex,
       })
       .catch((err) => {
         console.log(err);
       });
-    getPostComments();
+    refreshPost();
   };
 
   const addComment = async (e) => {
@@ -115,31 +106,30 @@ const PostDialog = () => {
             console.log(err);
           });
       }
-      getPostComments();
+      refreshPost();
     }
   };
 
   const handleLike = async () => {
-    if (user.isAuth) {
-      await likePost(post._id).then((data) => {
-        setLikes(data.data);
-      });
+    if (authContext.isAuth) {
+      await axios.put('/likePost', { id: postDialog.id });
+      refreshPost();
     } else {
-      setShowModalDialog(true);
+      showModalDialog();
     }
   };
 
-  const closeDialog = () => {
-    setPostDialogToShow(null);
+  const close = () => {
+    closeDialog();
     document.querySelector('body').classList.remove('hide-scroll');
   };
 
   return (
     <div className="post-container">
-      <span onClick={closeDialog} className="post-close"></span>
+      <span onClick={close} className="post-close"></span>
       <div className="post-left-side">
         <video className="video-page" controls>
-          <source src={post.video} type="video/mp4" />
+          <source src={postDialog.video} type="video/mp4" />
         </video>
       </div>
       <div className="post-right-side">
@@ -147,7 +137,7 @@ const PostDialog = () => {
           <div className="post-follow-btn">
             {!isMyPost && (
               <div
-                onClick={() => followUser(post.username)}
+                onClick={() => followUser(postDialog.username)}
                 className={isFollowed ? 'followed-button' : 'follow-button'}
               >
                 {isFollowed ? 'Following' : 'Follow'}
@@ -157,17 +147,19 @@ const PostDialog = () => {
           <div className="post-user">
             <img
               className="user-profile"
-              src={post.avatar ? post.avatar : './images/user-icon.jpg'}
+              src={
+                postDialog.avatar ? postDialog.avatar : './images/user-icon.jpg'
+              }
               alt="user-avatar"
             />
             <div>
-              <h3 className="bold">{post.username}</h3>
-              <span>{post.name}</span>
+              <h3 className="bold">{postDialog.username}</h3>
+              <span>{postDialog.name}</span>
               <span> · </span>
               <span>{timestamp}</span>
             </div>
           </div>
-          <div className="post-caption">{post.caption}</div>
+          <div className="post-caption">{postDialog.caption}</div>
           <div className="post-socials">
             <div className="section socials">
               <i
@@ -176,7 +168,7 @@ const PostDialog = () => {
               ></i>
               <div className="social-tag">{likes}</div>
               <i className="far fa-comment-dots"></i>
-              <div className="social-tag">{post.comments.length}</div>
+              <div className="social-tag">{postDialog.comments.length}</div>
               <i className="far fa-share-square social-mini-icon"></i>
             </div>
           </div>

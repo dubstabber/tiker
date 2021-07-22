@@ -27,4 +27,24 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/user/:id', async (req, res) => {
+  try {
+    const posts = await Post.find({ userId: req.params.id });
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+app.get('/liked/:id', async (req, res) => {
+  try {
+    const posts = await Post.find({ likes: req.params.id });
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = app;

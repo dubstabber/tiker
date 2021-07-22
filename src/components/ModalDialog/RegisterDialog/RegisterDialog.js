@@ -5,6 +5,7 @@ import './RegisterDialog.styles.css';
 
 const RegisterDialog = ({ switchPage }) => {
   const authContext = useContext(AuthContext);
+
   const registerUser = (e) => {
     e.preventDefault();
     const registerData = {

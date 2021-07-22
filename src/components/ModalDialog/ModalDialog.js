@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { AppContext } from '../../context';
+import DialogContext from '../../context/auth/dialogContext';
 import LoginDialog from './LoginDialog/LoginDialog';
 import RegisterDialog from './RegisterDialog/RegisterDialog';
 
@@ -7,18 +7,18 @@ import './ModalDialog.styles.css';
 
 const ModalDialog = () => {
   const [registerPage, setRegisterPage] = useState(false);
-  const { showModalDialog, setShowModalDialog } = useContext(AppContext);
+  const dialogContext = useContext(DialogContext);
 
   const disableLogin = () => {
     setRegisterPage(false);
-    setShowModalDialog(false);
+    dialogContext.closeDialog();
   };
 
   const switchPage = () => {
     setRegisterPage((prev) => !prev);
   };
 
-  if (showModalDialog) {
+  if (dialogContext.modalDialog) {
     return (
       <>
         <div onClick={disableLogin} className="modal-box"></div>
