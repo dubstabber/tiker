@@ -16,4 +16,6 @@ export const ALL_POSTS = 'ALL_POSTS';
 export const FOLLOWED_POSTS = 'FOLLOWED_POSTS';
 export const POSTS_ERROR = 'POSTS_ERROR';
 export const USER_PROFILE = 'USER_PROFILE';
+export const FOLLOWED_USERS = 'FOLLOWED_USERS';
+export const SUGGESTED_USERS = 'SUGGESTED_USERS';
 export const SEARCH_USERS = 'SEARCH_USERS';

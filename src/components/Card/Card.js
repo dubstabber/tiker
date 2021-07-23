@@ -1,50 +1,47 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { AppContext } from '../../context';
+import AuthContext from '../../context/home/authContext';
+import HomeContext from '../../context/home/homeContext';
+import DialogContext from '../../context/home/dialogContext';
 import PostDialog from '../PostDialog/PostDialog';
 import './Card.styles.css';
+import axios from 'axios';
 
 function Card({ post }) {
   const [isFollowed, setIsFollowed] = useState(false);
   const [isMyPost, setIsMyPost] = useState(false);
   const [likes, setLikes] = useState(0);
-  const {
-    user,
-    setShowModalDialog,
-    setShowProfile,
-    followUser,
-    likePost,
-    followed,
-    postDialogToShow,
-    showPostDialog,
-  } = useContext(AppContext);
+  const authContext = useContext(AuthContext);
+  const { getProfile } = useContext(HomeContext);
+  const { showModalDialog, showPostDialog } = useContext(DialogContext);
   const timestamp = post.timestamp;
   const timeStampReformat = timestamp.slice(2, timestamp.indexOf('T'));
 
   useEffect(() => {
-    if (user.isAuth) {
-      if (user.id === post.userId) setIsMyPost(true);
+    if (authContext.isAuth) {
+      if (authContext.id === post.userId) setIsMyPost(true);
       else
         setIsFollowed(
-          !followed.every((followedUser) => followedUser.id !== post.userId)
+          !authContext.user.following.every(
+            (followedUser) => followedUser.id !== post.userId
+          )
         );
 
       setLikes(post.likes.length);
     }
-  }, [followed, post, user]);
+  }, [authContext.user, post]);
 
   const handleShowProfile = () => {
-    setShowProfile(post.userId);
+    getProfile(post.userId);
   };
 
   const handleLike = async () => {
     if (user.isAuth) {
-      await likePost(post._id);
+      const res = await axios.put('/likePost');
+      if (res) setLikes(res.data);
     } else {
-      setShowModalDialog(true);
+      showModalDialog();
     }
   };
-
-  if (postDialogToShow === post._id) return <PostDialog post={post} />;
 
   return (
     <div className="card">

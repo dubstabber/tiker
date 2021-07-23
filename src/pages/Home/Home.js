@@ -1,5 +1,6 @@
-import React, { useEffect, useContext } from 'react';
-import { AppContext } from '../../context';
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+import HomeContext from '../../context/home/homeContext';
 import Card from '../../components/Card/Card';
 import Profile from '../../components/Profile/Profile';
 import MiniCard from '../../components/MiniCard/MiniCard';
@@ -7,26 +8,31 @@ import FollowersColumn from '../../components/FollowersColumn/FollowersColumn';
 import './Home.styles.css';
 
 function Home() {
-  const {
-    user,
-    showProfile,
-    followed,
-    suggested,
-    posts,
-    allPosts,
-    setAllPosts,
-  } = useContext(AppContext);
+  const homeContext = useContext(HomeContext);
+  const [followedUsers, setFollowedUsers] = useState([]);
   let descendingPosts;
   let followingPosts;
   let topFiveFollowing;
   let topFiveNotFollowing;
 
   useEffect(() => {
+    // async function fetchFollowedUsers() {
+    //   await axios
+    //     .get('/getUsers/5')
+    //     .then((data) => {
+    //       setFollowedUsers(data.data);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // }
+    // fetchFollowedUsers();
+
     document.querySelector('body').classList.remove('hide-scroll');
   }, []);
 
-  if (posts) {
-    descendingPosts = posts.sort((a, b) => {
+  if (homeContext.posts) {
+    descendingPosts = homeContext.posts.sort((a, b) => {
       const [dateA, timeA] = a.timestamp.split('T');
       let [yearA, monthA, dayA] = dateA.split('-');
       let [hoursA, minutesA, secondsA] = timeA.split(':');
@@ -61,7 +67,7 @@ function Home() {
       return !user.following.every((id) => id.id !== el.userId);
     });
 
-    topFiveFollowing = followed.slice(0, 5);
+    topFiveFollowing = followedUsers;
     topFiveNotFollowing = suggested.sort((a, b) =>
       a.followers.length < b.followers.length ? 1 : -1
     );
@@ -71,23 +77,14 @@ function Home() {
     <>
       {descendingPosts && (
         <div className="container">
-          <FollowersColumn
-            users={topFiveFollowing}
-            allPosts={allPosts}
-            setAllPosts={setAllPosts}
-          />
-          {showProfile ? (
+          <FollowersColumn users={topFiveFollowing} />
+          {homeContext.profile ? (
             <Profile />
           ) : (
             <div className="feed">
-              {allPosts === 2
-                ? descendingPosts.map((descendingPost, index) => (
-                    <Card key={index} post={descendingPost} />
-                  ))
-                : allPosts === 1 &&
-                  followingPosts.map((followingPost, index) => (
-                    <Card key={index} post={followingPost} />
-                  ))}
+              {descendingPosts.map((descendingPost, index) => (
+                <Card key={index} post={descendingPost} />
+              ))}
             </div>
           )}
           <div className="suggested-box">

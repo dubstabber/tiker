@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { AuthContext } from '../../context/dialog/authState';
-import { DialogContext } from '../../context/dialog/dialogState';
+import AuthContext from '../../context/dialog/authContext';
+import DialogContext from '../../context/dialog/dialogContext';
 import axios from 'axios';
 import CommentCard from './CommentCard/CommentCard';
 
@@ -123,6 +123,8 @@ const PostDialog = () => {
     closeDialog();
     document.querySelector('body').classList.remove('hide-scroll');
   };
+
+  if (!postDialog) return <></>;
 
   return (
     <div className="post-container">

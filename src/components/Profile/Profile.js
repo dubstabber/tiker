@@ -1,48 +1,34 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { AppContext } from '../../context';
+import AuthContext from '../../context/home/authContext';
+import HomeContext from '../../context/home/homeContext';
 import Video from './Video/Video';
 
 import './Profile.styles.css';
 
 const Profile = () => {
-  const [userData, setUserData] = useState({});
   const [isFollowed, setIsFollowed] = useState(false);
   const [viewContent, setViewContent] = useState(true);
   const [videos, setVideos] = useState([]);
-  const { user, showProfile, followUser, followed } = useContext(AppContext);
+  const authContext = useContext(AuthContext);
+  const homeContext = useContext(HomeContext);
 
   useEffect(() => {
-    axios
-      .get('/getUser/' + showProfile)
-      .then((data) => {
-        setUserData(data.data);
-        setIsFollowed(!followed.every((id) => id.id !== showProfile));
-      })
-      .catch((err) => {
-        console.error('User could not be fetched');
-      });
-  }, [showProfile, user, followed]);
+    setIsFollowed(
+      !homeContext.profile.following.every((id) => id.id !== showProfile)
+    );
+  }, [showProfile, homeContext.profile]);
 
   useEffect(() => {
-    axios
-      .get('/getPosts')
-      .then((data) => {
-        if (viewContent) {
-          const owned = data.data.filter(
-            (video) => video.userId === showProfile
-          );
-          setVideos(owned);
-        } else {
-          const liked = data.data.filter((video) =>
-            video.likes.includes(showProfile)
-          );
-          setVideos(liked);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
+    if (viewContent) {
+      axios.get('/getPosts/user/' + showProfile).then((data) => {
+        setVideos(data.data);
       });
+    } else {
+      axios.get('/getPosts/liked/' + showProfile).then((data) => {
+        setVideos(data.data);
+      });
+    }
   }, [viewContent, showProfile]);
 
   return (
@@ -56,7 +42,7 @@ const Profile = () => {
         <div className="profile__data">
           <div className="profile__username">{userData.username}</div>
           <div className="profile__name">{userData.name}</div>
-          {user.id !== showProfile && (
+          {authContext.user.id !== showProfile && (
             <div
               onClick={() => followUser(userData.username)}
               className={isFollowed ? 'followed-button' : 'follow-button'}
@@ -99,7 +85,7 @@ const Profile = () => {
         </div>
         <div className="profile__content">
           {videos.map((video) => (
-            <Video key={video._id} video={video} />
+            <Video key={video.id} video={video} />
           ))}
         </div>
       </div>

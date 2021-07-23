@@ -7,13 +7,18 @@ import {
   FOLLOWED_POSTS,
   POSTS_ERROR,
   USER_PROFILE,
+  FOLLOWED_USERS,
+  SUGGESTED_USERS,
   SEARCH_USERS,
 } from '../types';
 
 const HomeState = ({ children }) => {
   const initialState = {
     posts: [],
+    allPosts: 2,
     profile: null,
+    followed: null,
+    suggested: null,
     foundUsers: null,
     error: null,
   };
@@ -50,6 +55,22 @@ const HomeState = ({ children }) => {
     }
   };
 
+  const getFollowedUsers = async () => {
+    try {
+      const res = await axios.get('/getFollowing/');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const followUser = async (username) => {
+    try {
+      const res = await axios.put('/follow/' + username);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const findUser = async (username) => {
     try {
       console.log('implement "findUser"');
@@ -62,12 +83,14 @@ const HomeState = ({ children }) => {
     <HomeContext.Provider
       value={{
         posts: state.posts,
+        allPosts: state.allPosts,
         profile: state.profile,
         foundUsers: state.foundUsers,
         error: state.error,
         getAllPosts,
         getFollowedPosts,
         getProfile,
+        followUser,
         findUser,
       }}
     >

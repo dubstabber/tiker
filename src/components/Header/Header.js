@@ -1,11 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { AppContext } from '../../context';
+import AuthContext from '../../context/dialog/authContext';
+import HomeContext from '../../context/dialog/homeContext';
+import DialogContext from '../../context/dialog/dialogContext';
 import './Header.styles.css';
 
-const Header = (props) => {
-  const { user, setShowModalDialog, setShowProfile, resetState, setAllPosts } =
-    useContext(AppContext);
+const Header = () => {
+  const authContext = useContext(AuthContext);
+  const { getAllPosts, getProfile } = useContext(HomeContext);
+  const { showModalDialog } = useContext(DialogContext);
   const [search, setSearch] = useState('');
 
   const handleSearch = (e) => {
@@ -15,7 +18,7 @@ const Header = (props) => {
   };
 
   const handleLogin = () => {
-    setShowModalDialog(true);
+    showModalDialog();
   };
 
   const handleLogout = () => {
@@ -28,13 +31,7 @@ const Header = (props) => {
   return (
     <div className="header">
       <Link to="/">
-        <div
-          onClick={() => {
-            setAllPosts(2);
-            setShowProfile(null);
-          }}
-          className="logo"
-        ></div>
+        <div onClick={getAllPosts} className="logo"></div>
       </Link>
       <form onSubmit={handleSearch} className="search-container">
         <input
@@ -51,27 +48,28 @@ const Header = (props) => {
       </form>
       <div className="upload-container">
         <div className="section">
-          {user.isAuth ? (
+          {authContext.isAuth ? (
             <Link to="/upload">
               <div className="upload" />
             </Link>
           ) : (
             <div onClick={handleLogin} className="upload" />
           )}
-          {user.isAuth ? (
+          {authContext.isAuth ? (
             <div>
               <img
                 className="personal"
-                src={user.avatar ? user.avatar : './images/user-icon.jpg'}
+                src={
+                  authContext.avatar
+                    ? authContext.avatar
+                    : './images/user-icon.jpg'
+                }
                 alt="personal"
               />
               <div className="personal-options">
                 <Link to="/" style={{ textDecoration: 'none' }}>
                   <p
-                    onClick={() => {
-                      setAllPosts(0);
-                      setShowProfile(user.id);
-                    }}
+                    onClick={() => getProfile(authContext.id)}
                     className="personal-option"
                   >
                     View profile

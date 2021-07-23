@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../../context';
+import HomeContext from '../../context/home/homeContext';
 import './MicroCard.styles.css';
 
-const MicroCard = ({ user, setAllPosts }) => {
-  const { setShowProfile } = useContext(AppContext);
+const MicroCard = ({ user }) => {
+  const { getProfile } = useContext(HomeContext);
 
   const handleShowProfile = () => {
-    setAllPosts(0);
-    setShowProfile(user.id);
+    getProfile(user.id);
   };
 
   return (

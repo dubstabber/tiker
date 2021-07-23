@@ -1,15 +1,15 @@
 import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
-import { AppContext } from '../../context';
+import AuthContext from '../../context/auth/authContext';
 
 import './Settings.styles.css';
 
 const Settings = () => {
-  const { user, getUser } = useContext(AppContext);
+  const authContext = useContext(AuthContext);
   const [avatar, setAvatar] = useState('');
-  const [username, setUsername] = useState(`${user.username}`);
-  const [name, setName] = useState(`${user.name}`);
-  const [email, setEmail] = useState(`${user.email}`);
+  const [username, setUsername] = useState(`${authContext.user.username}`);
+  const [name, setName] = useState(`${authContext.user.name}`);
+  const [email, setEmail] = useState(`${authContext.user.email}`);
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [bio, setBio] = useState('');
@@ -20,13 +20,13 @@ const Settings = () => {
 
   useEffect(() => {
     setAvatar('');
-    setUsername(`${user.username}`);
-    setName(`${user.name}`);
-    setEmail(`${user.email}`);
+    setUsername(`${authContext.user.username}`);
+    setName(`${authContext.user.name}`);
+    setEmail(`${authContext.user.email}`);
     setPassword('');
     setPassword2('');
-    setBio(`${user.bio}`);
-  }, [user]);
+    setBio(`${authContext.user.bio}`);
+  }, [authContext.user]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -43,7 +43,7 @@ const Settings = () => {
     await axios
       .put('/updateAccount', updateData)
       .then(() => {
-        getUser();
+        authContext.getUser();
         window.location.reload();
       })
       .catch((err) => {
@@ -59,7 +59,11 @@ const Settings = () => {
           <div className="settings-item">
             <img
               className="user-profile"
-              src={user.avatar ? user.avatar : './images/user-icon.jpg'}
+              src={
+                authContext.avatar
+                  ? authContext.avatar
+                  : './images/user-icon.jpg'
+              }
               width={'100%'}
               alt="user-profile"
             />

@@ -1,20 +1,15 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../../context';
+import HomeContext from '../../context/dialog/homeContext';
 import './MiniCard.styles.css';
 
 function MiniCard({ notFollowingUser, setAllPosts }) {
-  const { setShowProfile, followUser } = useContext(AppContext);
-
-  const handleShowProfile = () => {
-    setAllPosts(0);
-    setShowProfile(notFollowingUser.id);
-  };
+  const { getProfile, followUser } = useContext(HomeContext);
 
   return (
     <div className="section minicard">
       <div className="section">
         <img
-          onClick={handleShowProfile}
+          onClick={() => getProfile(notFollowingUser.id)}
           className="user-profile"
           src={
             notFollowingUser.avatar

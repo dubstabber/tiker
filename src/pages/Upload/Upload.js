@@ -1,19 +1,21 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
-import { AppContext } from '../../context';
+import AuthContext from '../../context/auth/authContext';
+import HomeContext from '../../context/auth/homeContext';
 import axios from 'axios';
 import './Upload.styles.css';
 
 const Upload = () => {
-  const { user } = useContext(AppContext);
+  const authContext = useContext(AuthContext);
+  const { getAllPosts } = useContext(HomeContext);
 
-  if (!user.isAuth) {
+  if (!authContext.isAuth) {
     return <Redirect to="/" />;
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (user.isAuth) {
+    if (authContext.isAuth) {
       const postData = {
         caption: e.target.caption.value,
         video: e.target.video.value,
@@ -21,7 +23,8 @@ const Upload = () => {
 
       axios
         .post('/addPost', postData)
-        .then((response) => {
+        .then(() => {
+          getAllPosts();
           window.location.reload();
         })
         .catch((err) => {

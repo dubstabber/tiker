@@ -1,3 +1,3 @@
 import { createContext } from 'react';
 
-export const DialogContext = createContext();
+export default DialogContext = createContext();

@@ -1,16 +1,13 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../../../context';
-import PostDialog from '../../PostDialog/PostDialog';
+import DialogContext from '../../../context/dialog/dialogContext';
 
 import './Video.styles.css';
 
 const Video = ({ video }) => {
-  const { showPostDialog, postDialogToShow } = useContext(AppContext);
-
-  if (postDialogToShow === video._id) return <PostDialog post={video} />;
+  const { showPostDialog } = useContext(DialogContext);
 
   return (
-    <video onClick={() => showPostDialog(video._id)} className="video__user">
+    <video onClick={() => showPostDialog(video.id)} className="video__user">
       <source src={video.video} type="video/mp4" />
     </video>
   );
