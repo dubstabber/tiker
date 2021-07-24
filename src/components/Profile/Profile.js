@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import AuthContext from '../../context/home/authContext';
+import AuthContext from '../../context/auth/authContext';
 import HomeContext from '../../context/home/homeContext';
 import Video from './Video/Video';
 
@@ -15,36 +15,46 @@ const Profile = () => {
 
   useEffect(() => {
     setIsFollowed(
-      !homeContext.profile.following.every((id) => id.id !== showProfile)
+      !authContext.user.following.every(
+        (id) => id.id !== homeContext.profile.id
+      )
     );
-  }, [showProfile, homeContext.profile]);
+  }, [homeContext.profile.id, homeContext.profile, authContext]);
 
   useEffect(() => {
     if (viewContent) {
-      axios.get('/getPosts/user/' + showProfile).then((data) => {
+      axios.get('/getPosts/user/' + homeContext.profile.id).then((data) => {
         setVideos(data.data);
       });
     } else {
-      axios.get('/getPosts/liked/' + showProfile).then((data) => {
+      axios.get('/getPosts/liked/' + homeContext.profile.id).then((data) => {
         setVideos(data.data);
       });
     }
-  }, [viewContent, showProfile]);
+  }, [viewContent, homeContext.profile.id]);
 
   return (
     <div className="profile__container">
       <div className="profile__info">
         <img
           className="user-profile-big"
-          src={userData.avatar ? userData.avatar : './images/user-icon.jpg'}
+          src={
+            homeContext.profile.avatar
+              ? homeContext.profile.avatar
+              : './images/user-icon.jpg'
+          }
           alt="profile-avatar"
         />
         <div className="profile__data">
-          <div className="profile__username">{userData.username}</div>
-          <div className="profile__name">{userData.name}</div>
-          {authContext.user.id !== showProfile && (
+          <div className="profile__username">
+            {homeContext.profile.username}
+          </div>
+          <div className="profile__name">{homeContext.profile.name}</div>
+          {authContext.user && authContext.user.id !== homeContext.profile.id && (
             <div
-              onClick={() => followUser(userData.username)}
+              onClick={() =>
+                homeContext.followUser(homeContext.profile.username)
+              }
               className={isFollowed ? 'followed-button' : 'follow-button'}
             >
               {isFollowed ? 'Following' : 'Follow'}
@@ -54,19 +64,21 @@ const Profile = () => {
         <div className="profile__stats">
           <div className="profile__following">
             <span className="profile__following--number">
-              {userData.following && userData.following.length}
+              {homeContext.profile.following &&
+                homeContext.profile.following.length}
             </span>{' '}
             Following
           </div>
           <div className="profile__followers">
             <span className="profile__followers--number">
-              {userData.followers && userData.followers.length}
+              {homeContext.profile.followers &&
+                homeContext.profile.followers.length}
             </span>{' '}
             Followers
           </div>
         </div>
         <div className="profile__bio">
-          <div>{userData.bio}</div>
+          <div>{homeContext.profile.bio}</div>
         </div>
       </div>
 
@@ -85,7 +97,7 @@ const Profile = () => {
         </div>
         <div className="profile__content">
           {videos.map((video) => (
-            <Video key={video.id} video={video} />
+            <Video key={video._id} video={video} />
           ))}
         </div>
       </div>

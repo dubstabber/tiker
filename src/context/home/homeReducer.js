@@ -7,9 +7,10 @@ import {
   FOLLOWED_USERS,
   SUGGESTED_USERS,
   SEARCH_USERS,
+  CLEAR,
 } from '../types';
 
-export default (state, action) => {
+const homeReducer = (state, action) => {
   switch (action.type) {
     case ALL_POSTS:
       return {
@@ -17,7 +18,7 @@ export default (state, action) => {
         posts: action.payload,
         allPosts: 2,
         profile: null,
-        foundUsers: null,
+        foundUsers: [],
       };
     case FOLLOWED_POSTS:
       return {
@@ -25,12 +26,17 @@ export default (state, action) => {
         posts: action.payload,
         allPosts: 1,
         profile: null,
-        foundUsers: null,
+        foundUsers: [],
       };
     case FOLLOWED_USERS:
       return {
         ...state,
         followed: action.payload,
+      };
+    case SUGGESTED_USERS:
+      return {
+        ...state,
+        suggested: action.payload,
       };
     case POSTS_ERROR:
       return {
@@ -46,7 +52,19 @@ export default (state, action) => {
         profile: action.payload,
         foundUsers: null,
       };
+    case CLEAR:
+      return {
+        ...state,
+        posts: [],
+        profile: null,
+        followed: [],
+        suggested: [],
+        foundUsers: [],
+        error: null,
+      };
     default:
       return state;
   }
 };
+
+export default homeReducer;

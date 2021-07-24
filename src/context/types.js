@@ -19,3 +19,4 @@ export const USER_PROFILE = 'USER_PROFILE';
 export const FOLLOWED_USERS = 'FOLLOWED_USERS';
 export const SUGGESTED_USERS = 'SUGGESTED_USERS';
 export const SEARCH_USERS = 'SEARCH_USERS';
+export const CLEAR = 'CLEAR';

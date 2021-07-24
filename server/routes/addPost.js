@@ -16,31 +16,33 @@ app.post('/', auth, async (req, res) => {
       .head(req.body.video)
       .then((data) => {
         const isVideo = data.headers['content-type'].includes('video');
-        if (!isVideo) res.send('Link does not contain a video');
+        if (!isVideo) {
+          res.status(401).json({ msg: `Link does not contain a video` });
+        } else {
+          const newPost = {
+            userId: req.user.id,
+            caption: req.body.caption,
+            video: req.body.video,
+            likes: [],
+            comments: [],
+            timestamp: timestampString,
+          };
+
+          Post.create(newPost)
+            .then(() => {
+              res.json('Post has been created');
+            })
+            .catch(() => {
+              res.status(401).json({ msg: 'Post could not be created' });
+            });
+        }
       })
-      .catch((err) => {
-        res.send(`A video cannot be processed: ${err}`);
+      .catch(() => {
+        res.status(404).json({ msg: `This link cannot be processed` });
       });
   } else {
-    res.send('You have not provided any link');
+    res.status(404).json({ msg: 'You have not provided any link' });
   }
-
-  const newPost = {
-    userId: req.user.id,
-    caption: req.body.caption,
-    video: req.body.video,
-    likes: [],
-    comments: [],
-    timestamp: timestampString,
-  };
-
-  await Post.create(newPost)
-    .then((data) => {
-      res.json('Post has been created');
-    })
-    .catch((err) => {
-      res.status(401).json({ msg: 'Error: Post could not be created', err });
-    });
 });
 
 module.exports = app;

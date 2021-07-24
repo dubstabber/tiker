@@ -1,7 +1,9 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer, useContext } from 'react';
 import axios from 'axios';
 import HomeContext from './homeContext';
 import homeReducer from './homeReducer';
+import AuthContext from '../auth/authContext';
+import DialogContext from '../dialog/dialogContext';
 import {
   ALL_POSTS,
   FOLLOWED_POSTS,
@@ -10,6 +12,7 @@ import {
   FOLLOWED_USERS,
   SUGGESTED_USERS,
   SEARCH_USERS,
+  CLEAR,
 } from '../types';
 
 const HomeState = ({ children }) => {
@@ -17,13 +20,34 @@ const HomeState = ({ children }) => {
     posts: [],
     allPosts: 2,
     profile: null,
-    followed: null,
-    suggested: null,
-    foundUsers: null,
+    followed: [],
+    suggested: [],
+    foundUsers: [],
     error: null,
   };
 
   const [state, dispatch] = useReducer(homeReducer, initialState);
+  const { showModalDialog } = useContext(DialogContext);
+  const { isAuth, loadUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    getAllPosts();
+    getFollowedUsers();
+    async function getUsers() {
+      try {
+        let res;
+        if (isAuth) {
+          res = await axios.get('/getSuggestedUsers');
+        } else {
+          res = await axios.get('/getUsers/5');
+        }
+        dispatch({ type: SUGGESTED_USERS, payload: res.data });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    getUsers();
+  }, [isAuth]);
 
   const getAllPosts = async () => {
     try {
@@ -37,9 +61,13 @@ const HomeState = ({ children }) => {
 
   const getFollowedPosts = async () => {
     try {
-      //   const res = await axios.get('/getPosts');
-      console.log('implement "getFollowedPosts"');
-      //   dispatch({ type: FOLLOWED_POSTS, payload: res.data });
+      if (isAuth) {
+        //   const res = await axios.get('/getPosts');
+        console.log('implement "getFollowedPosts"');
+        //   dispatch({ type: FOLLOWED_POSTS, payload: res.data });
+      } else {
+        console.log('implement "getUsers"');
+      }
     } catch (err) {
       dispatch({ type: POSTS_ERROR, payload: err.response.msg });
     }
@@ -58,6 +86,22 @@ const HomeState = ({ children }) => {
   const getFollowedUsers = async () => {
     try {
       const res = await axios.get('/getFollowing/');
+
+      dispatch({ type: FOLLOWED_USERS, payload: res.data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getSuggestedUsers = async () => {
+    try {
+      let res;
+      if (isAuth) {
+        res = await axios.get('/getSuggestedUsers');
+      } else {
+        res = await axios.get('/getUsers/5');
+      }
+      dispatch({ type: SUGGESTED_USERS, payload: res.data });
     } catch (err) {
       console.log(err);
     }
@@ -65,7 +109,14 @@ const HomeState = ({ children }) => {
 
   const followUser = async (username) => {
     try {
-      const res = await axios.put('/follow/' + username);
+      if (isAuth) {
+        await axios.put('/follow/' + username);
+        loadUser();
+        getFollowedUsers();
+        getSuggestedUsers();
+      } else {
+        showModalDialog();
+      }
     } catch (err) {
       console.log(err);
     }
@@ -79,19 +130,28 @@ const HomeState = ({ children }) => {
     }
   };
 
+  const clearState = () => {
+    dispatch({ type: CLEAR });
+  };
+
   return (
     <HomeContext.Provider
       value={{
         posts: state.posts,
         allPosts: state.allPosts,
         profile: state.profile,
+        followed: state.followed,
+        suggested: state.suggested,
         foundUsers: state.foundUsers,
         error: state.error,
         getAllPosts,
         getFollowedPosts,
         getProfile,
+        getSuggestedUsers,
+        getFollowedUsers,
         followUser,
         findUser,
+        clearState,
       }}
     >
       {children}

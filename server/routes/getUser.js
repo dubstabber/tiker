@@ -8,6 +8,7 @@ app.get('/:id', (req, res) => {
     if (!err) {
       if (arr.length !== 0) {
         const user = {
+          id: arr.id,
           username: arr.username,
           name: arr.name,
           avatar: arr.avatar,

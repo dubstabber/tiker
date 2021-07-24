@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import AuthState from './context/auth/authState';
-import DialogState from './context/auth/dialogState';
+import DialogState from './context/dialog/dialogState';
 import HomeState from './context/home/homeState';
 import Header from './components/Header/Header';
 import Home from './pages/Home/Home';
@@ -18,16 +18,16 @@ function App() {
     <HashRouter>
       <AuthState>
         <DialogState>
-          <ModalDialog />
-          <PostDialog />
-          <Header />
-          <Switch>
-            <Route path="/settings" component={Settings} />
-            <Route path="/upload" component={Upload} />
-            <HomeState>
+          <HomeState>
+            <ModalDialog />
+            <PostDialog />
+            <Header />
+            <Switch>
+              <Route path="/settings" component={Settings} />
+              <Route path="/upload" component={Upload} />
               <Route path="/" component={Home} />
-            </HomeState>
-          </Switch>
+            </Switch>
+          </HomeState>
         </DialogState>
       </AuthState>
     </HashRouter>

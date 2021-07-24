@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import DialogContext from '../../context/auth/dialogContext';
+import DialogContext from '../../context/dialog/dialogContext';
 import LoginDialog from './LoginDialog/LoginDialog';
 import RegisterDialog from './RegisterDialog/RegisterDialog';
 

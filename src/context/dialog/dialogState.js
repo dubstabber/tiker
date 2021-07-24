@@ -24,7 +24,8 @@ const DialogState = ({ children }) => {
 
   const showPostDialog = async (postId) => {
     try {
-      const res = await axios.get('/getPost/:id');
+      const res = await axios.get('/getPost/' + postId);
+      document.querySelector('body').classList.add('hide-scroll');
       dispatch({ type: POST_DIALOG_SUCCESS, payload: res.data });
     } catch (err) {
       dispatch({ type: POST_FAIL, payload: err.response.data.msg });

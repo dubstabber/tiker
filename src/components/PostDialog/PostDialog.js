@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import AuthContext from '../../context/dialog/authContext';
+import AuthContext from '../../context/auth/authContext';
 import DialogContext from '../../context/dialog/dialogContext';
+import HomeContext from '../../context/home/homeContext';
 import axios from 'axios';
 import CommentCard from './CommentCard/CommentCard';
 
@@ -10,6 +11,7 @@ const PostDialog = () => {
   const authContext = useContext(AuthContext);
   const { postDialog, showPostDialog, showModalDialog, closeDialog } =
     useContext(DialogContext);
+  const { followUser } = useContext(HomeContext);
   const [likes, setLikes] = useState(0);
   const [isMyPost, setIsMyPost] = useState(false);
   const [isFollowed, setIsFollowed] = useState(false);
@@ -18,19 +20,21 @@ const PostDialog = () => {
   const [commentToReply, setCommentToReply] = useState(null);
   const [replyPlaceholder, setReplyPlaceholder] = useState('');
   const inputElement = useRef(null);
-  const timestamp = post.timestamp.split('T')[0];
+  const timestamp = postDialog && postDialog.timestamp.split('T')[0];
 
   useEffect(() => {
-    if (authContext.isAuth) {
+    if (authContext.isAuth && postDialog) {
       if (authContext.user.id === postDialog.userId) setIsMyPost(true);
       else
         setIsFollowed(
-          !followed.every((followedUser) => followedUser.id !== post.userId)
+          !authContext.user.following.every(
+            (followedUser) => followedUser.id !== postDialog.userId
+          )
         );
       setLikes(postDialog.likes.length);
       setPostComments(postDialog.comments);
     }
-  }, [postDialog]);
+  }, [postDialog, authContext]);
 
   const refreshPost = () => {
     showPostDialog(postDialog.id);
@@ -81,7 +85,7 @@ const PostDialog = () => {
       if (commentToReply || commentToReply === 0) {
         await axios
           .post('/commentTheComment', {
-            postId: post._id,
+            postId: postDialog.id,
             comment,
             commentToReply,
             replyPlaceholder,
@@ -96,7 +100,7 @@ const PostDialog = () => {
           });
       } else {
         await axios
-          .post('/comment', { postId: post._id, comment })
+          .post('/comment', { postId: postDialog.id, comment })
           .then((data) => {
             setComment('');
             setCommentToReply(null);

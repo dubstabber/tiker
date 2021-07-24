@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import AuthContext from '../../context/home/authContext';
+import AuthContext from '../../context/auth/authContext';
 import HomeContext from '../../context/home/homeContext';
-import DialogContext from '../../context/home/dialogContext';
-import PostDialog from '../PostDialog/PostDialog';
+import DialogContext from '../../context/dialog/dialogContext';
 import './Card.styles.css';
 import axios from 'axios';
 
@@ -11,14 +10,14 @@ function Card({ post }) {
   const [isMyPost, setIsMyPost] = useState(false);
   const [likes, setLikes] = useState(0);
   const authContext = useContext(AuthContext);
-  const { getProfile } = useContext(HomeContext);
+  const { getProfile, followUser } = useContext(HomeContext);
   const { showModalDialog, showPostDialog } = useContext(DialogContext);
   const timestamp = post.timestamp;
   const timeStampReformat = timestamp.slice(2, timestamp.indexOf('T'));
 
   useEffect(() => {
     if (authContext.isAuth) {
-      if (authContext.id === post.userId) setIsMyPost(true);
+      if (authContext.user.id === post.userId) setIsMyPost(true);
       else
         setIsFollowed(
           !authContext.user.following.every(
@@ -28,19 +27,23 @@ function Card({ post }) {
 
       setLikes(post.likes.length);
     }
-  }, [authContext.user, post]);
+  }, [authContext.user, post, authContext]);
 
   const handleShowProfile = () => {
     getProfile(post.userId);
   };
 
   const handleLike = async () => {
-    if (user.isAuth) {
+    if (authContext.isAuth) {
       const res = await axios.put('/likePost');
       if (res) setLikes(res.data);
     } else {
       showModalDialog();
     }
+  };
+
+  const handleFollow = () => {
+    followUser(post.username);
   };
 
   return (
@@ -66,7 +69,7 @@ function Card({ post }) {
         </div>
         {!isMyPost && (
           <div
-            onClick={() => followUser(post.username)}
+            onClick={handleFollow}
             className={isFollowed ? 'followed-button' : 'follow-button'}
           >
             {isFollowed ? 'Following' : 'Follow'}

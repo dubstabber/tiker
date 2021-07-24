@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
-import HomeContext from '../../context/auth/homeContext';
+import HomeContext from '../../context/home/homeContext';
 import axios from 'axios';
 import './Upload.styles.css';
 
@@ -21,14 +21,14 @@ const Upload = () => {
         video: e.target.video.value,
       };
 
-      axios
+      await axios
         .post('/addPost', postData)
         .then(() => {
           getAllPosts();
           window.location.reload();
         })
         .catch((err) => {
-          console.error(err);
+          console.error(`Cannot upload: ${err.response.data.msg}`);
         });
     }
   };
@@ -37,7 +37,7 @@ const Upload = () => {
     <div className="upload-page">
       <br />
       <h1>Upload video</h1>
-      <p>This video will be published to @{user.username}</p>
+      <p>This video will be published to @{authContext.user.username}</p>
       <div className="container">
         <form onSubmit={handleSubmit}>
           <div className="section">

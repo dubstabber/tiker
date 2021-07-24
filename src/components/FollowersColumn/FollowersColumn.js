@@ -1,15 +1,14 @@
 import React, { useContext } from 'react';
 import MicroCard from '../MicroCard/MicroCard';
-import AuthContext from '../../context/home/authContext';
-import DialogContext from '../../context/home/dialogContext';
+import AuthContext from '../../context/auth/authContext';
+import DialogContext from '../../context/dialog/dialogContext';
 import HomeContext from '../../context/home/homeContext';
 import './FollowersColumn.styles.css';
 
 const FollowersColumn = ({ users }) => {
   const authContext = useContext(AuthContext);
   const { showModalDialog } = useContext(DialogContext);
-  const { allPosts, getAllPosts, getFollowedPosts, getProfile } =
-    useContext(HomeContext);
+  const { allPosts, getAllPosts, getFollowedPosts } = useContext(HomeContext);
 
   const handleLogin = () => {
     showModalDialog();

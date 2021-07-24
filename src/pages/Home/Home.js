@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import React, { useEffect, useContext } from 'react';
+import AuthContext from '../../context/auth/authContext';
 import HomeContext from '../../context/home/homeContext';
 import Card from '../../components/Card/Card';
 import Profile from '../../components/Profile/Profile';
@@ -8,28 +8,18 @@ import FollowersColumn from '../../components/FollowersColumn/FollowersColumn';
 import './Home.styles.css';
 
 function Home() {
+  const authContext = useContext(AuthContext);
   const homeContext = useContext(HomeContext);
-  const [followedUsers, setFollowedUsers] = useState([]);
   let descendingPosts;
   let followingPosts;
   let topFiveFollowing;
   let topFiveNotFollowing;
 
   useEffect(() => {
-    // async function fetchFollowedUsers() {
-    //   await axios
-    //     .get('/getUsers/5')
-    //     .then((data) => {
-    //       setFollowedUsers(data.data);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // }
-    // fetchFollowedUsers();
-
+    authContext.loadUser();
     document.querySelector('body').classList.remove('hide-scroll');
-  }, []);
+    // eslint-disable-next-line
+  }, [authContext.isAuth]);
 
   if (homeContext.posts) {
     descendingPosts = homeContext.posts.sort((a, b) => {
@@ -63,14 +53,18 @@ function Home() {
       return 0;
     });
 
-    followingPosts = descendingPosts.filter((el) => {
-      return !user.following.every((id) => id.id !== el.userId);
-    });
+    if (authContext.isAuth) {
+      followingPosts = descendingPosts.filter((el) => {
+        return !authContext.user.following.every((id) => id.id !== el.userId);
+      });
+    }
 
-    topFiveFollowing = followedUsers;
-    topFiveNotFollowing = suggested.sort((a, b) =>
-      a.followers.length < b.followers.length ? 1 : -1
-    );
+    topFiveFollowing = homeContext && homeContext.followed;
+    topFiveNotFollowing =
+      homeContext &&
+      homeContext.suggested.sort((a, b) =>
+        a.followers.length < b.followers.length ? 1 : -1
+      );
   }
 
   return (
@@ -94,11 +88,7 @@ function Home() {
                 <div className="break" />
                 {topFiveNotFollowing &&
                   topFiveNotFollowing.map((notFollowingUser, index) => (
-                    <MiniCard
-                      key={index}
-                      notFollowingUser={notFollowingUser}
-                      setAllPosts={setAllPosts}
-                    />
+                    <MiniCard key={index} notFollowingUser={notFollowingUser} />
                   ))}
               </div>
             </div>

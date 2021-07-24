@@ -1,3 +1,5 @@
 import { createContext } from 'react';
 
-export default DialogContext = createContext();
+const dialogContext = createContext();
+
+export default dialogContext;

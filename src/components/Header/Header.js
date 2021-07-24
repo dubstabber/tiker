@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import AuthContext from '../../context/dialog/authContext';
-import HomeContext from '../../context/dialog/homeContext';
+import AuthContext from '../../context/auth/authContext';
+import HomeContext from '../../context/home/homeContext';
 import DialogContext from '../../context/dialog/dialogContext';
 import './Header.styles.css';
 
@@ -23,7 +23,7 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    resetState();
+    authContext.logout();
     window.location.reload();
     return <Redirect to="/" />;
   };
@@ -69,7 +69,7 @@ const Header = () => {
               <div className="personal-options">
                 <Link to="/" style={{ textDecoration: 'none' }}>
                   <p
-                    onClick={() => getProfile(authContext.id)}
+                    onClick={() => getProfile(authContext.user.id)}
                     className="personal-option"
                   >
                     View profile

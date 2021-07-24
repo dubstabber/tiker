@@ -7,7 +7,11 @@ const Video = ({ video }) => {
   const { showPostDialog } = useContext(DialogContext);
 
   return (
-    <video onClick={() => showPostDialog(video.id)} className="video__user">
+    <video
+      key={video._id}
+      onClick={() => showPostDialog(video._id)}
+      className="video__user"
+    >
       <source src={video.video} type="video/mp4" />
     </video>
   );

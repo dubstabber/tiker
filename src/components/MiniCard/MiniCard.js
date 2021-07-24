@@ -1,9 +1,13 @@
 import React, { useContext } from 'react';
-import HomeContext from '../../context/dialog/homeContext';
+import HomeContext from '../../context/home/homeContext';
 import './MiniCard.styles.css';
 
-function MiniCard({ notFollowingUser, setAllPosts }) {
+function MiniCard({ notFollowingUser }) {
   const { getProfile, followUser } = useContext(HomeContext);
+
+  const handleFollow = () => {
+    followUser(notFollowingUser.username);
+  };
 
   return (
     <div className="section minicard">
@@ -25,10 +29,7 @@ function MiniCard({ notFollowingUser, setAllPosts }) {
         </div>
       </div>
       {
-        <div
-          onClick={() => followUser(notFollowingUser.username)}
-          className="follow-button"
-        >
+        <div onClick={handleFollow} className="follow-button">
           Follow
         </div>
       }
