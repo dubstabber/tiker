@@ -51,8 +51,8 @@ const HomeState = ({ children }) => {
     try {
       if (isAuth) {
         const res = await axios.get('/getFollowedPosts');
-        console.log(res.data);
-        //   dispatch({ type: FOLLOWED_POSTS, payload: res.data });
+
+        dispatch({ type: FOLLOWED_POSTS, payload: res.data });
       } else {
         console.log('implement "getUsers"');
       }
