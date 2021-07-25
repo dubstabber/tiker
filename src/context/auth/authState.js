@@ -55,8 +55,6 @@ const AuthState = ({ children }) => {
         type: REGISTER_SUCCESS,
         payload: res.data,
       });
-
-      loadUser();
     } catch (err) {
       dispatch({
         type: REGISTER_FAIL,
