@@ -7,13 +7,13 @@ import './Header.styles.css';
 
 const Header = () => {
   const authContext = useContext(AuthContext);
-  const { getAllPosts, getProfile } = useContext(HomeContext);
+  const { getAllPosts, getProfile, findUser } = useContext(HomeContext);
   const { showModalDialog } = useContext(DialogContext);
   const [search, setSearch] = useState('');
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log(search);
+    findUser(search);
     setSearch('');
   };
 

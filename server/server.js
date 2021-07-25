@@ -33,6 +33,7 @@ app.use('/getSuggestedUsers', require('./routes/getSuggestedUsers'));
 app.use('/getUsers', require('./routes/getUsers'));
 app.use('/getUser', require('./routes/getUser'));
 app.use('/getProfile', require('./routes/getProfile'));
+app.use('/searchUsers', require('./routes/searchUsers'));
 app.use('/getFollowing', require('./routes/getFollowing'));
 app.use('/follow', require('./routes/follow'));
 app.use('/likePost', require('./routes/likePost'));

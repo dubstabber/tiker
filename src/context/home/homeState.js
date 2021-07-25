@@ -114,7 +114,8 @@ const HomeState = ({ children }) => {
 
   const findUser = async (username) => {
     try {
-      console.log('implement "findUser"');
+      // TODO implement findUser
+      console.log(username);
     } catch (err) {
       console.log(err);
     }
