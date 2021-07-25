@@ -18,7 +18,7 @@ const homeReducer = (state, action) => {
         posts: action.payload,
         allPosts: 2,
         profile: null,
-        foundUsers: [],
+        foundUsers: null,
       };
     case FOLLOWED_POSTS:
       return {
@@ -26,7 +26,7 @@ const homeReducer = (state, action) => {
         posts: action.payload,
         allPosts: 1,
         profile: null,
-        foundUsers: [],
+        foundUsers: null,
       };
     case FOLLOWED_USERS:
       return {
@@ -52,6 +52,14 @@ const homeReducer = (state, action) => {
         profile: action.payload,
         foundUsers: null,
       };
+    case SEARCH_USERS:
+      return {
+        ...state,
+        posts: [],
+        allPosts: 0,
+        profile: null,
+        foundUsers: action.payload,
+      };
     case CLEAR:
       return {
         ...state,
@@ -59,7 +67,7 @@ const homeReducer = (state, action) => {
         profile: null,
         followed: [],
         suggested: [],
-        foundUsers: [],
+        foundUsers: null,
         error: null,
       };
     default:

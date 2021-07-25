@@ -1,0 +1,28 @@
+.mediumCard_container {
+  display: flex;
+  cursor: pointer;
+  width: 40vw;
+  padding: 2rem;
+}
+
+.mediumCard_container:hover {
+  background-color: rgb(245, 245, 245);
+}
+
+.mediumCard_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.mediumCard__name {
+  font-size: 1.4rem;
+}
+
+.mediumCard__followers--number {
+  color: black;
+}
+
+.mediumCard__bio {
+  font-size: 1.4rem;
+}

@@ -13,8 +13,9 @@ const Header = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    findUser(search);
-    setSearch('');
+    if (search.trim()) {
+      findUser(search);
+    }
   };
 
   const handleLogin = () => {

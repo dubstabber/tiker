@@ -22,7 +22,7 @@ const HomeState = ({ children }) => {
     profile: null,
     followed: [],
     suggested: [],
-    foundUsers: [],
+    foundUsers: null,
     error: null,
   };
 
@@ -114,8 +114,9 @@ const HomeState = ({ children }) => {
 
   const findUser = async (username) => {
     try {
-      // TODO implement findUser
-      console.log(username);
+      const res = await axios.get('/searchUsers/' + username);
+
+      dispatch({ type: SEARCH_USERS, payload: res.data });
     } catch (err) {
       console.log(err);
     }

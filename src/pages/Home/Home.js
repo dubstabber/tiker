@@ -3,6 +3,7 @@ import AuthContext from '../../context/auth/authContext';
 import HomeContext from '../../context/home/homeContext';
 import Card from '../../components/Card/Card';
 import Profile from '../../components/Profile/Profile';
+import MediumCard from '../../components/MediumCard/MediumCard';
 import MiniCard from '../../components/MiniCard/MiniCard';
 import FollowersColumn from '../../components/FollowersColumn/FollowersColumn';
 import './Home.styles.css';
@@ -11,7 +12,6 @@ function Home() {
   const authContext = useContext(AuthContext);
   const homeContext = useContext(HomeContext);
   let descendingPosts;
-  let followingPosts;
   let topFiveFollowing;
   let topFiveNotFollowing;
 
@@ -70,9 +70,13 @@ function Home() {
             <Profile />
           ) : (
             <div className="feed">
-              {descendingPosts.map((descendingPost, index) => (
-                <Card key={index} post={descendingPost} />
-              ))}
+              {homeContext.foundUsers
+                ? homeContext.foundUsers.map((foundUser) => (
+                    <MediumCard key={foundUser.id} user={foundUser} />
+                  ))
+                : descendingPosts.map((descendingPost, index) => (
+                    <Card key={index} post={descendingPost} />
+                  ))}
             </div>
           )}
           <div className="suggested-box">
