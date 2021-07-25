@@ -7,9 +7,9 @@ import './Settings.styles.css';
 const Settings = () => {
   const authContext = useContext(AuthContext);
   const [avatar, setAvatar] = useState('');
-  const [username, setUsername] = useState(`${authContext.user.username}`);
-  const [name, setName] = useState(`${authContext.user.name}`);
-  const [email, setEmail] = useState(`${authContext.user.email}`);
+  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [bio, setBio] = useState('');
@@ -19,14 +19,18 @@ const Settings = () => {
   }, []);
 
   useEffect(() => {
-    setAvatar('');
-    setUsername(`${authContext.user.username}`);
-    setName(`${authContext.user.name}`);
-    setEmail(`${authContext.user.email}`);
-    setPassword('');
-    setPassword2('');
-    setBio(`${authContext.user.bio}`);
-  }, [authContext.user]);
+    if (authContext.user) {
+      setAvatar('');
+      setUsername(`${authContext.user.username}`);
+      setName(`${authContext.user.name}`);
+      setEmail(`${authContext.user.email}`);
+      setPassword('');
+      setPassword2('');
+      setBio(`${authContext.user.bio}`);
+    } else {
+      authContext.loadUser();
+    }
+  }, [authContext]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -43,7 +47,6 @@ const Settings = () => {
     await axios
       .put('/updateAccount', updateData)
       .then(() => {
-        authContext.getUser();
         window.location.reload();
       })
       .catch((err) => {
