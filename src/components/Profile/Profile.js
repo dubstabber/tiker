@@ -14,11 +14,13 @@ const Profile = () => {
   const homeContext = useContext(HomeContext);
 
   useEffect(() => {
-    setIsFollowed(
-      !authContext.user.following.every(
-        (id) => id.id !== homeContext.profile.id
-      )
-    );
+    if (authContext.isAuth) {
+      setIsFollowed(
+        !authContext.user.following.every(
+          (id) => id.id !== homeContext.profile.id
+        )
+      );
+    }
   }, [homeContext.profile.id, homeContext.profile, authContext]);
 
   useEffect(() => {
