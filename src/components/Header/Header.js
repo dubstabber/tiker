@@ -60,8 +60,8 @@ const Header = () => {
               <img
                 className="personal"
                 src={
-                  authContext.avatar
-                    ? authContext.avatar
+                  authContext.user.avatar
+                    ? authContext.user.avatar
                     : './images/user-icon.jpg'
                 }
                 alt="personal"

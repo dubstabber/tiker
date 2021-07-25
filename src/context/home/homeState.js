@@ -33,20 +33,8 @@ const HomeState = ({ children }) => {
   useEffect(() => {
     getAllPosts();
     getFollowedUsers();
-    async function getUsers() {
-      try {
-        let res;
-        if (isAuth) {
-          res = await axios.get('/getSuggestedUsers');
-        } else {
-          res = await axios.get('/getUsers/5');
-        }
-        dispatch({ type: SUGGESTED_USERS, payload: res.data });
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    getUsers();
+    getSuggestedUsers();
+    // eslint-disable-next-line
   }, [isAuth]);
 
   const getAllPosts = async () => {
@@ -62,8 +50,8 @@ const HomeState = ({ children }) => {
   const getFollowedPosts = async () => {
     try {
       if (isAuth) {
-        //   const res = await axios.get('/getPosts');
-        console.log('implement "getFollowedPosts"');
+        const res = await axios.get('/getFollowedPosts');
+        console.log(res.data);
         //   dispatch({ type: FOLLOWED_POSTS, payload: res.data });
       } else {
         console.log('implement "getUsers"');
@@ -85,9 +73,11 @@ const HomeState = ({ children }) => {
 
   const getFollowedUsers = async () => {
     try {
-      const res = await axios.get('/getFollowing/');
+      if (isAuth) {
+        const res = await axios.get('/getFollowing/');
 
-      dispatch({ type: FOLLOWED_USERS, payload: res.data });
+        dispatch({ type: FOLLOWED_USERS, payload: res.data });
+      }
     } catch (err) {
       console.log(err);
     }

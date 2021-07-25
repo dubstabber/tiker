@@ -53,7 +53,7 @@ function Home() {
       return 0;
     });
 
-    if (authContext.isAuth) {
+    if (authContext.isAuth && authContext.user) {
       followingPosts = descendingPosts.filter((el) => {
         return !authContext.user.following.every((id) => id.id !== el.userId);
       });
