@@ -20,7 +20,10 @@ const FollowersColumn = ({ users }) => {
         <div className={allPosts === 2 ? 'home-red' : 'home'} />
         <h2 className={allPosts === 2 ? 'bold red' : ''}>For You</h2>
       </div>
-      <div onClick={getFollowedPosts} className="followers-section">
+      <div
+        onClick={authContext.isAuth ? getFollowedPosts : handleLogin}
+        className="followers-section"
+      >
         <div className={allPosts === 1 ? 'following-red' : 'following'} />
         <h2 className={allPosts === 1 ? 'bold red' : ''}>Following</h2>
       </div>
