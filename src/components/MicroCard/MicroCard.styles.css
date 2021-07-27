@@ -1,3 +1,10 @@
 .microcard {
-  margin: 1rem 0 0 0;
+  padding: 0.5rem 0 0.5rem 0;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.microcard:hover {
+  background-color: rgb(245, 245, 245);
 }

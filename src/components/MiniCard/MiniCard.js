@@ -11,9 +11,8 @@ function MiniCard({ notFollowingUser }) {
 
   return (
     <div className="section minicard">
-      <div className="section">
+      <div onClick={() => getProfile(notFollowingUser.id)} className="section">
         <img
-          onClick={() => getProfile(notFollowingUser.id)}
           className="user-profile"
           src={
             notFollowingUser.avatar

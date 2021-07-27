@@ -83,6 +83,7 @@
   position: absolute;
   top: 20%;
   right: 15%;
+  user-select: none;
 }
 
 .post-caption {

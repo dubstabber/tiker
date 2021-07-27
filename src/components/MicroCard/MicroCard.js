@@ -10,9 +10,8 @@ const MicroCard = ({ user }) => {
   };
 
   return (
-    <div className="section microcard">
+    <div onClick={handleShowProfile} className="section microcard">
       <img
-        onClick={handleShowProfile}
         className="user-profile"
         src={user.avatar ? user.avatar : './images/user-icon.jpg'}
         width={'100%'}
