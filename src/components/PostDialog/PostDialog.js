@@ -134,7 +134,7 @@ const PostDialog = () => {
     <div className="post-container">
       <span onClick={close} className="post-close"></span>
       <div className="post-left-side">
-        <video className="video-page" controls>
+        <video className="video-page" controls loop>
           <source src={postDialog.video} type="video/mp4" />
         </video>
       </div>
@@ -179,35 +179,69 @@ const PostDialog = () => {
             </div>
           </div>
         </div>
-        <div className="post-comments">
-          {postComments.map((postComment, index) => {
-            return (
-              <CommentCard
-                key={index}
-                postComment={postComment}
-                index={index}
-                reply={reply}
-                likeComment={likeComment}
-                likeSubcomment={likeSubcomment}
+        <div
+          className={
+            authContext.isAuth
+              ? 'post-comments post-comments--scroll'
+              : 'post-comments'
+          }
+        >
+          {authContext.isAuth ? (
+            postComments.map((postComment, index) => {
+              return (
+                <CommentCard
+                  key={index}
+                  postComment={postComment}
+                  index={index}
+                  reply={reply}
+                  likeComment={likeComment}
+                  likeSubcomment={likeSubcomment}
+                />
+              );
+            })
+          ) : (
+            <div className="post-login">
+              <div className="post-login__h1">Login to see the comments</div>
+              <div className="post-login__h6">
+                Login to see the comments and like the video
+              </div>
+              <div
+                onClick={() => showModalDialog(false)}
+                className="post-login__button"
+              >
+                Login
+              </div>
+              <div className="post-login__signup">
+                <span className="post-login__signup-info">
+                  Don't have an account?
+                </span>{' '}
+                <span
+                  onClick={() => showModalDialog(true)}
+                  className="post-login__signup-btn"
+                >
+                  Sign up
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
+        {authContext.isAuth && (
+          <div className="post-add-comment">
+            <form onSubmit={addComment} className="post-form">
+              <input
+                onChange={checkComment}
+                value={comment}
+                name="addComment"
+                className="post-input"
+                placeholder="Add comment..."
+                ref={inputElement}
               />
-            );
-          })}
-        </div>
-        <div className="post-add-comment">
-          <form onSubmit={addComment} className="post-form">
-            <input
-              onChange={checkComment}
-              value={comment}
-              name="addComment"
-              className="post-input"
-              placeholder="Add comment..."
-              ref={inputElement}
-            />
-            <button className={comment ? 'post-button-ready' : 'post-button'}>
-              Post
-            </button>
-          </form>
-        </div>
+              <button className={comment ? 'post-button-ready' : 'post-button'}>
+                Post
+              </button>
+            </form>
+          </div>
+        )}
       </div>
     </div>
   );

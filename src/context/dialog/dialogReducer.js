@@ -11,6 +11,7 @@ const dialogReducer = (state, action) => {
       return {
         ...state,
         modalDialog: true,
+        registerPage: action.payload,
         postDialog: null,
         error: null,
       };

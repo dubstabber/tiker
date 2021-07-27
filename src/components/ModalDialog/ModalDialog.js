@@ -6,16 +6,10 @@ import RegisterDialog from './RegisterDialog/RegisterDialog';
 import './ModalDialog.styles.css';
 
 const ModalDialog = () => {
-  const [registerPage, setRegisterPage] = useState(false);
   const dialogContext = useContext(DialogContext);
 
   const disableLogin = () => {
-    setRegisterPage(false);
     dialogContext.closeDialog();
-  };
-
-  const switchPage = () => {
-    setRegisterPage((prev) => !prev);
   };
 
   if (dialogContext.modalDialog) {
@@ -23,11 +17,7 @@ const ModalDialog = () => {
       <>
         <div onClick={disableLogin} className="modal-box"></div>
         <div className="box">
-          {registerPage ? (
-            <RegisterDialog switchPage={switchPage} />
-          ) : (
-            <LoginDialog switchPage={switchPage} />
-          )}
+          {dialogContext.registerPage ? <RegisterDialog /> : <LoginDialog />}
         </div>
       </>
     );

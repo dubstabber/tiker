@@ -56,6 +56,10 @@
   cursor: pointer;
 }
 
+.register-info {
+  color: black;
+}
+
 .register-proposal {
   display: flex;
   justify-content: center;

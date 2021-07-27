@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import AuthContext from '../../../context/auth/authContext';
+import DialogContext from '../../../context/dialog/dialogContext';
 
 import './RegisterDialog.styles.css';
 
-const RegisterDialog = ({ switchPage }) => {
+const RegisterDialog = () => {
   const authContext = useContext(AuthContext);
+  const dialogContext = useContext(DialogContext);
 
   const registerUser = (e) => {
     e.preventDefault();
@@ -51,7 +53,10 @@ const RegisterDialog = ({ switchPage }) => {
       <hr />
       <div className="login-proposal">
         <span>Already have an account?</span>
-        <span onClick={switchPage} className="login-link">
+        <span
+          onClick={() => dialogContext.showModalDialog(false)}
+          className="login-link"
+        >
           Sign in
         </span>
       </div>

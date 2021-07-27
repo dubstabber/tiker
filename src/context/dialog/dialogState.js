@@ -12,14 +12,15 @@ import {
 const DialogState = ({ children }) => {
   const initialState = {
     modalDialog: false,
+    registerPage: false,
     postDialog: null,
     error: null,
   };
 
   const [state, dispatch] = useReducer(dialogReducer, initialState);
 
-  const showModalDialog = () => {
-    dispatch({ type: MODAL_DIALOG });
+  const showModalDialog = (page) => {
+    dispatch({ type: MODAL_DIALOG, payload: page });
   };
 
   const showPostDialog = async (postId) => {
@@ -41,6 +42,7 @@ const DialogState = ({ children }) => {
       value={{
         modalDialog: state.modalDialog,
         postDialog: state.postDialog,
+        registerPage: state.registerPage,
         showModalDialog,
         showPostDialog,
         closeDialog,

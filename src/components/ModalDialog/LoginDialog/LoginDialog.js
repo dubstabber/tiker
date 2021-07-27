@@ -1,12 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import AuthContext from '../../../context/auth/authContext';
+import DialogContext from '../../../context/dialog/dialogContext';
 
 import './LoginDialog.styles.css';
 
-const LoginDialog = ({ switchPage }) => {
+const LoginDialog = () => {
   const [error, setError] = useState(false);
   const authContext = useContext(AuthContext);
+  const dialogContext = useContext(DialogContext);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -48,8 +50,11 @@ const LoginDialog = ({ switchPage }) => {
       </div>
       <hr />
       <div className="register-proposal">
-        <span>Don't have an account?</span>
-        <span onClick={switchPage} className="register-link">
+        <span className="register-info">Don't have an account?</span>
+        <span
+          onClick={() => dialogContext.showModalDialog(true)}
+          className="register-link"
+        >
           Sign up
         </span>
       </div>
