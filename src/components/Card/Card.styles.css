@@ -28,6 +28,10 @@
   font-size: 2rem;
 }
 
+.user-infoData {
+  cursor: pointer;
+}
+
 .username {
   margin-left: 1rem;
   margin-right: 1rem;

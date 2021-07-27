@@ -40,7 +40,7 @@ const authReducer = (state, action) => {
         token: null,
         isAuth: false,
         user: null,
-        err: action.payload,
+        error: action.payload,
       };
     case CLEAR_ERRORS:
       return {

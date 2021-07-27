@@ -8,14 +8,13 @@ import './ModalDialog.styles.css';
 const ModalDialog = () => {
   const dialogContext = useContext(DialogContext);
 
-  const disableLogin = () => {
-    dialogContext.closeDialog();
-  };
-
   if (dialogContext.modalDialog) {
     return (
       <>
-        <div onClick={disableLogin} className="modal-box"></div>
+        <div
+          onClick={() => dialogContext.closeDialog()}
+          className="modal-box"
+        ></div>
         <div className="box">
           {dialogContext.registerPage ? <RegisterDialog /> : <LoginDialog />}
         </div>

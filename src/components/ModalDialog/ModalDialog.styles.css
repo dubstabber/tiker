@@ -12,10 +12,11 @@
 .box {
   position: fixed;
   background-color: white;
-  width: 20%;
-  height: 60%;
-  top: 20%;
-  left: 40%;
+  width: 40rem;
+  height: 60rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 5px;
   z-index: 5;
 }

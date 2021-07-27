@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import AuthContext from './authContext';
 import authReducer from './authReducer';
@@ -36,6 +37,8 @@ const AuthState = ({ children }) => {
         type: USER_LOADED,
         payload: res.data,
       });
+      window.location.reload();
+      return <Redirect to="/" />;
     } catch (err) {
       dispatch({ type: AUTH_ERROR });
     }
@@ -96,6 +99,7 @@ const AuthState = ({ children }) => {
       value={{
         isAuth: state.isAuth,
         user: state.user,
+        error: state.error,
         loadUser,
         register,
         login,

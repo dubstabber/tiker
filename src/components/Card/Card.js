@@ -59,7 +59,7 @@ function Card({ post }) {
             alt="user-profile"
           />
           <div>
-            <div className="section">
+            <div onClick={handleShowProfile} className="section user-infoData">
               <h3 className="bold">{post.username}</h3>
               <p className="username">{post.name}</p>
               <p>{timeStampReformat}</p>

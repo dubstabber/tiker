@@ -1,70 +1,103 @@
 .login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  height: 87%;
+  margin: 0 auto;
+  height: 82%;
   z-index: 5;
 }
 
-.login-title {
-  font-size: 2rem;
-  font-weight: 600;
-  align-self: center;
-}
-
 .login-form {
-  height: 60%;
-  width: 70%;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-content: center;
+  margin-top: 10%;
+  align-items: center;
+  transition: all 2s ease-out;
 }
 
-.email-field {
-  position: relative;
+.login-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.email-label {
+  position: absolute;
+  top: 17%;
+  left: 15%;
+  font-size: 1.8rem;
+  transition: transform 0.2s ease-out, font-size 0.2s ease-out;
 }
 
 .email-input {
-  width: 100%;
+  width: 72%;
+  height: 8%;
+  margin: 1rem 0 0 0;
+  padding-left: 1rem;
   font-size: 1.8rem;
+  background-color: rgb(226, 226, 226);
+  border: 1px solid rgb(172, 172, 172);
+  border-radius: 0.5rem;
 }
 
-.password-field {
-  position: relative;
+.email-input:focus + .email-label {
+  font-size: 1.2rem;
+  transform: translateY(-1.5rem);
+}
+
+.password-label {
+  position: absolute;
+  top: 26%;
+  left: 15%;
+  font-size: 1.8rem;
+  transition: transform 0.2s ease-out, font-size 0.2s ease-out;
 }
 
 .password-input {
-  width: 100%;
+  margin: 1rem 0;
+  padding-left: 1rem;
+  width: 72%;
+  height: 8%;
   font-size: 1.8rem;
+  background-color: rgb(226, 226, 226);
+  border: 1px solid rgb(172, 172, 172);
+  border-radius: 0.5rem;
+}
+
+.password-input:focus + .password-label {
+  font-size: 1.2rem;
+  transform: translateY(-1.5rem);
+}
+
+.label--focus {
+  font-size: 1.2rem;
+  transform: translateY(-1.5rem);
 }
 
 .login-error {
   color: red;
   font-size: 1.4rem;
+  margin-right: 15rem;
 }
 
 .submit-login {
-  align-self: center;
-  width: 100%;
+  width: 75%;
+  margin-top: 3rem;
   background-color: #fe2c55;
-  height: 20%;
+  height: 8%;
   font-size: 1.8rem;
   border-radius: 5px;
   color: white;
   cursor: pointer;
 }
 
-.register-info {
-  color: black;
-}
-
 .register-proposal {
   display: flex;
-  justify-content: center;
   align-items: center;
   height: 7%;
+  margin-left: 3rem;
+}
+
+.register-info {
+  color: black;
 }
 
 .register-link {

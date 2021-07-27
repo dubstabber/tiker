@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { Redirect } from 'react-router-dom';
 import AuthContext from '../../../context/auth/authContext';
 import DialogContext from '../../../context/dialog/dialogContext';
 
 import './LoginDialog.styles.css';
 
 const LoginDialog = () => {
-  const [error, setError] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const authContext = useContext(AuthContext);
   const dialogContext = useContext(DialogContext);
 
@@ -17,8 +17,6 @@ const LoginDialog = () => {
       password: e.target.password.value,
     };
     authContext.login(loginData);
-    window.location.reload();
-    return <Redirect to="/" />;
   };
 
   return (
@@ -26,24 +24,39 @@ const LoginDialog = () => {
       <div className="login-container">
         <form onSubmit={handleLogin} className="login-form">
           <div className="login-title">Log in to Tiker</div>
-          <div className="email-field">
-            <input
-              placeholder="Email"
-              type="email"
-              className="email-input"
-              name="email"
-            />
-          </div>
-          <div className="password-field">
-            <input
-              placeholder="Password"
-              type="password"
-              className="password-input"
-              name="password"
-            />
-          </div>
-          {error && (
-            <span className="login-error">Invalid login or password</span>
+
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            className="email-input"
+            name="email"
+            id="email"
+            value={email}
+          />
+          <label
+            className={email ? 'email-label label--focus' : 'email-label'}
+            htmlFor="email"
+          >
+            E-mail address
+          </label>
+          <input
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            className="password-input"
+            name="password"
+            id="password"
+            value={password}
+          />
+          <label
+            className={
+              password ? 'password-label label--focus' : 'password-label'
+            }
+            htmlFor="password"
+          >
+            Password
+          </label>
+          {authContext.error && (
+            <div className="login-error">Invalid login or password</div>
           )}
           <button className="submit-login">Log in</button>
         </form>

@@ -44,7 +44,7 @@ app.post(
         },
         (err, token) => {
           if (err) throw err;
-          return res.json({ token });
+          return res.status(401).json({ token });
         }
       );
     } catch (err) {

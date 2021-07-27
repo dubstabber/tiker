@@ -23,10 +23,21 @@
 .search-input {
   margin: 0 auto;
   border-radius: 5rem;
+  border: 1px solid transparent;
   font-size: 1.7rem;
   padding-left: 2rem;
   width: 35rem;
   height: 4rem;
+  background-color: rgb(242, 241, 241);
+  outline: none;
+}
+
+.search-input:focus {
+  border: 1px solid gray;
+}
+
+.search-input:checked {
+  border: 1px solid gray;
 }
 
 .search-clear {
@@ -54,7 +65,7 @@
   background-image: url('../../images/search-icon.svg');
   background-repeat: no-repeat;
   width: 3rem;
-  background-color: white;
+  background-color: rgb(242, 241, 241);
   border: none;
   position: absolute;
   right: 1.6rem;

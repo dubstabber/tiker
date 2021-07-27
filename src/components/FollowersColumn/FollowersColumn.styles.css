@@ -9,6 +9,7 @@
   flex-direction: row;
   padding: 1rem 0 1rem 0;
   cursor: pointer;
+  user-select: none;
 }
 
 .followers-section:hover {
