@@ -11,7 +11,6 @@
   flex-direction: column;
   margin-top: 10%;
   align-items: center;
-  transition: all 2s ease-out;
 }
 
 .login-title {
@@ -52,7 +51,7 @@
 }
 
 .password-input {
-  margin: 1rem 0;
+  margin: 1rem 0 0 0;
   padding-left: 1rem;
   width: 72%;
   height: 8%;
@@ -63,11 +62,6 @@
 }
 
 .password-input:focus + .password-label {
-  font-size: 1.2rem;
-  transform: translateY(-1.5rem);
-}
-
-.label--focus {
   font-size: 1.2rem;
   transform: translateY(-1.5rem);
 }

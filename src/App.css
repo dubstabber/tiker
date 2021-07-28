@@ -118,3 +118,8 @@ hr {
   font-size: 1.4rem;
   cursor: pointer;
 }
+
+.label--focus {
+  font-size: 1.2rem;
+  transform: translateY(-1.5rem);
+}
