@@ -32,6 +32,7 @@ const LoginDialog = () => {
             name="email"
             id="email"
             value={email}
+            required
           />
           <label
             className={email ? 'email-label label--focus' : 'email-label'}
@@ -46,6 +47,7 @@ const LoginDialog = () => {
             name="password"
             id="password"
             value={password}
+            required
           />
           <label
             className={
@@ -56,7 +58,7 @@ const LoginDialog = () => {
             Password
           </label>
           {authContext.error && (
-            <div className="login-error">Invalid login or password</div>
+            <div className="login-error">{authContext.error}</div>
           )}
           <button className="submit-login">Log in</button>
         </form>

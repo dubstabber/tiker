@@ -18,6 +18,7 @@ const RegisterDialog = () => {
       password: e.target.password.value,
       password2: e.target.password2.value,
     };
+
     authContext.register(registerData);
   };
 
@@ -33,6 +34,7 @@ const RegisterDialog = () => {
             name="email"
             id="email"
             value={email}
+            required
           />
           <label
             className={email ? 'email-label label--focus' : 'email-label'}
@@ -47,6 +49,7 @@ const RegisterDialog = () => {
             name="password"
             id="password"
             value={password}
+            required
           />
           <label
             className={
@@ -63,6 +66,7 @@ const RegisterDialog = () => {
             name="password2"
             id="password2"
             value={password2}
+            required
           />
           <label
             className={
@@ -72,6 +76,9 @@ const RegisterDialog = () => {
           >
             Repeat password
           </label>
+          {/* {authContext.error && (
+            <div className="login-error">{authContext.error}</div>
+          )} */}
           <button className="submit-register">Sign up</button>
         </form>
       </div>
