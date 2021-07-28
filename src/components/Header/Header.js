@@ -23,7 +23,6 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
     authContext.logout();
     window.location.reload();
     return <Redirect to="/" />;
@@ -61,7 +60,7 @@ const Header = () => {
               <img
                 className="personal"
                 src={
-                  authContext.user.avatar && authContext.user
+                  authContext.user && authContext.user.avatar
                     ? authContext.user.avatar
                     : './images/user-icon.jpg'
                 }

@@ -28,19 +28,17 @@ const AuthState = ({ children }) => {
   const loadUser = async () => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
-    }
 
-    try {
-      const res = await axios.get('/getProfile');
+      try {
+        const res = await axios.get('/getProfile');
 
-      dispatch({
-        type: USER_LOADED,
-        payload: res.data,
-      });
-      window.location.reload();
-      return <Redirect to="/" />;
-    } catch (err) {
-      dispatch({ type: AUTH_ERROR });
+        dispatch({
+          type: USER_LOADED,
+          payload: res.data,
+        });
+      } catch (err) {
+        dispatch({ type: AUTH_ERROR });
+      }
     }
   };
 
@@ -82,6 +80,8 @@ const AuthState = ({ children }) => {
       });
 
       loadUser();
+      window.location.reload();
+      return <Redirect to="/" />;
     } catch (err) {
       dispatch({
         type: LOGIN_FAIL,

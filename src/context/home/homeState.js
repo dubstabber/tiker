@@ -9,8 +9,10 @@ import {
   FOLLOWED_POSTS,
   POSTS_ERROR,
   USER_PROFILE,
+  PROFILE_ERROR,
   FOLLOWED_USERS,
   SUGGESTED_USERS,
+  SUGGESTED_FAIL,
   SEARCH_USERS,
   CLEAR,
 } from '../types';
@@ -43,7 +45,7 @@ const HomeState = ({ children }) => {
 
       dispatch({ type: ALL_POSTS, payload: res.data });
     } catch (err) {
-      dispatch({ type: POSTS_ERROR, payload: err.response.msg });
+      // dispatch({ type: POSTS_ERROR, payload: err.response.msg });
     }
   };
 
@@ -53,8 +55,6 @@ const HomeState = ({ children }) => {
         const res = await axios.get('/getFollowedPosts');
 
         dispatch({ type: FOLLOWED_POSTS, payload: res.data });
-      } else {
-        console.log('implement "getUsers"');
       }
     } catch (err) {
       dispatch({ type: POSTS_ERROR, payload: err.response.msg });
@@ -67,7 +67,7 @@ const HomeState = ({ children }) => {
 
       dispatch({ type: USER_PROFILE, payload: res.data });
     } catch (err) {
-      console.log(err);
+      dispatch({ type: PROFILE_ERROR, payload: err.response.msg });
     }
   };
 
@@ -93,7 +93,7 @@ const HomeState = ({ children }) => {
       }
       dispatch({ type: SUGGESTED_USERS, payload: res.data });
     } catch (err) {
-      console.log(err);
+      dispatch({ type: SUGGESTED_FAIL, payload: err.response.msg });
     }
   };
 

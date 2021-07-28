@@ -16,7 +16,7 @@ function Card({ post }) {
   const timeStampReformat = timestamp.slice(2, timestamp.indexOf('T'));
 
   useEffect(() => {
-    if (authContext.isAuth) {
+    if (authContext.isAuth && authContext.user) {
       if (authContext.user.id === post.userId) setIsMyPost(true);
       else
         setIsFollowed(
@@ -35,7 +35,7 @@ function Card({ post }) {
 
   const handleLike = async () => {
     if (authContext.isAuth) {
-      const res = await axios.put('/likePost');
+      const res = await axios.put('/likePost', { id: post._id });
       if (res) setLikes(res.data);
     } else {
       showModalDialog();

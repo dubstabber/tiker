@@ -6,6 +6,7 @@ import {
   PROFILE_ERROR,
   FOLLOWED_USERS,
   SUGGESTED_USERS,
+  SUGGESTED_FAIL,
   SEARCH_USERS,
   CLEAR,
 } from '../types';
@@ -38,6 +39,12 @@ const homeReducer = (state, action) => {
         ...state,
         suggested: action.payload,
       };
+    case SUGGESTED_FAIL:
+      return {
+        ...state,
+        suggested: [],
+        error: action.payload,
+      };
     case POSTS_ERROR:
       return {
         ...state,
@@ -51,6 +58,12 @@ const homeReducer = (state, action) => {
         allPosts: 0,
         profile: action.payload,
         foundUsers: null,
+      };
+    case PROFILE_ERROR:
+      return {
+        ...state,
+        profile: null,
+        error: action.payload,
       };
     case SEARCH_USERS:
       return {
