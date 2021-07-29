@@ -56,8 +56,8 @@ const AuthState = ({ children }) => {
         type: REGISTER_SUCCESS,
         payload: res.data,
       });
+      login(formData);
     } catch (err) {
-      console.log(err.response.data.msg);
       dispatch({
         type: REGISTER_FAIL,
         payload: err.response.data.msg,

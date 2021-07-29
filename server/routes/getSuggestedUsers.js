@@ -44,6 +44,10 @@ app.get('/', auth, async (req, res) => {
       skipIndex += 5;
     }
 
+    while (users.length > 5) {
+      users.pop();
+    }
+
     return res.json(users);
   } catch (err) {
     console.error(err.message);

@@ -19,6 +19,11 @@ const LoginDialog = () => {
     authContext.login(loginData);
   };
 
+  const switchToRegisterDialog = () => {
+    dialogContext.showModalDialog(true);
+    authContext.clearErrors();
+  };
+
   return (
     <>
       <div className="login-container">
@@ -66,10 +71,7 @@ const LoginDialog = () => {
       <hr />
       <div className="register-proposal">
         <span className="register-info">Don't have an account?</span>
-        <span
-          onClick={() => dialogContext.showModalDialog(true)}
-          className="register-link"
-        >
+        <span onClick={switchToRegisterDialog} className="register-link">
           Sign up
         </span>
       </div>

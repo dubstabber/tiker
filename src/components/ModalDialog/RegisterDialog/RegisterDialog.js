@@ -22,6 +22,11 @@ const RegisterDialog = () => {
     authContext.register(registerData);
   };
 
+  const switchToLoginDialog = () => {
+    dialogContext.showModalDialog(false);
+    authContext.clearErrors();
+  };
+
   return (
     <>
       <div className="register-container">
@@ -76,19 +81,16 @@ const RegisterDialog = () => {
           >
             Repeat password
           </label>
-          {/* {authContext.error && (
+          {authContext.error && (
             <div className="login-error">{authContext.error}</div>
-          )} */}
+          )}
           <button className="submit-register">Sign up</button>
         </form>
       </div>
       <hr />
       <div className="login-proposal">
         <span className="login-info">Already have an account?</span>
-        <span
-          onClick={() => dialogContext.showModalDialog(false)}
-          className="login-link"
-        >
+        <span onClick={switchToLoginDialog} className="login-link">
           Sign in
         </span>
       </div>
