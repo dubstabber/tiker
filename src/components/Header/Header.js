@@ -46,50 +46,51 @@ const Header = () => {
         <span className="search-split"></span>
         <button className="search-btn"></button>
       </form>
-      <div className="upload-container">
-        <div className="section">
-          {authContext.isAuth ? (
+
+      <div className="section">
+        {authContext.isAuth ? (
+          <div className="upload-container">
             <Link to="/upload">
               <div className="upload" />
             </Link>
-          ) : (
-            <div onClick={handleLogin} className="upload" />
-          )}
-          {authContext.isAuth ? (
-            <div>
-              <img
-                className="personal"
-                src={
-                  authContext.user && authContext.user.avatar
-                    ? authContext.user.avatar
-                    : './images/user-icon.jpg'
-                }
-                alt="personal"
-              />
-              <div className="personal-options">
-                <Link to="/" style={{ textDecoration: 'none' }}>
-                  <p
-                    onClick={() => getProfile(authContext.user.id)}
-                    className="personal-option"
-                  >
-                    View profile
-                  </p>
-                </Link>
-                <Link to="/settings" style={{ textDecoration: 'none' }}>
-                  <p className="personal-option">Settings</p>
-                </Link>
-                <hr />
-                <p onClick={handleLogout} className="personal-option">
-                  Log out
+          </div>
+        ) : (
+          <div onClick={handleLogin} className="upload" />
+        )}
+        {authContext.isAuth ? (
+          <div className="personal-user">
+            <img
+              className="personal"
+              src={
+                authContext.user && authContext.user.avatar
+                  ? authContext.user.avatar
+                  : './images/user-icon.jpg'
+              }
+              alt="personal"
+            />
+            <div className="personal-options">
+              <Link to="/" style={{ textDecoration: 'none' }}>
+                <p
+                  onClick={() => getProfile(authContext.user.id)}
+                  className="personal-option"
+                >
+                  View profile
                 </p>
-              </div>
+              </Link>
+              <Link to="/settings" style={{ textDecoration: 'none' }}>
+                <p className="personal-option">Settings</p>
+              </Link>
+              <hr />
+              <p onClick={handleLogout} className="personal-option">
+                Log out
+              </p>
             </div>
-          ) : (
-            <button onClick={handleLogin} className="login-btn">
-              Login
-            </button>
-          )}
-        </div>
+          </div>
+        ) : (
+          <button onClick={handleLogin} className="login-btn">
+            Login
+          </button>
+        )}
       </div>
     </div>
   );

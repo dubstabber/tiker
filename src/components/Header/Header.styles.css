@@ -73,6 +73,10 @@
   cursor: pointer;
 }
 
+.upload-container {
+  position: relative;
+}
+
 .upload {
   width: 3rem;
   height: 2.5rem;
@@ -82,13 +86,17 @@
   cursor: pointer;
 }
 
-.personal {
+.personal-user {
   position: relative;
+}
+
+.personal {
   width: 4rem;
   height: 4rem;
   background-color: purple;
   border-radius: 2rem;
   margin: 0.5rem 2rem 0 2rem;
+  z-index: 1;
 }
 
 .personal-options {
@@ -98,12 +106,20 @@
   transform: translate(-7rem, 1rem);
   box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.419);
   border-radius: 7px;
-  width: 7%;
-  z-index: 2;
+  width: 13.5rem;
+  z-index: 3;
 }
 
 .personal:hover + .personal-options {
   visibility: visible;
+}
+
+.personal-options::before {
+  content: '';
+  top: -4rem;
+  position: absolute;
+  width: 8vw;
+  height: 5vh;
 }
 
 .personal-options:hover {
