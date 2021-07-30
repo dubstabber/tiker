@@ -51,6 +51,7 @@ const Upload = () => {
                   onChange={(e) => setCaptionInput(e.target.value)}
                   className="input"
                   name="caption"
+                  placeholder="Add caption"
                   value={captionInput}
                 />
               </div>
@@ -61,6 +62,7 @@ const Upload = () => {
                   onChange={(e) => setPostLink(e.target.value)}
                   className="input"
                   name="video"
+                  placeholder="Direct video link"
                   value={postLink}
                 />
               </div>
