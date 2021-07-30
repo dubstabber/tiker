@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 import HomeContext from '../../context/home/homeContext';
@@ -6,6 +6,9 @@ import axios from 'axios';
 import './Upload.styles.css';
 
 const Upload = () => {
+  const [error, setError] = useState('');
+  const [captionInput, setCaptionInput] = useState('');
+  const [postLink, setPostLink] = useState('');
   const authContext = useContext(AuthContext);
   const { getAllPosts } = useContext(HomeContext);
 
@@ -28,7 +31,7 @@ const Upload = () => {
           window.location.reload();
         })
         .catch((err) => {
-          console.error(`Cannot upload: ${err.response.data.msg}`);
+          setError(`${err.response.data.msg}`);
         });
     }
   };
@@ -41,20 +44,40 @@ const Upload = () => {
       <div className="container">
         <form onSubmit={handleSubmit}>
           <div className="section">
-            <div className="image-upload"></div>
             <div className="form-section">
               <div className="section input-section">
                 <label className="bold">Caption</label>
-                <input className="input" name="caption" />
+                <input
+                  onChange={(e) => setCaptionInput(e.target.value)}
+                  className="input"
+                  name="caption"
+                  value={captionInput}
+                />
               </div>
               <div className="break"></div>
               <div className="section input-section">
                 <label className="bold">Video Url</label>
-                <input className="input" name="video" />
+                <input
+                  onChange={(e) => setPostLink(e.target.value)}
+                  className="input"
+                  name="video"
+                  value={postLink}
+                />
               </div>
             </div>
           </div>
-          <button>Post</button>
+          <div className="form-bottom">
+            <p className="post-error">{error}</p>
+            <button
+              className={
+                captionInput && postLink
+                  ? 'upload-button--ready'
+                  : 'upload-button'
+              }
+            >
+              Post
+            </button>
+          </div>
         </form>
       </div>
     </div>

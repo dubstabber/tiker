@@ -88,6 +88,7 @@
 
 .personal-user {
   position: relative;
+  cursor: pointer;
 }
 
 .personal {

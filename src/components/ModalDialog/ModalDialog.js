@@ -11,7 +11,7 @@ const ModalDialog = () => {
   const dialogContext = useContext(DialogContext);
 
   const closeDialog = () => {
-    dialogContext.closeDialog();
+    dialogContext.closeModalDialog();
     authContext.clearErrors();
   };
 

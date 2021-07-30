@@ -2,7 +2,8 @@ import {
   MODAL_DIALOG,
   POST_DIALOG_SUCCESS,
   POST_FAIL,
-  CLOSE_DIALOG,
+  CLOSE_POST_DIALOG,
+  CLOSE_MODAL_DIALOG,
 } from '../types';
 
 const dialogReducer = (state, action) => {
@@ -12,7 +13,6 @@ const dialogReducer = (state, action) => {
         ...state,
         modalDialog: true,
         registerPage: action.payload,
-        postDialog: null,
         error: null,
       };
     case POST_DIALOG_SUCCESS:
@@ -23,11 +23,16 @@ const dialogReducer = (state, action) => {
         error: null,
       };
     case POST_FAIL:
-    case CLOSE_DIALOG:
+    case CLOSE_POST_DIALOG:
+      return {
+        ...state,
+        postDialog: null,
+        error: action.payload,
+      };
+    case CLOSE_MODAL_DIALOG:
       return {
         ...state,
         modalDialog: false,
-        postDialog: null,
         error: action.payload,
       };
     default:

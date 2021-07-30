@@ -6,7 +6,8 @@ import {
   MODAL_DIALOG,
   POST_DIALOG_SUCCESS,
   POST_FAIL,
-  CLOSE_DIALOG,
+  CLOSE_POST_DIALOG,
+  CLOSE_MODAL_DIALOG,
 } from '../types';
 
 const DialogState = ({ children }) => {
@@ -33,8 +34,12 @@ const DialogState = ({ children }) => {
     }
   };
 
-  const closeDialog = () => {
-    dispatch({ type: CLOSE_DIALOG });
+  const closePostDialog = () => {
+    dispatch({ type: CLOSE_POST_DIALOG });
+  };
+
+  const closeModalDialog = () => {
+    dispatch({ type: CLOSE_MODAL_DIALOG });
   };
 
   return (
@@ -45,7 +50,8 @@ const DialogState = ({ children }) => {
         registerPage: state.registerPage,
         showModalDialog,
         showPostDialog,
-        closeDialog,
+        closePostDialog,
+        closeModalDialog,
       }}
     >
       {children}

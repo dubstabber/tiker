@@ -9,7 +9,7 @@ import './PostDialog.styles.css';
 
 const PostDialog = () => {
   const authContext = useContext(AuthContext);
-  const { postDialog, showPostDialog, showModalDialog, closeDialog } =
+  const { postDialog, showPostDialog, showModalDialog, closePostDialog } =
     useContext(DialogContext);
   const { followUser } = useContext(HomeContext);
   const [likes, setLikes] = useState(0);
@@ -23,7 +23,7 @@ const PostDialog = () => {
   const timestamp = postDialog && postDialog.timestamp.split('T')[0];
 
   useEffect(() => {
-    if (authContext.isAuth && postDialog) {
+    if (authContext.isAuth && authContext.user && postDialog) {
       if (authContext.user.id === postDialog.userId) setIsMyPost(true);
       else
         setIsFollowed(
@@ -119,12 +119,12 @@ const PostDialog = () => {
       await axios.put('/likePost', { id: postDialog.id });
       refreshPost();
     } else {
-      showModalDialog();
+      showModalDialog(false);
     }
   };
 
   const close = () => {
-    closeDialog();
+    closePostDialog();
     document.querySelector('body').classList.remove('hide-scroll');
   };
 

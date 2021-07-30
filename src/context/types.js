@@ -10,7 +10,8 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const MODAL_DIALOG = 'MODAL_DIALOG';
 export const POST_DIALOG_SUCCESS = 'POST_DIALOG_SUCCESS';
 export const POST_FAIL = 'POST_FAIL';
-export const CLOSE_DIALOG = 'CLOSE_DIALOG';
+export const CLOSE_POST_DIALOG = 'CLOSE_POST_DIALOG';
+export const CLOSE_MODAL_DIALOG = 'CLOSE_MODAL_DIALOG';
 
 export const ALL_POSTS = 'ALL_POSTS';
 export const FOLLOWED_POSTS = 'FOLLOWED_POSTS';

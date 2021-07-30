@@ -1,17 +1,10 @@
 /* Styling for Upload Page */
 .upload-page {
-    margin-left: 3rem;
-  }
-  
-.image-upload {
-  width: 40rem;
-  height: 23rem;
-  background-color: rgb(22,24,35,0.03);
-  border-radius: 10px;
+  margin-left: 3rem;
 }
-  
+
 .input-section {
-  margin: 1rem;
+  margin: 1rem 1rem 1rem 0;
   width: 70rem;
   display: flex;
   flex-direction: row;
@@ -19,13 +12,12 @@
 }
 
 .form-section {
-  margin-left: 2rem;
   margin-top: 6rem;
 }
-  
+
 label {
   font-size: 4rem;
-  line-height: 0; 
+  line-height: 0;
 }
 
 input {
@@ -35,8 +27,40 @@ input {
   margin-top: -2rem;
 }
 
+.form-bottom {
+  float: right;
+}
+
+.post-error {
+  color: red;
+  font-size: 1.4rem;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  text-align: right;
+}
+
 button {
   height: 3rem;
   width: 10rem;
   float: right;
+}
+
+.upload-button {
+  border: none;
+  border-radius: 0.2rem;
+  color: gray;
+  margin: 1rem;
+  width: 15rem;
+  height: 4rem;
+}
+
+.upload-button--ready {
+  border: none;
+  border-radius: 0.2rem;
+  background-color: #fe2c55;
+  color: white;
+  margin: 1rem;
+  width: 15rem;
+  height: 4rem;
+  cursor: pointer;
 }
