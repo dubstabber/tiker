@@ -48,15 +48,16 @@ const Header = () => {
       </form>
 
       <div className="section">
-        {authContext.isAuth ? (
-          <div className="upload-container">
+        <div className="upload-container">
+          {authContext.isAuth ? (
             <Link to="/upload">
               <div className="upload" />
             </Link>
-          </div>
-        ) : (
-          <div onClick={handleLogin} className="upload" />
-        )}
+          ) : (
+            <div onClick={handleLogin} className="upload" />
+          )}
+          <div className="upload-tooltip">Upload video</div>
+        </div>
         {authContext.isAuth ? (
           <div className="personal-user">
             <img
