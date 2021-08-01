@@ -60,6 +60,12 @@
   resize: none;
 }
 
+.settings-status {
+  color: red;
+  font-size: 1.4rem;
+  align-self: center;
+}
+
 .settings-submit {
   margin-top: 3rem;
   font-size: 1.8rem;

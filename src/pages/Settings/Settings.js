@@ -13,6 +13,7 @@ const Settings = () => {
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [bio, setBio] = useState('');
+  const [status, setStatus] = useState('');
 
   useEffect(() => {
     document.querySelector('body').classList.add('hide-scroll');
@@ -50,7 +51,13 @@ const Settings = () => {
         window.location.reload();
       })
       .catch((err) => {
-        console.log(err);
+        if (typeof err.response.data.msg === 'string') {
+          setStatus(err.response.data.msg);
+        } else if (err.response.data.msg[0].param === 'password') {
+          setStatus('Password length must be greater than 6');
+        } else {
+          setStatus('Something went wrong');
+        }
       });
   };
 
@@ -134,6 +141,7 @@ const Settings = () => {
               value={bio}
             ></textarea>
           </div>
+          <div className="settings-status">{status}</div>
           <button className="settings-submit">Update account</button>
         </form>
       </div>

@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const { body } = require('express-validator');
+const { body, validationResult } = require('express-validator');
 const axios = require('axios');
 const auth = require('../middleware/auth');
 
@@ -62,11 +62,18 @@ app.put(
         else updateUser.password = req.body.password;
       }
 
+      if (req.body.password && req.body.password2) {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return res.status(400).json({ msg: errors.array() });
+        }
+      }
+
       updateUser.bio = req.body.bio;
 
       await User.updateOne({ _id: req.user.id }, updateUser)
         .then(() => {
-          return res.send('Your profile has been updated');
+          return res.json({ msg: 'Your profile has been updated' });
         })
         .catch((err) => {
           return res

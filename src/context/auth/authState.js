@@ -58,10 +58,22 @@ const AuthState = ({ children }) => {
       });
       login(formData);
     } catch (err) {
-      dispatch({
-        type: REGISTER_FAIL,
-        payload: err.response.data.msg,
-      });
+      if (err.response.data.msg[0].param === 'password') {
+        dispatch({
+          type: REGISTER_FAIL,
+          payload: 'Password length must be greater than 6',
+        });
+      } else if (typeof err.response.data.msg === 'string') {
+        dispatch({
+          type: REGISTER_FAIL,
+          payload: err.response.data.msg,
+        });
+      } else {
+        dispatch({
+          type: REGISTER_FAIL,
+          payload: 'Something went wrong',
+        });
+      }
     }
   };
 
@@ -84,10 +96,22 @@ const AuthState = ({ children }) => {
       window.location.reload();
       return <Redirect to="/" />;
     } catch (err) {
-      dispatch({
-        type: LOGIN_FAIL,
-        payload: err.response.data.msg,
-      });
+      if (err.response.data.msg[0].param === 'password') {
+        dispatch({
+          type: LOGIN_FAIL,
+          payload: 'Password length must be greater than 6',
+        });
+      } else if (typeof err.response.data.msg === 'string') {
+        dispatch({
+          type: LOGIN_FAIL,
+          payload: err.response.data.msg,
+        });
+      } else {
+        dispatch({
+          type: LOGIN_FAIL,
+          payload: 'Something went wrong',
+        });
+      }
     }
   };
 
