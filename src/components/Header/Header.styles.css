@@ -109,8 +109,8 @@
   position: absolute;
   border-width: 1rem;
   border-style: solid;
-  bottom: 100%;
-  left: 42%;
+  /* bottom: 100%; */
+  transform: translate(4rem, -2.9rem);
   border-color: transparent transparent rgb(68, 68, 68) transparent;
 }
 

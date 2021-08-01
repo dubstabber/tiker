@@ -52,6 +52,7 @@ const Header = () => {
           {authContext.isAuth ? (
             <Link to="/upload">
               <div className="upload" />
+              <div className="upload-tooltip">Upload video</div>
             </Link>
           ) : (
             <div onClick={handleLogin} className="upload" />
