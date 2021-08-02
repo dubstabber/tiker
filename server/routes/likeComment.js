@@ -15,10 +15,12 @@ app.post('/', auth, async (req, res) => {
         post
           .save()
           .then(() => {
-            res.send(`Liked`);
+            return res.send(`Liked`);
           })
           .catch((err) => {
-            res.send('This comment cannot be liked');
+            return res
+              .status(500)
+              .json({ msg: 'This comment cannot be liked' });
           });
       } else {
         const index = post.comments[req.body.commentToLike].likes.indexOf(
@@ -28,16 +30,18 @@ app.post('/', auth, async (req, res) => {
         post
           .save()
           .then(() => {
-            res.send(`Unliked`);
+            return res.send(`Unliked`);
           })
           .catch((err) => {
-            res.send('This comment cannot be unliked');
+            return res
+              .status(500)
+              .json({ msg: 'This comment cannot be unliked' });
           });
       }
     });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    return res.status(500).send('Server Error');
   }
 });
 

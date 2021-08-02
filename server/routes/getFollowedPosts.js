@@ -9,7 +9,8 @@ const Post = require('../models/Post');
 app.get('/', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
-    if (!user) res.status(404).send('User could not be fetched');
+    if (!user)
+      return res.status(404).json({ msg: 'User could not be fetched' });
 
     const posts = [];
     for (let followedUser of user.following) {
@@ -35,10 +36,10 @@ app.get('/', auth, async (req, res) => {
       readyPosts.push(readyPost);
     }
 
-    res.send(readyPosts);
+    return res.send(readyPosts);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    return res.status(500).json({ msg: 'Server Error' });
   }
 });
 

@@ -24,10 +24,10 @@ app.get('/:username', async (req, res) => {
       readyUsers.push(readyUser);
     });
 
-    res.send(readyUsers);
+    return res.send(readyUsers);
   } catch (error) {
     console.error(error.message);
-    res.status(500).send('Server Error');
+    return res.status(500).send('Server Error');
   }
 });
 

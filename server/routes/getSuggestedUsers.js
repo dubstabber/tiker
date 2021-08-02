@@ -7,12 +7,14 @@ const User = require('../models/User');
 app.get('/', auth, async (req, res) => {
   try {
     let loggedUser = await User.findOne({ _id: req.user.id });
-    if (!loggedUser) return res.send('Logged user cannot be retrieved');
+    if (!loggedUser)
+      return res.status(500).json({ msg: 'Logged user cannot be retrieved' });
 
     let skipIndex = 0;
     let users = [];
     let currentUsers = await User.find({}).skip(skipIndex).limit(5);
-    if (!currentUsers) return res.send('Users cannot be retrieved');
+    if (!currentUsers)
+      return res.status(500).json({ msg: 'Users cannot be retrieved' });
     let readyUsers;
     skipIndex += 5;
 
@@ -40,7 +42,8 @@ app.get('/', auth, async (req, res) => {
 
       users.push(...readyUsers);
       currentUsers = await User.find({}).skip(skipIndex).limit(5);
-      if (!currentUsers) return res.send('Users cannot be retrieved');
+      if (!currentUsers)
+        return res.status(500).json({ msg: 'Users cannot be retrieved' });
       skipIndex += 5;
     }
 
@@ -51,7 +54,7 @@ app.get('/', auth, async (req, res) => {
     return res.json(users);
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ msg: err.message });
+    return res.status(500).json({ msg: err.message });
   }
 });
 

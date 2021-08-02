@@ -8,7 +8,8 @@ const Post = require('../models/Post');
 app.post('/', auth, async (req, res) => {
   try {
     const post = await Post.findOne({ _id: req.body.postId });
-    if (!post) return res.send(`Could not fetch post's comments`);
+    if (!post)
+      return res.status(500).json({ msg: `Could not fetch post's comments` });
 
     const comments = [];
     let currentUser;
@@ -42,7 +43,7 @@ app.post('/', auth, async (req, res) => {
     return res.json(comments);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    return res.status(500).send('Server Error');
   }
 });
 

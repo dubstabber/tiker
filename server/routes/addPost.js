@@ -17,7 +17,7 @@ app.post('/', auth, async (req, res) => {
       .then((data) => {
         const isVideo = data.headers['content-type'].includes('video');
         if (!isVideo) {
-          res.status(401).json({ msg: `Link does not contain a video` });
+          return res.status(401).json({ msg: `Link does not contain a video` });
         } else {
           const newPost = {
             userId: req.user.id,
@@ -30,18 +30,18 @@ app.post('/', auth, async (req, res) => {
 
           Post.create(newPost)
             .then(() => {
-              res.json('Post has been created');
+              return res.json('Post has been created');
             })
             .catch(() => {
-              res.status(401).json({ msg: 'Post could not be created' });
+              return res.status(401).json({ msg: 'Post could not be created' });
             });
         }
       })
       .catch(() => {
-        res.status(404).json({ msg: `This link cannot be processed` });
+        return res.status(404).json({ msg: `This link cannot be processed` });
       });
   } else {
-    res.status(404).json({ msg: 'You have not provided any link' });
+    return res.status(404).json({ msg: 'You have not provided any link' });
   }
 });
 

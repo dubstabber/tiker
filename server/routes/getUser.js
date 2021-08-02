@@ -16,12 +16,12 @@ app.get('/:id', (req, res) => {
           followers: arr.followers,
           bio: arr.bio,
         };
-        res.json(user);
+        return res.json(user);
       } else {
-        res.json([]);
+        return res.json([]);
       }
     } else {
-      res.json([]);
+      return res.json([]);
     }
   });
 });

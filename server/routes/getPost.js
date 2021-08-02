@@ -38,10 +38,10 @@ app.get('/:id', async (req, res) => {
       }
     }
 
-    res.json(readyPost);
+    return res.json(readyPost);
   } catch (error) {
     console.error(error.message);
-    res.status(500).send('Server Error');
+    return res.status(500).send('Server Error');
   }
 });
 

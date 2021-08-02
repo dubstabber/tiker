@@ -29,22 +29,24 @@ app.post('/', auth, async (req, res) => {
           post.comments[req.body.commentToReply].subComments.push(replyComment);
           post
             .save()
-            .then((data) => {
-              res.send(replyComment);
+            .then(() => {
+              return res.send(replyComment);
             })
             .catch((err) => {
-              res.send('This post cannot be commented');
+              return res
+                .status(500)
+                .json({ msg: 'This post cannot be commented' });
             });
         })
         .catch((err) => {
-          res.send('This post cannot be commented');
+          return res.status(500).json({ msg: 'This post cannot be commented' });
         });
     } else {
-      return res.send('This comment cannot be published');
+      return res.status(500).json({ msg: 'This comment cannot be published' });
     }
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    return res.status(500).json({ msg: 'Server Error' });
   }
 });
 

@@ -8,7 +8,7 @@ app.get('/', auth, async (req, res) => {
   if (req.user.id) {
     let user = await User.findOne({ _id: req.user.id });
     if (!user) {
-      return res.send(`Cannot log in with this token`);
+      return res.status(500).json({ msg: `Cannot log in with this token` });
     }
 
     let userData = {
@@ -24,7 +24,7 @@ app.get('/', auth, async (req, res) => {
 
     return res.json(userData);
   }
-  return res.json('You are not logged in');
+  return res.status(400).json({ msg: 'You are not logged in' });
 });
 
 module.exports = app;

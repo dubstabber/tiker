@@ -53,7 +53,7 @@ app.post(
       if (err) {
         return res.status(400).json({ msg: 'Account could not be created' });
       } else {
-        res.send(`Account '${req.body.email}' has been created`);
+        return res.send(`Account '${req.body.email}' has been created`);
       }
     });
   }

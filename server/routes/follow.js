@@ -8,15 +8,16 @@ app.put('/:username', auth, async (req, res) => {
   if (req.user.id) {
     let followUser = await User.findOne({ username: req.params.username });
     if (!followUser)
-      return res.send(
-        `Something went wrong. User: ${req.params.username} cannot be followed`
-      );
+      return res.status(500).json({
+        msg: `Something went wrong. User: ${req.params.username} cannot be followed`,
+      });
 
     if (followUser.id === req.user.id)
-      return res.send(`You cannot follow yourself.`);
+      return res.status(400).json({ msg: `You cannot follow yourself.` });
 
     let userData = await User.findOne({ _id: req.user.id });
-    if (!userData) return res.send(`Something went wrong.`);
+    if (!userData)
+      return res.status(500).json({ msg: `Something went wrong.` });
 
     let isNotFollowed = userData.following.every(
       (el) => el.id !== followUser.id

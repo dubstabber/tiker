@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
         );
       });
       Promise.all(promises).then(() => {
-        res.json(posts);
+        return res.json(posts);
       });
     }
   });

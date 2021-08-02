@@ -10,7 +10,8 @@ app.post('/', auth, async (req, res) => {
   try {
     if (comment) {
       const post = await Post.findOne({ _id: req.body.postId });
-      if (!post) return res.send('This post cannot be commented');
+      if (!post)
+        return res.status(500).json({ msg: 'This post cannot be commented' });
 
       const date = new Date();
       let formattedDate = `${date.getFullYear()}-${
@@ -35,11 +36,11 @@ app.post('/', auth, async (req, res) => {
 
       return res.json(newComment);
     } else {
-      return res.send('This comment cannot be published');
+      return res.status(500).json({ msg: 'This comment cannot be published' });
     }
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    return res.status(500).json({ msg: 'Server Error' });
   }
 });
 

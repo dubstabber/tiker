@@ -8,7 +8,7 @@ app.get('/:quantity', async (req, res) => {
   if (isNaN(limit)) limit = 1;
 
   let users = await User.find({}).limit(limit);
-  if (!users) return res.send('Users cannot be retrieved');
+  if (!users) return res.status(500).json({ msg: 'Users cannot be retrieved' });
 
   let usersData = users.map((el) => {
     return {
