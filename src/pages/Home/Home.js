@@ -82,7 +82,7 @@ function Home() {
           <div className="suggested-box">
             <div className="section">
               <div className="suggested">
-                <h2 className="bold">Suggested accounts</h2>
+                <h2 className="suggested__label bold">Suggested accounts</h2>
                 <div className="break" />
                 {topFiveNotFollowing &&
                   topFiveNotFollowing.map((notFollowingUser, index) => (

@@ -4,6 +4,13 @@
   height: 60rem;
 }
 
+@media (max-width: 44rem) {
+  .card {
+    width: 50vw;
+    height: auto;
+  }
+}
+
 .social-tag {
   margin: 0 2rem 0 0.5rem;
   min-width: 1rem;
@@ -29,7 +36,14 @@
 }
 
 .user-infoData {
+  display: flex;
+  flex-direction: row;
   cursor: pointer;
+}
+
+.socials {
+  font-size: 2rem;
+  margin-left: 7rem;
 }
 
 .username {
@@ -37,7 +51,27 @@
   margin-right: 1rem;
 }
 
-.socials {
-  font-size: 2rem;
-  margin-left: 7rem;
+@media (max-width: 44rem) {
+  .user-info {
+    flex-direction: column;
+  }
+  .user-infoData {
+    display: flex;
+    flex-direction: column;
+  }
+  .video {
+    margin: 0;
+    width: 50vw;
+    height: 57vh;
+  }
+
+  .socials {
+    margin-left: 0;
+  }
+  .username {
+    margin: 0 0 1rem 0;
+  }
+  .user-timestamp {
+    display: none;
+  }
 }

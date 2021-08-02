@@ -8,3 +8,9 @@
 .microcard:hover {
   background-color: rgb(245, 245, 245);
 }
+
+@media screen and (max-width: 70rem) {
+  .microcard-user {
+    display: none;
+  }
+}

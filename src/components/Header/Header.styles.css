@@ -20,6 +20,12 @@
   z-index: 0;
 }
 
+@media (max-width: 39rem) {
+  .search-container {
+    display: none;
+  }
+}
+
 .search-input {
   margin: 0 auto;
   border-radius: 5rem;
@@ -148,6 +154,10 @@
   visibility: visible;
 }
 
+.personal:active + .personal-options {
+  visibility: visible;
+}
+
 .personal-options::before {
   content: '';
   top: -4rem;
@@ -157,6 +167,10 @@
 }
 
 .personal-options:hover {
+  visibility: visible;
+}
+
+.personal-options:active {
   visibility: visible;
 }
 

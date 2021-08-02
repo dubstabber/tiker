@@ -18,16 +18,30 @@ const FollowersColumn = ({ users }) => {
     <div className="followers-column">
       <div onClick={getAllPosts} className="followers-section">
         <div className={allPosts === 2 ? 'home-red' : 'home'} />
-        <h2 className={allPosts === 2 ? 'bold red' : ''}>For You</h2>
+        <h2
+          className={
+            allPosts === 2 ? 'bold red followers-text' : 'followers-text'
+          }
+        >
+          For You
+        </h2>
       </div>
       <div
         onClick={authContext.isAuth ? getFollowedPosts : handleLogin}
         className="followers-section"
       >
         <div className={allPosts === 1 ? 'following-red' : 'following'} />
-        <h2 className={allPosts === 1 ? 'bold red' : ''}>Following</h2>
+        <h2
+          className={
+            allPosts === 1 ? 'bold red followers-text' : 'followers-text'
+          }
+        >
+          Following
+        </h2>
       </div>
-      {authContext.isAuth && <p>Your top accounts</p>}
+      {authContext.isAuth && (
+        <p className="followers-text">Your top accounts</p>
+      )}
       <hr />
       {authContext.isAuth ? (
         users &&

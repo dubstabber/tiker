@@ -22,16 +22,18 @@ function MiniCard({ notFollowingUser }) {
           width={'100%'}
           alt="user-profile"
         />
-        <div>
+        <div className="minicard__mediumScreen">
           <h3 className="bold">{notFollowingUser.username}</h3>
           <p>{notFollowingUser.name}</p>
         </div>
       </div>
-      {
-        <div onClick={handleFollow} className="follow-button">
-          Follow
-        </div>
-      }
+
+      <div
+        onClick={handleFollow}
+        className="follow-button minicard__mediumScreen"
+      >
+        Follow
+      </div>
     </div>
   );
 }

@@ -17,7 +17,7 @@ const MicroCard = ({ user }) => {
         width={'100%'}
         alt="user-profile"
       />
-      <div>
+      <div className="microcard-user">
         <h3 className="bold">{user.username}</h3>
         <p>{user.name}</p>
       </div>

@@ -4,12 +4,27 @@
   padding: 1rem;
 }
 
+@media screen and (max-width: 70rem) {
+  .followers-column {
+    width: 5rem;
+  }
+  .followers-text {
+    display: none;
+  }
+}
+
 .followers-section {
   display: flex;
   flex-direction: row;
   padding: 1rem 0 1rem 0;
   cursor: pointer;
   user-select: none;
+}
+
+@media screen and (max-width: 70rem) {
+  .followers-section {
+    padding-left: 1rem;
+  }
 }
 
 .followers-section:hover {

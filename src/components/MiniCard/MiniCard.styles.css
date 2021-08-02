@@ -9,3 +9,9 @@
 .minicard:hover {
   background-color: rgb(245, 245, 245);
 }
+
+@media (max-width: 66rem) {
+  .minicard__mediumScreen {
+    display: none;
+  }
+}
