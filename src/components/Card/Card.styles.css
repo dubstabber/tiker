@@ -75,3 +75,28 @@
     display: none;
   }
 }
+
+@media (max-width: 38rem) {
+  .user-info {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    width: 41.2rem;
+    font-size: 2rem;
+  }
+  .user-infoData {
+    display: none;
+  }
+  .user-caption {
+    display: none;
+  }
+  .video {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+  html {
+    left: 0;
+  }
+}

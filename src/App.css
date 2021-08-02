@@ -128,6 +128,19 @@ hr {
   }
 }
 
+@media (max-width: 38rem) {
+  body {
+    margin: 0;
+    overflow-x: hidden;
+  }
+  .follow-button {
+    display: none;
+  }
+  .followed-button {
+    display: none;
+  }
+}
+
 .label--focus {
   font-size: 1.2rem;
   transform: translateY(-1.5rem);

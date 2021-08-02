@@ -106,3 +106,38 @@
   justify-items: center;
   grid-gap: 2px;
 }
+
+@media (max-width: 100rem) {
+  .profile__content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 50rem) {
+  .profile__content {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (max-width: 40rem) {
+  .profile__username {
+    font-size: 1.6rem;
+    font-weight: 600;
+    padding-bottom: 0;
+  }
+  .profile__name {
+    font-size: 1rem;
+    font-weight: 600;
+    padding-bottom: 0;
+  }
+  .profile__stats {
+    font-size: 1.2rem;
+  }
+  .profile__bio {
+    font-size: 1.1rem;
+  }
+  .user-profile-scale {
+    width: 5rem !important;
+    height: 5rem !important;
+  }
+}

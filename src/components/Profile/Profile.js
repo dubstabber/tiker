@@ -39,7 +39,7 @@ const Profile = () => {
     <div className="profile__container">
       <div className="profile__info">
         <img
-          className="user-profile-big"
+          className="user-profile-big user-profile-scale"
           src={
             homeContext.profile.avatar
               ? homeContext.profile.avatar

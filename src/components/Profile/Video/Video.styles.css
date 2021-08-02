@@ -3,3 +3,11 @@
   height: 30rem;
   cursor: pointer;
 }
+
+@media (max-width: 38rem) {
+  .video__user {
+    width: 15rem;
+    height: 20rem;
+    cursor: pointer;
+  }
+}

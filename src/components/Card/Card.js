@@ -64,7 +64,7 @@ function Card({ post }) {
               <p className="username">{post.name}</p>
               <p className="user-timestamp">{timeStampReformat}</p>
             </div>
-            <p>{post.caption}</p>
+            <p className="user-caption">{post.caption}</p>
           </div>
         </div>
         {!isMyPost && (

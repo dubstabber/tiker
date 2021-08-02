@@ -13,6 +13,13 @@
   }
 }
 
+@media (max-width: 38rem) {
+  .followers-column {
+    display: none;
+    position: absolute;
+  }
+}
+
 .followers-section {
   display: flex;
   flex-direction: row;
