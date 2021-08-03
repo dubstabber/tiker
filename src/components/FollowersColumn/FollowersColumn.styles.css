@@ -1,23 +1,35 @@
+.followers-navigation {
+  position: fixed;
+  visibility: hidden;
+}
+
 .followers-column {
   width: 23rem;
   height: 60rem;
   padding: 1rem;
 }
 
-@media screen and (max-width: 70rem) {
-  .followers-column {
-    width: 5rem;
-  }
-  .followers-text {
-    display: none;
-  }
+.mobile-logo {
+  position: fixed;
+  width: 12.9rem;
+  height: 4rem;
+  top: 1rem;
+  left: 7rem;
+  background-image: url('../../images/tiker-logo.png');
+  background-repeat: no-repeat;
+  background-size: 11rem;
+  margin: 0.5rem;
+  z-index: -1;
 }
 
-@media (max-width: 38rem) {
-  .followers-column {
-    display: none;
-    position: absolute;
-  }
+.followers-column--mobile {
+  position: fixed;
+  width: 27rem;
+  height: 60rem;
+  background-color: white;
+  padding-top: 7rem;
+  padding-left: 3rem;
+  padding-right: 2rem;
 }
 
 .followers-section {
@@ -26,12 +38,6 @@
   padding: 1rem 0 1rem 0;
   cursor: pointer;
   user-select: none;
-}
-
-@media screen and (max-width: 70rem) {
-  .followers-section {
-    padding-left: 1rem;
-  }
 }
 
 .followers-section:hover {
@@ -90,4 +96,61 @@
 
 .login-caption {
   font-size: 1.4rem;
+}
+
+@media (min-width: 38rem) and (max-width: 70rem) {
+  .followers-column {
+    width: 5rem;
+  }
+  .followers-text {
+    display: none;
+  }
+  .followers-section {
+    padding-left: 1rem;
+  }
+  .login-caption {
+    display: none;
+  }
+  .white-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 38rem) {
+  .followers-navigation {
+    visibility: visible;
+    top: 3rem;
+    left: 2rem;
+    width: 5rem;
+    height: 5rem;
+    z-index: 10;
+    cursor: pointer;
+  }
+  .followers-hamburger {
+    transform: translateX(1rem);
+    width: 3rem;
+    height: 0.2rem;
+    background-color: black;
+  }
+  .followers-hamburger::before {
+    content: '';
+    position: fixed;
+    top: 1rem;
+    width: 3rem;
+    height: 0.2rem;
+    background-color: black;
+  }
+  .followers-hamburger::after {
+    content: '';
+    position: fixed;
+    top: 2rem;
+    width: 3rem;
+    height: 0.2rem;
+    background-color: black;
+  }
+
+  .followers-column {
+    visibility: hidden;
+    position: fixed;
+  }
 }

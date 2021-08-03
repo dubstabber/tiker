@@ -108,12 +108,12 @@
     display: flex;
     flex-direction: column !important;
     transform: translateY(-40rem);
+    text-shadow: 0 0 0.5rem black;
   }
   .social-tag {
     color: white;
     margin: 0 0 0 1.4rem;
   }
-
   .video {
     margin: 0;
     width: 100vw;

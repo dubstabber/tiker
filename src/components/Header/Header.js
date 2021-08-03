@@ -33,6 +33,8 @@ const Header = () => {
       <Link to="/">
         <div onClick={getAllPosts} className="logo"></div>
       </Link>
+      <i className="search-btn"></i>
+      <i className="header-user"></i>
       <form onSubmit={handleSearch} className="search-container">
         <input
           onChange={(e) => setSearch(e.target.value)}
