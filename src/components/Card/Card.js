@@ -81,13 +81,19 @@ function Card({ post }) {
       </video>
       <div className="section socials">
         <i onClick={handleLike} className="far fa-heart social-mini-icon"></i>
+        <i onClick={handleLike} className="fas fa-heart mobile-icon"></i>
         <div className="social-tag">{likes}</div>
         <i
           onClick={() => showPostDialog(post._id)}
           className="far fa-comment-dots social-mini-icon"
         ></i>
+        <i
+          onClick={() => showPostDialog(post._id)}
+          className="fas fa-comment-dots mobile-icon"
+        ></i>
         <div className="social-tag">{post.comments.length}</div>
         <i className="far fa-share-square social-mini-icon"></i>
+        <i className="fas fa-share-square mobile-icon"></i>
       </div>
     </div>
   );

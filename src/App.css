@@ -14,6 +14,16 @@ body {
   text-align: center;
 }
 
+.mobile-icon {
+  display: none;
+}
+
+@media (max-width: 38rem) {
+  .mobile-icon {
+    display: inline;
+  }
+}
+
 h1 {
   font-size: 6rem;
   line-height: 0;

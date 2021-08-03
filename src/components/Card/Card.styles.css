@@ -80,16 +80,40 @@
   .user-info {
     position: absolute;
     display: flex;
-    flex-direction: row;
-    width: 41.2rem;
+    flex-direction: column;
+    width: 5rem;
     font-size: 2rem;
+    right: 0;
+    transform: translateY(34rem);
   }
+
   .user-infoData {
     display: none;
   }
   .user-caption {
     display: none;
   }
+  .social-mini-icon {
+    display: none;
+  }
+  .mobile-icon {
+    font-size: 4rem;
+    color: white;
+    cursor: pointer;
+    margin-top: 1.4rem;
+  }
+  .socials {
+    position: absolute;
+    right: 0;
+    display: flex;
+    flex-direction: column !important;
+    transform: translateY(-40rem);
+  }
+  .social-tag {
+    color: white;
+    margin: 0 0 0 1.4rem;
+  }
+
   .video {
     margin: 0;
     width: 100vw;
