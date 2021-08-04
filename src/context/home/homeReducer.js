@@ -5,9 +5,12 @@ import {
   USER_PROFILE,
   PROFILE_ERROR,
   FOLLOWED_USERS,
+  FOLLOWED_FAIL,
   SUGGESTED_USERS,
   SUGGESTED_FAIL,
   SEARCH_USERS,
+  SEARCH_USERS_FAIL,
+  FOLLOW_ERROR,
   CLEAR,
 } from '../types';
 
@@ -33,6 +36,12 @@ const homeReducer = (state, action) => {
       return {
         ...state,
         followed: action.payload,
+      };
+    case FOLLOWED_FAIL:
+      return {
+        ...state,
+        followed: [],
+        error: action.payload,
       };
     case SUGGESTED_USERS:
       return {
@@ -72,6 +81,17 @@ const homeReducer = (state, action) => {
         allPosts: 0,
         profile: null,
         foundUsers: action.payload,
+      };
+    case SEARCH_USERS_FAIL:
+      return {
+        ...state,
+        foundUsers: null,
+        error: action.payload,
+      };
+    case FOLLOW_ERROR:
+      return {
+        ...state,
+        error: action.payload,
       };
     case CLEAR:
       return {

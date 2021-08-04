@@ -11,9 +11,12 @@ import {
   USER_PROFILE,
   PROFILE_ERROR,
   FOLLOWED_USERS,
+  FOLLOWED_FAIL,
   SUGGESTED_USERS,
   SUGGESTED_FAIL,
   SEARCH_USERS,
+  SEARCH_USERS_FAIL,
+  FOLLOW_ERROR,
   CLEAR,
 } from '../types';
 
@@ -45,7 +48,7 @@ const HomeState = ({ children }) => {
 
       dispatch({ type: ALL_POSTS, payload: res.data });
     } catch (err) {
-      // dispatch({ type: POSTS_ERROR, payload: err.response.msg });
+      dispatch({ type: POSTS_ERROR, payload: err.response.msg });
     }
   };
 
@@ -79,7 +82,7 @@ const HomeState = ({ children }) => {
         dispatch({ type: FOLLOWED_USERS, payload: res.data });
       }
     } catch (err) {
-      console.log(err);
+      dispatch({ type: FOLLOWED_FAIL, payload: err.response.msg });
     }
   };
 
@@ -108,7 +111,7 @@ const HomeState = ({ children }) => {
         showModalDialog();
       }
     } catch (err) {
-      console.log(err);
+      dispatch({ type: FOLLOW_ERROR, payload: err.response.msg });
     }
   };
 
@@ -118,7 +121,17 @@ const HomeState = ({ children }) => {
 
       dispatch({ type: SEARCH_USERS, payload: res.data });
     } catch (err) {
-      console.log(err);
+      dispatch({ type: SEARCH_USERS_FAIL, payload: err.response.msg });
+    }
+  };
+
+  const getUsers = async () => {
+    try {
+      const res = await axios.get('/getUsers/10');
+
+      dispatch({ type: SEARCH_USERS, payload: res.data });
+    } catch (err) {
+      dispatch({ type: SEARCH_USERS_FAIL, payload: err.response.msg });
     }
   };
 
@@ -143,6 +156,7 @@ const HomeState = ({ children }) => {
         getFollowedUsers,
         followUser,
         findUser,
+        getUsers,
         clearState,
       }}
     >
