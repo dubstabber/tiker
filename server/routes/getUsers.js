@@ -16,6 +16,7 @@ app.get('/:quantity', async (req, res) => {
       name: el.name,
       username: el.username,
       avatar: el.avatar,
+      bio: el.bio,
       following: el.following,
       followers: el.followers,
     };
