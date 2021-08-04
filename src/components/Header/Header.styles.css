@@ -227,9 +227,10 @@
     display: none;
   }
   .logo {
+    position: fixed;
     background-image: url('../../images/home-icon-filled-white.svg');
     background-size: 4rem;
-    margin-left: 8rem;
+    left: 10vw;
     margin-top: 1rem;
   }
   .search-btn {
@@ -238,7 +239,7 @@
     background-size: 4rem;
     width: 5rem;
     background-color: transparent;
-    left: 15rem;
+    left: 30vw;
     bottom: 1rem;
     cursor: pointer;
   }
@@ -252,7 +253,7 @@
     width: 5rem;
     cursor: pointer;
     z-index: 1;
-    left: 22rem;
+    left: 50vw;
   }
   .header-user {
     display: block;
@@ -263,6 +264,6 @@
     background-size: 5rem;
     width: 5rem;
     bottom: 1rem;
-    left: 30rem;
+    left: 70vw;
   }
 }
