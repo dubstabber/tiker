@@ -41,11 +41,6 @@
   cursor: pointer;
 }
 
-.socials {
-  font-size: 2rem;
-  margin-left: 7rem;
-}
-
 .username {
   margin-left: 1rem;
   margin-right: 1rem;
@@ -65,9 +60,6 @@
     height: 57vh;
   }
 
-  .socials {
-    margin-left: 0;
-  }
   .username {
     margin: 0 0 1rem 0;
   }

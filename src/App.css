@@ -18,10 +18,9 @@ body {
   display: none;
 }
 
-@media (max-width: 38rem) {
-  .mobile-icon {
-    display: inline;
-  }
+.socials {
+  font-size: 2rem;
+  margin-left: 7rem;
 }
 
 h1 {
@@ -129,6 +128,17 @@ hr {
   cursor: pointer;
 }
 
+.label--focus {
+  font-size: 1.2rem;
+  transform: translateY(-1.5rem);
+}
+
+@media (max-width: 44rem) {
+  .socials {
+    margin-left: 0;
+  }
+}
+
 @media (max-width: 39rem) {
   .followed-button {
     padding: 2px 2px 3px;
@@ -139,6 +149,9 @@ hr {
 }
 
 @media (max-width: 38rem) {
+  .mobile-icon {
+    display: inline;
+  }
   body {
     margin: 0;
     overflow-x: hidden;
@@ -149,9 +162,4 @@ hr {
   .followed-button {
     display: none;
   }
-}
-
-.label--focus {
-  font-size: 1.2rem;
-  transform: translateY(-1.5rem);
 }
