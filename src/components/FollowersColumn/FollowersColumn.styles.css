@@ -25,11 +25,12 @@
 .followers-column--mobile {
   position: fixed;
   width: 27rem;
-  height: 60rem;
+  height: 80vh;
+  overflow: hidden;
   background-color: white;
-  padding-top: 7rem;
+  padding-top: 9.8vh;
   padding-left: 3rem;
-  padding-right: 2rem;
+  padding-right: 5rem;
 }
 
 .followers-section {

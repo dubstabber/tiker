@@ -221,7 +221,9 @@
   .header {
     position: fixed;
     bottom: 0;
+    height: 10vh;
     border-top: solid 1px rgb(227, 227, 228);
+    z-index: 5;
   }
   .login-btn {
     display: none;
@@ -255,6 +257,9 @@
     z-index: 1;
     left: 50vw;
   }
+  .upload-tooltip {
+    display: none;
+  }
   .header-user {
     display: block;
     position: fixed;
@@ -263,7 +268,8 @@
     background-repeat: no-repeat;
     background-size: 5rem;
     width: 5rem;
-    bottom: 1rem;
+    bottom: 3vh;
     left: 70vw;
+    cursor: pointer;
   }
 }
