@@ -22,7 +22,13 @@ const FollowersColumn = ({ users }) => {
   return (
     <>
       <div onClick={toggleNavigation} className="followers-navigation">
-        <div className="followers-hamburger"></div>
+        <div
+          className={
+            navigationActive
+              ? 'followers-hamburger--black'
+              : 'followers-hamburger--white'
+          }
+        ></div>
       </div>
       <div
         className={
@@ -70,6 +76,7 @@ const FollowersColumn = ({ users }) => {
             </div>
           </>
         )}
+        <div onClick={toggleNavigation} className="mobile-shadow"></div>
         <hr />
       </div>
     </>

@@ -149,6 +149,9 @@ hr {
 }
 
 @media (max-width: 38rem) {
+  .break {
+    height: 0;
+  }
   .mobile-icon {
     display: inline;
   }

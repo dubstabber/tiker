@@ -9,6 +9,10 @@
   padding: 1rem;
 }
 
+.mobile-shadow {
+  display: none;
+}
+
 .mobile-logo {
   position: fixed;
   width: 12.9rem;
@@ -19,18 +23,17 @@
   background-repeat: no-repeat;
   background-size: 11rem;
   margin: 0.5rem;
-  z-index: -1;
 }
 
 .followers-column--mobile {
   position: fixed;
-  width: 27rem;
+  width: 60vw;
   height: 80vh;
-  overflow: hidden;
   background-color: white;
   padding-top: 9.8vh;
-  padding-left: 3rem;
-  padding-right: 5rem;
+  padding-left: 5vw;
+  padding-right: 4vw;
+  z-index: 2;
 }
 
 .followers-section {
@@ -127,13 +130,35 @@
     z-index: 10;
     cursor: pointer;
   }
-  .followers-hamburger {
+  .followers-hamburger--white {
+    transform: translateX(1rem);
+    width: 3rem;
+    height: 0.2rem;
+    background-color: white;
+  }
+  .followers-hamburger--white::before {
+    content: '';
+    position: fixed;
+    top: 1rem;
+    width: 3rem;
+    height: 0.2rem;
+    background-color: white;
+  }
+  .followers-hamburger--white::after {
+    content: '';
+    position: fixed;
+    top: 2rem;
+    width: 3rem;
+    height: 0.2rem;
+    background-color: white;
+  }
+  .followers-hamburger--black {
     transform: translateX(1rem);
     width: 3rem;
     height: 0.2rem;
     background-color: black;
   }
-  .followers-hamburger::before {
+  .followers-hamburger--black::before {
     content: '';
     position: fixed;
     top: 1rem;
@@ -141,7 +166,7 @@
     height: 0.2rem;
     background-color: black;
   }
-  .followers-hamburger::after {
+  .followers-hamburger--black::after {
     content: '';
     position: fixed;
     top: 2rem;
@@ -153,5 +178,17 @@
   .followers-column {
     visibility: hidden;
     position: fixed;
+  }
+  .mobile-shadow {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 31vw;
+    height: 90vh;
+    background-color: black;
+    opacity: 0.6;
+    overflow: hidden;
+    z-index: 0;
   }
 }
