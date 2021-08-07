@@ -7,7 +7,8 @@ import './Header.styles.css';
 
 const Header = () => {
   const authContext = useContext(AuthContext);
-  const { getAllPosts, getProfile, findUser } = useContext(HomeContext);
+  const { getAllPosts, getProfile, findUser, getUsers } =
+    useContext(HomeContext);
   const { showModalDialog } = useContext(DialogContext);
   const [search, setSearch] = useState('');
 
@@ -16,6 +17,10 @@ const Header = () => {
     if (search.trim()) {
       findUser(search);
     }
+  };
+
+  const handleGetUsers = () => {
+    getUsers();
   };
 
   const handleLogin = () => {
@@ -33,7 +38,7 @@ const Header = () => {
       <Link to="/">
         <div onClick={getAllPosts} className="logo"></div>
       </Link>
-      <i className="search-btn"></i>
+      <i onClick={handleGetUsers} className="search-btn"></i>
       <i className="header-user"></i>
       <form onSubmit={handleSearch} className="search-container">
         <input
