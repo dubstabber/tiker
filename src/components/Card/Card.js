@@ -70,7 +70,9 @@ function Card({ post }) {
         {!isMyPost && (
           <div
             onClick={handleFollow}
-            className={isFollowed ? 'followed-button' : 'follow-button'}
+            className={
+              isFollowed ? 'disable followed-button' : 'disable follow-button'
+            }
           >
             {isFollowed ? 'Following' : 'Follow'}
           </div>

@@ -167,4 +167,7 @@ hr {
     margin-right: 0;
     cursor: pointer;
   }
+  .disable {
+    display: none;
+  }
 }
