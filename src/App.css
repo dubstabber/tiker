@@ -159,10 +159,12 @@ hr {
     margin: 0;
     overflow-x: hidden;
   }
-  .follow-button {
-    display: none;
-  }
-  .followed-button {
-    display: none;
+  .user-profile-big {
+    width: 10rem;
+    height: 10rem;
+    background-color: red;
+    border-radius: 5rem;
+    margin-right: 0;
+    cursor: pointer;
   }
 }

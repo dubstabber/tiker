@@ -38,6 +38,10 @@ const Profile = () => {
   return (
     <div className="profile__container">
       <div className="profile__info">
+        <div className="profile__mobileHeader">
+          <div className="mobileHeader__name">{homeContext.profile.name}</div>
+          <hr />
+        </div>
         <img
           className="user-profile-big user-profile-scale"
           src={
@@ -52,16 +56,13 @@ const Profile = () => {
             {homeContext.profile.username}
           </div>
           <div className="profile__name">{homeContext.profile.name}</div>
-          {authContext.user && authContext.user.id !== homeContext.profile.id && (
-            <div
-              onClick={() =>
-                homeContext.followUser(homeContext.profile.username)
-              }
-              className={isFollowed ? 'followed-button' : 'follow-button'}
-            >
-              {isFollowed ? 'Following' : 'Follow'}
-            </div>
-          )}
+
+          <div
+            onClick={() => homeContext.followUser(homeContext.profile.username)}
+            className={isFollowed ? 'followed-button' : 'follow-button'}
+          >
+            {isFollowed ? 'Following' : 'Follow'}
+          </div>
         </div>
         <div className="profile__stats">
           <div className="profile__following">
