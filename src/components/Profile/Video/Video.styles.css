@@ -7,7 +7,7 @@
 
 @media (max-width: 38rem) {
   .video__user {
-    width: 15rem;
+    width: 33vw;
     height: 20rem;
     cursor: pointer;
   }
