@@ -1,7 +1,7 @@
-.mediumCard_container {
+.mediumCard__container {
   display: flex;
   cursor: pointer;
-  width: 40vw;
+  width: 80vw;
   padding: 2rem;
 }
 
@@ -9,7 +9,7 @@
   background-color: rgb(245, 245, 245);
 }
 
-.mediumCard_info {
+.mediumCard__info {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -25,4 +25,10 @@
 
 .mediumCard__bio {
   font-size: 1.4rem;
+}
+
+@media (max-width: 38rem) {
+  .mediumCard__bio {
+    display: none;
+  }
 }

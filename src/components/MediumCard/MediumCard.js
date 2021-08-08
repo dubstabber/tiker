@@ -7,13 +7,13 @@ const MediumCard = ({ user }) => {
   const { getProfile } = useContext(HomeContext);
 
   return (
-    <div onClick={() => getProfile(user.id)} className="mediumCard_container">
+    <div onClick={() => getProfile(user.id)} className="mediumCard__container">
       <img
         className="user-profile"
         src={user.avatar ? user.avatar : './images/user-icon.jpg'}
         alt="user-avatar"
       />
-      <div className="mediumCard_info">
+      <div className="mediumCard__info">
         <h3 className="bold">{user.username}</h3>
 
         <div>

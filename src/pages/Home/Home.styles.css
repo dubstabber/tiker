@@ -34,4 +34,7 @@
   .suggested-box {
     display: none;
   }
+  .feed {
+    margin-top: 4rem;
+  }
 }
