@@ -8,8 +8,9 @@ import './FollowersColumn.styles.css';
 const FollowersColumn = ({ users }) => {
   const authContext = useContext(AuthContext);
   const [navigationActive, setNavigationActive] = useState(false);
-  const { showModalDialog, modalDialog } = useContext(DialogContext);
-  const { allPosts, getAllPosts, getFollowedPosts } = useContext(HomeContext);
+  const { showModalDialog } = useContext(DialogContext);
+  const { allPosts, getAllPosts, getFollowedPosts, foundUsers } =
+    useContext(HomeContext);
 
   const handleLogin = () => {
     showModalDialog();
@@ -21,15 +22,17 @@ const FollowersColumn = ({ users }) => {
 
   return (
     <>
-      <div onClick={toggleNavigation} className="followers-navigation">
-        <div
-          className={
-            navigationActive
-              ? 'followers-hamburger--black'
-              : 'followers-hamburger--white'
-          }
-        ></div>
-      </div>
+      {!foundUsers && (
+        <div onClick={toggleNavigation} className="followers-navigation">
+          <div
+            className={
+              navigationActive
+                ? 'followers-hamburger--black'
+                : 'followers-hamburger--white'
+            }
+          ></div>
+        </div>
+      )}
       <div
         className={
           navigationActive ? 'followers-column--mobile' : 'followers-column'
