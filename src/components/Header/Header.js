@@ -19,8 +19,12 @@ const Header = () => {
     }
   };
 
-  const handleGetUsers = () => {
-    getUsers();
+  const handleProfile = () => {
+    if (authContext.isAuth && authContext.user) {
+      getProfile(authContext.user.id);
+    } else {
+      showModalDialog();
+    }
   };
 
   const handleLogin = () => {
@@ -38,8 +42,8 @@ const Header = () => {
       <Link to="/">
         <div onClick={getAllPosts} className="logo"></div>
       </Link>
-      <i onClick={handleGetUsers} className="search-btn"></i>
-      <i className="header-user"></i>
+      <i onClick={() => getUsers()} className="search-btn"></i>
+      <i onClick={handleProfile} className="header-user"></i>
       <form onSubmit={handleSearch} className="search-container">
         <input
           onChange={(e) => setSearch(e.target.value)}
