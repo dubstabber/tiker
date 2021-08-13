@@ -8,7 +8,7 @@ import './FollowersColumn.styles.css';
 const FollowersColumn = ({ users }) => {
   const authContext = useContext(AuthContext);
   const [navigationActive, setNavigationActive] = useState(false);
-  const { showModalDialog } = useContext(DialogContext);
+  const { showModalDialog, postDialog } = useContext(DialogContext);
   const { allPosts, getAllPosts, getFollowedPosts, foundUsers } =
     useContext(HomeContext);
 
@@ -22,7 +22,7 @@ const FollowersColumn = ({ users }) => {
 
   return (
     <>
-      {!foundUsers && (
+      {!foundUsers && !postDialog && (
         <div onClick={toggleNavigation} className="followers-navigation">
           <div
             className={

@@ -212,3 +212,14 @@
   color: #fe2c55;
   cursor: pointer;
 }
+
+@media (max-width: 38rem) {
+  .post-right-side {
+    display: none;
+  }
+  .video-page {
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+  }
+}
