@@ -137,7 +137,28 @@ const PostDialog = () => {
         <video className="video-page" controls loop>
           <source src={postDialog.video} type="video/mp4" />
         </video>
+        <div className="mobile__icons">
+          <div className="mobile__icon">
+            <img
+              className="user-profile"
+              src={postDialog.avatar}
+              alt="user-avatar"
+            />
+          </div>
+          <div className="mobile__icon">
+            <i onClick={handleLike} className="fas fa-heart mobile-icon"></i>
+            <div className="social-tag">{likes}</div>
+          </div>
+          <div className="mobile__icon">
+            <i className="fas fa-comment-dots mobile-icon"></i>
+            <div className="social-tag">{postDialog.comments.length}</div>
+          </div>
+          <div className="mobile__icon">
+            <i className="far fa-share-square mobile-icon"></i>
+          </div>
+        </div>
       </div>
+
       <div className="post-right-side">
         <div className="post-info">
           <div className="post-follow-btn">

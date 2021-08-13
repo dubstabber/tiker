@@ -59,6 +59,10 @@
   height: 100vh;
 }
 
+.mobile__icons {
+  display: none;
+}
+
 .post-right-side {
   width: 30vw;
   height: 100vh;
@@ -221,5 +225,17 @@
     background-color: black;
     width: 100vw;
     height: 100vh;
+  }
+  .mobile__icons {
+    display: block;
+    right: 0;
+    top: 35vh;
+    height: 100vh;
+    position: fixed;
+  }
+  .mobile__icon {
+    margin: 2rem 0 2rem 0;
+    color: white;
+    font-size: 2rem;
   }
 }
