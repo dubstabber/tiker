@@ -272,4 +272,7 @@
     left: 70vw;
     cursor: pointer;
   }
+  .personal-user {
+    display: none;
+  }
 }

@@ -8,6 +8,7 @@ import './Profile.styles.css';
 
 const Profile = () => {
   const [isFollowed, setIsFollowed] = useState(false);
+  const [isMyProfile, setIsMyProfile] = useState(false);
   const [viewContent, setViewContent] = useState(true);
   const [videos, setVideos] = useState([]);
   const authContext = useContext(AuthContext);
@@ -15,6 +16,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (authContext.isAuth) {
+      setIsMyProfile(homeContext.profile.id === authContext.user.id);
       setIsFollowed(
         !authContext.user.following.every(
           (id) => id.id !== homeContext.profile.id
@@ -56,13 +58,16 @@ const Profile = () => {
             {homeContext.profile.username}
           </div>
           <div className="profile__name">{homeContext.profile.name}</div>
-
-          <div
-            onClick={() => homeContext.followUser(homeContext.profile.username)}
-            className={isFollowed ? 'followed-button' : 'follow-button'}
-          >
-            {isFollowed ? 'Following' : 'Follow'}
-          </div>
+          {!isMyProfile && (
+            <div
+              onClick={() =>
+                homeContext.followUser(homeContext.profile.username)
+              }
+              className={isFollowed ? 'followed-button' : 'follow-button'}
+            >
+              {isFollowed ? 'Following' : 'Follow'}
+            </div>
+          )}
         </div>
         <div className="profile__stats">
           <div className="profile__following">
