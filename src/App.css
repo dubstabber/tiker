@@ -159,6 +159,10 @@ hr {
     margin: 0;
     overflow-x: hidden;
   }
+  h1 {
+    font-size: 3rem;
+    line-height: 0;
+  }
   .user-profile-big {
     width: 10rem;
     height: 10rem;

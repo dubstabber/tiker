@@ -43,32 +43,29 @@ const Upload = () => {
       <p>This video will be published to @{authContext.user.username}</p>
       <div className="container">
         <form onSubmit={handleSubmit}>
-          <div className="section">
-            <div className="form-section">
-              <div className="section input-section">
-                <label className="bold">Caption</label>
-                <input
-                  onChange={(e) => setCaptionInput(e.target.value)}
-                  className="input"
-                  name="caption"
-                  placeholder="Add caption"
-                  value={captionInput}
-                />
-              </div>
-              <div className="break"></div>
-              <div className="section input-section">
-                <label className="bold">Video Url</label>
-                <input
-                  onChange={(e) => setPostLink(e.target.value)}
-                  className="input"
-                  name="video"
-                  placeholder="Direct video link"
-                  value={postLink}
-                />
-              </div>
-            </div>
+          <div className="form__section">
+            <section className="form__labels">
+              <label className="form__label bold">Caption</label>
+              <label className="form__label bold">Video Url</label>
+            </section>
+            <section className="form__inputs">
+              <input
+                onChange={(e) => setCaptionInput(e.target.value)}
+                className="form__input"
+                name="caption"
+                placeholder="Add caption"
+                value={captionInput}
+              />
+              <input
+                onChange={(e) => setPostLink(e.target.value)}
+                className="form__input"
+                name="video"
+                placeholder="Direct video link"
+                value={postLink}
+              />
+            </section>
           </div>
-          <div className="form-bottom">
+          <div className="form__bottom">
             <p className="post-error">{error}</p>
             <button
               className={

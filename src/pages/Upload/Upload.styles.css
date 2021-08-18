@@ -3,31 +3,37 @@
   margin-left: 3rem;
 }
 
-.input-section {
-  margin: 1rem 1rem 1rem 0;
-  width: 70rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.form-section {
+.form__section {
   margin-top: 6rem;
+  display: flex;
 }
 
-label {
-  font-size: 4rem;
-  line-height: 0;
+.form__labels {
+  margin-right: 2rem;
 }
 
-input {
-  height: 4.5rem;
+.form__inputs {
   width: 50rem;
-  font-size: 3.5rem;
-  margin-top: -2rem;
+  margin-bottom: 1rem;
 }
 
-.form-bottom {
+.form__label {
+  display: block;
+  font-size: 4rem;
+  margin-bottom: 2rem;
+  white-space: nowrap;
+}
+
+.form__input {
+  height: 5.5rem;
+  font-size: 3rem;
+  padding: 0.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+}
+
+.form__bottom {
   float: right;
 }
 
@@ -35,23 +41,22 @@ input {
   color: red;
   font-size: 1.4rem;
   margin-top: 1rem;
-  margin-right: 1rem;
-  text-align: right;
-}
-
-button {
-  height: 3rem;
-  width: 10rem;
-  float: right;
 }
 
 .upload-button {
   border: none;
   border-radius: 0.2rem;
   color: gray;
-  margin: 1rem;
+  margin: 1rem 0 1rem 1rem;
+  padding: 0;
   width: 15rem;
   height: 4rem;
+  float: right;
+}
+
+button {
+  height: 3rem;
+  width: 10rem;
 }
 
 .upload-button--ready {
@@ -59,8 +64,36 @@ button {
   border-radius: 0.2rem;
   background-color: #fe2c55;
   color: white;
-  margin: 1rem;
+  margin: 1rem 0 1rem 1rem;
   width: 15rem;
   height: 4rem;
+  float: right;
   cursor: pointer;
+}
+
+@media (max-width: 70rem) {
+  .form__inputs {
+    width: 100%;
+  }
+  .form__label {
+    font-size: 3.4rem;
+  }
+  .form__input {
+    font-size: 2.4rem;
+    height: 5rem;
+  }
+}
+
+@media (max-width: 38rem) {
+  .form__section,
+  .form__bottom {
+    margin-right: 3rem;
+  }
+  .form__label {
+    font-size: 2.6rem;
+  }
+  .form__input {
+    font-size: 1.8rem;
+    height: 4rem;
+  }
 }
