@@ -7,7 +7,8 @@
   justify-content: space-between;
 }
 
-.logo {
+.logo-1,
+.logo-2 {
   width: 12.9rem;
   height: 4rem;
   background-image: url('../../images/tiker-logo.png');
@@ -84,7 +85,8 @@
   position: relative;
 }
 
-.upload {
+.upload--1,
+.upload--2 {
   position: relative;
   width: 3rem;
   height: 2.5rem;
@@ -228,9 +230,16 @@
   .login-btn {
     display: none;
   }
-  .logo {
+  .logo-1 {
     position: fixed;
-    background-image: url('../../images/home-icon-filled-white.svg');
+    background-image: url('../../images/home-white.png');
+    background-size: 4rem;
+    left: 10vw;
+    margin-top: 1rem;
+  }
+  .logo-2 {
+    position: fixed;
+    background-image: url('../../images/home-black.png');
     background-size: 4rem;
     left: 10vw;
     margin-top: 1rem;
@@ -245,11 +254,23 @@
     bottom: 1rem;
     cursor: pointer;
   }
-  .upload {
+  .upload--1 {
     position: fixed;
     height: 4rem;
     margin-top: 1.5rem;
-    background-image: url('../../images/tiker-upload-plus.png');
+    background-image: url('../../images/tiker-upload-plus-1.png');
+    background-repeat: no-repeat;
+    background-size: 5rem;
+    width: 5rem;
+    cursor: pointer;
+    z-index: 1;
+    left: 50vw;
+  }
+  .upload--2 {
+    position: fixed;
+    height: 4rem;
+    margin-top: 1.5rem;
+    background-image: url('../../images/tiker-upload-plus-2.png');
     background-repeat: no-repeat;
     background-size: 5rem;
     width: 5rem;
@@ -264,7 +285,7 @@
     display: block;
     position: fixed;
     height: 4rem;
-    background-image: url('../../images/tiker-profile.png');
+    background-image: url('../../images/user-white.png');
     background-repeat: no-repeat;
     background-size: 5rem;
     width: 5rem;
