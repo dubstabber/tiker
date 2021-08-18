@@ -9,8 +9,17 @@
   background-color: rgb(245, 245, 245);
 }
 
-@media screen and (max-width: 70rem) {
+@media (max-width: 70rem) {
   .microcard-user {
     display: none;
+  }
+  .microcard-name {
+    display: none;
+  }
+}
+
+@media (max-width: 38rem) {
+  .microcard-user {
+    display: block;
   }
 }

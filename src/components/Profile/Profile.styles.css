@@ -63,7 +63,7 @@
 .profile__posts {
   display: grid;
   grid-template-rows: 20% 80%;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 72%);
   text-align: center;
 }
 
@@ -214,5 +214,8 @@
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
     grid-gap: 2px;
+  }
+  .profile__posts {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

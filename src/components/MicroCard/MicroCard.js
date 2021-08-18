@@ -19,7 +19,7 @@ const MicroCard = ({ user }) => {
       />
       <div className="microcard-user">
         <h3 className="bold">{user.username}</h3>
-        <p>{user.name}</p>
+        <p className="microcard-name">{user.name}</p>
       </div>
     </div>
   );
