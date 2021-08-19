@@ -7,7 +7,7 @@ import './Header.styles.css';
 
 const Header = () => {
   const authContext = useContext(AuthContext);
-  const { getAllPosts, getProfile, findUser, getUsers, profile, posts } =
+  const { getAllPosts, getProfile, findUser, getUsers, posts, clearState } =
     useContext(HomeContext);
   const { showModalDialog } = useContext(DialogContext);
   const [search, setSearch] = useState('');
@@ -73,7 +73,10 @@ const Header = () => {
         <div className="upload-container">
           {authContext.isAuth ? (
             <Link to="/upload">
-              <div className={posts.length ? 'upload-1' : 'upload-2'} />
+              <div
+                onClick={() => clearState()}
+                className={posts.length ? 'upload-1' : 'upload-2'}
+              />
               <div className="upload-tooltip">Upload video</div>
             </Link>
           ) : (
