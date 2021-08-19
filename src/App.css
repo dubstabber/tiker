@@ -171,6 +171,9 @@ hr {
     margin-right: 0;
     cursor: pointer;
   }
+  .user-profile {
+    margin-right: 0;
+  }
   .disable {
     display: none;
   }

@@ -34,6 +34,7 @@
   flex-direction: row;
   width: 41.2rem;
   font-size: 2rem;
+  margin-right: 3rem;
 }
 
 .user-infoData {
@@ -98,15 +99,16 @@
   }
   .socials {
     position: absolute;
-    right: 0;
+    right: 3rem;
     display: flex;
     flex-direction: column !important;
+    align-items: center;
     transform: translateY(-40rem);
     text-shadow: 0 0 0.5rem black;
   }
   .social-tag {
     color: white;
-    margin: 0 0 0 1.4rem;
+    margin: 0 0 0 0;
   }
   .video {
     margin: 0;

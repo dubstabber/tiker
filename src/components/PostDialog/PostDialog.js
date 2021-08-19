@@ -141,7 +141,9 @@ const PostDialog = () => {
           <div className="mobile__icon">
             <img
               className="user-profile"
-              src={postDialog.avatar}
+              src={
+                postDialog.avatar ? postDialog.avatar : './images/user-icon.jpg'
+              }
               alt="user-avatar"
             />
           </div>

@@ -69,7 +69,8 @@
   right: 5.5rem;
 }
 
-.search-btn-1 {
+.search-btn-1,
+.search-btn-2 {
   background-image: url('../../images/search-icon.svg');
   background-repeat: no-repeat;
   width: 3rem;
@@ -79,11 +80,6 @@
   right: 1.6rem;
   top: 1rem;
   cursor: pointer;
-}
-
-.search-btn-2 {
-  position: absolute;
-  height: 4.5rem;
 }
 
 .upload-container {
@@ -260,6 +256,8 @@
     cursor: pointer;
   }
   .search-btn-2 {
+    position: absolute;
+    height: 4.5rem;
     background-image: url('../../images/search-icon-black.png');
     background-repeat: no-repeat;
     background-size: 4rem;
