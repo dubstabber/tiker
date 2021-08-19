@@ -45,8 +45,14 @@ const Header = () => {
           className={posts.length ? 'logo-1' : 'logo-2'}
         ></div>
       </Link>
-      <i onClick={() => getUsers()} className="search-btn"></i>
-      <i onClick={handleProfile} className="header-user"></i>
+      <i
+        onClick={() => getUsers()}
+        className={posts.length ? 'search-btn-1' : 'search-btn-2'}
+      ></i>
+      <i
+        onClick={handleProfile}
+        className={posts.length ? 'header-user-white' : 'header-user-black'}
+      ></i>
       <form onSubmit={handleSearch} className="search-container">
         <input
           onChange={(e) => setSearch(e.target.value)}
@@ -58,18 +64,23 @@ const Header = () => {
           <div onClick={() => setSearch('')} className="search-clear"></div>
         )}
         <span className="search-split"></span>
-        <button className="search-btn"></button>
+        <button
+          className={posts.length ? 'search-btn-1' : 'search-btn-2'}
+        ></button>
       </form>
 
       <div className="section">
         <div className="upload-container">
           {authContext.isAuth ? (
             <Link to="/upload">
-              <div className={profile ? 'upload--2' : 'upload--1'} />
+              <div className={posts.length ? 'upload-1' : 'upload-2'} />
               <div className="upload-tooltip">Upload video</div>
             </Link>
           ) : (
-            <div onClick={handleLogin} className="upload" />
+            <div
+              onClick={handleLogin}
+              className={posts.length ? 'upload-1' : 'upload-2'}
+            />
           )}
           <div className="upload-tooltip">Upload video</div>
         </div>

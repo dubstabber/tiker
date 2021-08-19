@@ -69,7 +69,7 @@
   right: 5.5rem;
 }
 
-.search-btn {
+.search-btn-1 {
   background-image: url('../../images/search-icon.svg');
   background-repeat: no-repeat;
   width: 3rem;
@@ -81,12 +81,17 @@
   cursor: pointer;
 }
 
+.search-btn-2 {
+  position: absolute;
+  height: 4.5rem;
+}
+
 .upload-container {
   position: relative;
 }
 
-.upload--1,
-.upload--2 {
+.upload-1,
+.upload-2 {
   position: relative;
   width: 3rem;
   height: 2.5rem;
@@ -123,7 +128,7 @@
   border-color: transparent transparent rgb(68, 68, 68) transparent;
 }
 
-.upload:hover + .upload-tooltip {
+.upload-1:hover + .upload-tooltip {
   opacity: 1;
   transform: translate(-4.9rem, 1.4rem);
 }
@@ -244,7 +249,7 @@
     left: 10vw;
     margin-top: 1rem;
   }
-  .search-btn {
+  .search-btn-1 {
     background-image: url('../../images/search-icon-white.png');
     background-repeat: no-repeat;
     background-size: 4rem;
@@ -254,7 +259,17 @@
     bottom: 1rem;
     cursor: pointer;
   }
-  .upload--1 {
+  .search-btn-2 {
+    background-image: url('../../images/search-icon-black.png');
+    background-repeat: no-repeat;
+    background-size: 4rem;
+    width: 5rem;
+    background-color: transparent;
+    left: 30vw;
+    bottom: 1rem;
+    cursor: pointer;
+  }
+  .upload-1 {
     position: fixed;
     height: 4rem;
     margin-top: 1.5rem;
@@ -266,7 +281,7 @@
     z-index: 1;
     left: 50vw;
   }
-  .upload--2 {
+  .upload-2 {
     position: fixed;
     height: 4rem;
     margin-top: 1.5rem;
@@ -281,11 +296,24 @@
   .upload-tooltip {
     display: none;
   }
-  .header-user {
+  .header-user-white {
     display: block;
     position: fixed;
     height: 4rem;
     background-image: url('../../images/user-white.png');
+    background-repeat: no-repeat;
+    background-size: 5rem;
+    width: 5rem;
+    bottom: 3vh;
+    left: 70vw;
+    cursor: pointer;
+  }
+
+  .header-user-black {
+    display: block;
+    position: fixed;
+    height: 4rem;
+    background-image: url('../../images/user-black.png');
     background-repeat: no-repeat;
     background-size: 5rem;
     width: 5rem;
