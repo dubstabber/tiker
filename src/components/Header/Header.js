@@ -7,7 +7,7 @@ import './Header.styles.css';
 
 const Header = () => {
   const authContext = useContext(AuthContext);
-  const { getAllPosts, getProfile, findUser, getUsers, posts, clearState } =
+  const { getHomeData, getProfile, findUser, getUsers, posts, clearState } =
     useContext(HomeContext);
   const { showModalDialog } = useContext(DialogContext);
   const [search, setSearch] = useState('');
@@ -41,7 +41,7 @@ const Header = () => {
     <div className="header">
       <Link to="/">
         <div
-          onClick={getAllPosts}
+          onClick={getHomeData}
           className={posts.length ? 'logo-1' : 'logo-2'}
         ></div>
       </Link>

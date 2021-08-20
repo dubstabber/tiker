@@ -36,11 +36,15 @@ const HomeState = ({ children }) => {
   const { isAuth, loadUser } = useContext(AuthContext);
 
   useEffect(() => {
+    getHomeData();
+    // eslint-disable-next-line
+  }, [isAuth]);
+
+  const getHomeData = () => {
     getAllPosts();
     getFollowedUsers();
     getSuggestedUsers();
-    // eslint-disable-next-line
-  }, [isAuth]);
+  };
 
   const getAllPosts = async () => {
     try {
@@ -149,6 +153,7 @@ const HomeState = ({ children }) => {
         suggested: state.suggested,
         foundUsers: state.foundUsers,
         error: state.error,
+        getHomeData,
         getAllPosts,
         getFollowedPosts,
         getProfile,
