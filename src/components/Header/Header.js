@@ -45,14 +45,18 @@ const Header = () => {
           className={posts.length ? 'logo-1' : 'logo-2'}
         ></div>
       </Link>
-      <i
-        onClick={() => getUsers()}
-        className={posts.length ? 'search-btn-1' : 'search-btn-2'}
-      ></i>
-      <i
-        onClick={handleProfile}
-        className={posts.length ? 'header-user-white' : 'header-user-black'}
-      ></i>
+      <Link to="/">
+        <i
+          onClick={() => getUsers()}
+          className={posts.length ? 'search-btn-1' : 'search-btn-2'}
+        ></i>
+      </Link>
+      <Link to="/">
+        <i
+          onClick={handleProfile}
+          className={posts.length ? 'header-user-white' : 'header-user-black'}
+        ></i>
+      </Link>
       <form onSubmit={handleSearch} className="search-container">
         <input
           onChange={(e) => setSearch(e.target.value)}
